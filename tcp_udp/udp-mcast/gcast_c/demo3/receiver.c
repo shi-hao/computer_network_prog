@@ -11,6 +11,9 @@
 #define BUFLEN 255
 #define buf_len 40
 /*********************************************************************
+ *
+ *   组播ip， 端口号，  接收组播数据网卡
+ *
  *********************************************************************/
 
 int main(int argc, char **argv)
@@ -91,6 +94,8 @@ int main(int argc, char **argv)
 	}
 
 	/* 把本机加入组播地址，即本机网卡作为组播成员，只有加入组才能收到组播消息 */
+	//IP_ADD_MEMBERSHIP, 告知内核，接收组播数据，内核默认丢弃
+	//IP_DROP_MEMBERSHIP，告知内核，丢弃组播数据
 	if (setsockopt(sockfd, IPPROTO_IP, IP_ADD_MEMBERSHIP, &mreq, sizeof(mreq)) == -1) {
 		perror("setsockopt");
 		exit(-1);
