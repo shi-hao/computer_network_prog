@@ -9,7 +9,6 @@
 #include<stdio.h>
 #include<unistd.h>
 
-
 int tun_alloc(int flags)
 {
 	struct ifreq ifr;
