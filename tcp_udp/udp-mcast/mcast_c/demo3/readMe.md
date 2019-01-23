@@ -21,7 +21,7 @@
  使用wireshark抓包发现，三台PC使用的是IGMPv3协议，receiver在启动时，会向广播地址224.0.0.22发送
  Membership Report数据包。
 
- 本文件下有几个文档，很使用，介绍了igmp协议，multicast等知识。
+ 本目录的doc文件夹下，有几个很实用的文档，介绍了igmp协议，multicast等知识。
 
 
 
