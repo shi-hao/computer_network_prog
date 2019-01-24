@@ -22,8 +22,9 @@ ubuntu:直接使用apt-get install iperf
 
 (3)实测
 ubuntu主机运行multicast接收程序:
-iperf -s -u  -B 239.1.1.88   -i  1
+iperf -s -u  -B 239.1.1.88  -f m  -i  1
 
+-f 表示单位，此处为兆
 -s 表示运行服务端
 -u 表示使用udp
 -B 表示使用的网卡接口
@@ -33,19 +34,26 @@ iperf -s -u  -B 239.1.1.88   -i  1
 组播不支持指定网卡接收，所以请注意netstat -gn查看加入组播的网卡。
 
 win主机运行multicast发送程序：
-iperf -c 239.1.1.88 -B 192.168.3.3 -u -T 32 -t 3 -i 1
+iperf -c 239.1.1.88 -B 192.168.3.3 -b 50m -u -T 32 -t 3 -i 1
 
 
 -t 表示测试总时间
 -i 表示时间间隔。
 比如 -t 3 -i 1 就表示发送3秒的数据包，间隔1秒
 
+-b Set target bandwidth to n bits/sec (default 1 Mbit/sec for UDP, unlimited for TCP).
+   设置测试带宽，此处为50兆
+
 
 troubleshooting
 
-(1)iperf在win使用会有好些问题，需要耐心调试。
-比如win下运行multicast的server端，会报出bind request address failed的错误，无奈，在win端使用
-客户模式，未使用serber模式。
+(1)win10:bind failed can not assign request address
+解决办法：使用不依赖cygwin编译的版本，比如win32 2.08版本。
+
+(2)iperf 指定网卡接口
+iperf在运行时，client模式，可以使用-B指定具体的网卡发送数据。
+但是在server模式下，运行组播模式，-B用来指定组播地址，无法指定具体的网卡接收组播数据，一般而言如果有线和无线
+网卡都启用了，iperf会默认使用有线网卡，所以可以通过禁用网卡来让iperf使用我们预意向的网卡
 
 -------------------------------------------------------------------------------------------
 iperf官网组播演示例子：
