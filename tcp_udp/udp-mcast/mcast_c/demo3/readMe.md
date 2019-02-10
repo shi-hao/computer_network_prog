@@ -17,6 +17,3 @@
  Membership Report数据包。
 
  本目录的doc文件夹下，有几个很实用的文档，介绍了igmp协议，multicast等知识。
-
-
-
