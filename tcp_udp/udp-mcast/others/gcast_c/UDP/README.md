@@ -1,2 +1,0 @@
-# UDP
-Unicast, broadcast, multicast
