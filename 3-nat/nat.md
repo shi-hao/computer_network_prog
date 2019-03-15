@@ -15,6 +15,8 @@ mapping between those to IPs.
 地址为20.10.10.9，通过静态NAT，将地址192.168.1.100映射为20.10.10.9，那么外网所有的以ip为
 20.10.10.9的ip数据包，都会被网关路由转换地址后发给服务器192.168.1.100
 
+DMZ主机
+
 
 Dynamic NAT is used when you have a “pool” of public IP addresses that you want to assign 
 to your internal hosts dynamically. Don’t use dynamic NAT for servers or other devices that 
