@@ -15,6 +15,7 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 路由设置的有几个重要要素：  
   
 [目的网段]：[掩码]：[网关]：[接口]  
+ -net       netmask  gw     dev
 接口指的是本地的网卡，目的网段是跨网网段，网关的地址要和本地接口在同一网段内。  
 route add -net 192.168.1.0 netmask 255.255.255.0 gw 192.168.2.1 dev eno1  
   
