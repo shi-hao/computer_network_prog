@@ -46,18 +46,18 @@ int main(int argc, char* argv[])
 #endif
 
 #if 1
-  /* 
-   * bind the socket to one network device using setsockopt()
-   * this method works well!!
-   */
-  const char* device = "wlp4s0";
-  int rc;
-  rc = setsockopt(sock_cli, SOL_SOCKET, SO_BINDTODEVICE, device, strlen(device));
-  if (rc != 0)
-  {
-     perror("setsockopt");
-     exit (EXIT_FAILURE);
-  }
+	/* 
+	 * bind the socket to one network device using setsockopt()
+	 * this method works well!!
+	 */
+	const char* device = "wlp4s0";
+	int rc;
+	rc = setsockopt(sock_cli, SOL_SOCKET, SO_BINDTODEVICE, device, strlen(device));
+	if (rc != 0)
+	{
+		perror("setsockopt");
+		exit (EXIT_FAILURE);
+	}
 #endif
 	//-------------------------------------------------------------------
 
