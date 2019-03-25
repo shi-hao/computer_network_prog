@@ -42,8 +42,8 @@ int main(int argc, char* argv[])
 	int client_fd;
 	struct sockaddr_in ser_addr;
 
-	if(argc < 3){
-		printf("\n usage : ip port \n");
+	if(argc < 4){
+		printf("\n usage : ip port local_IP \n");
 		exit(0);
 	}
 
@@ -54,16 +54,44 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
-#if 0
+	//---------------------------------------------------------------
+#if 1
+	/* 
+	 * TCP client bind specific interface using bind()
+	 * this method not works!!
+	 */
+	//定义sockaddr_in
 	struct sockaddr_in local_addr;
-	int ret;
+	memset(&local_addr, 0, sizeof(local_addr));
 	local_addr.sin_family = AF_INET;
-	local_addr.sin_addr.s_addr = inet_addr(local_IP);
-	local_addr.sin_port = 0;  //注意网络序转换
+	local_addr.sin_addr.s_addr = inet_addr(argv[3]);
+	local_addr.sin_port = 0;  //系统随机分配可用port
 
-	ret = bind(fd, (struct sockaddr*)&local_addr, sizeof(local_addr));
-	if(ret < 0) printf("bind error\n");
+	//bind成功返回0，出错返回-1
+	if(bind(client_fd, (struct sockaddr *)&local_addr,sizeof(local_addr))==-1)
+	{
+		perror("bind");
+		exit(1);//1为异常退出
+	}
+	printf("bind success.\n");
 #endif
+
+#if 0
+	/* 
+	 * bind the socket to one network device using setsockopt()
+	 * this method works well!!
+	 */
+	const char* device = "wlp4s0";
+	int rc;
+	rc = setsockopt(client_fd, SOL_SOCKET, SO_BINDTODEVICE, device, strlen(device));
+	if (rc != 0)
+	{
+		perror("setsockopt");
+		exit (EXIT_FAILURE);
+	}
+#endif
+	//-------------------------------------------------------------------
+
 
 	memset(&ser_addr, 0, sizeof(ser_addr));
 	ser_addr.sin_family = AF_INET;
