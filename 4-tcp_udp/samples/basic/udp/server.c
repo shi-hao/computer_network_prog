@@ -26,7 +26,7 @@ void handle_udp_msg(int fd)
 	{
 		memset(buf, 0, BUFF_LEN);
 		len = sizeof(client_addr);
-		count = recvfrom(fd, buf, BUFF_LEN, 0, (struct sockaddr*)&client_addr, &len);  //recvfrom是拥塞函数，没有数据就一直拥塞
+		count = recvfrom(fd, buf, BUFF_LEN, 0, (struct sockaddr*)&client_addr, &len);//recvfrom
 		if(count == -1)
 		{
 			printf("recieve data fail!\n");
@@ -34,16 +34,13 @@ void handle_udp_msg(int fd)
 		}
 		printf("client:%s\n",buf);  //打印client发过来的信息
 		printf("client_addr.sin_addr:%s\n",inet_ntoa(client_addr.sin_addr));  //打印client ip
-		printf("client_addr.sin_port:%d\n",client_addr.sin_port);  //打印client port
+		printf("client_addr.sin_port:%d\n",ntohs(client_addr.sin_port));  //打印client port
 
 #if 1
 		memset(buf, 0, BUFF_LEN);
 		sprintf(buf, "I have recieved %d bytes data!\n", count);  //回复client
-		//printf("server:%s\n",buf);  //打印自己发送的信息给
-		sendto(fd, buf, BUFF_LEN, 0, (struct sockaddr*)&client_addr, len);  //发送信息给client，注意使用了client_addr结构体指针
-		sleep(1);
+		sendto(fd, buf, BUFF_LEN, 0, (struct sockaddr*)&client_addr, len);
 #endif
-
 	}
 }
 
@@ -58,6 +55,11 @@ int main(int argc, char* argv[])
 	int server_fd, ret;
 	struct sockaddr_in ser_addr; 
 
+	if(argc < 3){
+		printf("usage : server_ip  port \n");
+		exit(0);
+	}
+
 	server_fd = socket(AF_INET, SOCK_DGRAM, 0); //AF_INET:IPV4;SOCK_DGRAM:UDP
 	if(server_fd < 0)
 	{
@@ -67,8 +69,10 @@ int main(int argc, char* argv[])
 
 	memset(&ser_addr, 0, sizeof(ser_addr));
 	ser_addr.sin_family = AF_INET;
-	ser_addr.sin_addr.s_addr = htonl(INADDR_ANY); //IP地址，需要进行网络序转换，INADDR_ANY：本地地址
-	ser_addr.sin_port = htons(SERVER_PORT);  //端口号，需要网络序转换
+	//ser_addr.sin_addr.s_addr = htonl(INADDR_ANY);//IP地址需要进行网络序转换，INADDR_ANY
+	//ser_addr.sin_port = htons(SERVER_PORT); //端口号，需要网络序转换
+	ser_addr.sin_addr.s_addr = inet_addr(argv[1]); //ip
+	ser_addr.sin_port = htons(atoi(argv[2])); //端口号，需要网络序转换
 
 	ret = bind(server_fd, (struct sockaddr*)&ser_addr, sizeof(ser_addr));
 	if(ret < 0)
