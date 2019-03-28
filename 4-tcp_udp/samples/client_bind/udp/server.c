@@ -32,13 +32,13 @@ void handle_udp_msg(int fd)
 			printf("recieve data fail!\n");
 			return;
 		}
-		printf("client:%s\n",buf);  //打印client发过来的信息
+		printf("recv:%s\n",buf);  //打印client发过来的信息
 		printf("client_addr.sin_addr:%s\n",inet_ntoa(client_addr.sin_addr));  //打印client ip
 		printf("client_addr.sin_port:%d\n",ntohs(client_addr.sin_port));  //打印client port
 
 #if 1
 		memset(buf, 0, BUFF_LEN);
-		sprintf(buf, "I have recieved %d bytes data!\n", count);  //回复client
+		sprintf(buf, "hello client, i am server!\n");  //回复client
 		sendto(fd, buf, BUFF_LEN, 0, (struct sockaddr*)&client_addr, len);
 #endif
 	}

@@ -22,12 +22,12 @@ void udp_msg_sender(int fd, struct sockaddr* dst)
 	{
 		char buf[BUFF_LEN] = "TEST UDP MSG!\n";
 		len = sizeof(*dst);
-		printf("client:%s\n",buf);  //打印自己发送的信息
+		printf("sending:%s\n",buf);  //打印自己发送的信息
 		sendto(fd, buf, BUFF_LEN, 0, dst, len);
 
 		memset(buf, 0, BUFF_LEN);
 		recvfrom(fd, buf, BUFF_LEN, 0, (struct sockaddr*)&src, &len);  //接收来自server的信息
-		printf("server[%s:%d]:%s\n",inet_ntoa(src.sin_addr), ntohs(src.sin_port), buf);
+		printf("recv from [%s:%d]:%s\n",inet_ntoa(src.sin_addr), ntohs(src.sin_port), buf);
 		sleep(1);  //一秒发送一次消息
 	}
 }
@@ -42,8 +42,8 @@ int main(int argc, char* argv[])
 	int client_fd;
 	struct sockaddr_in ser_addr;
 
-	if(argc < 4){
-		printf("\n usage : ip port local_IP \n");
+	if(argc < 5){
+		printf("\n usage : ip port local_IP device \n");
 		exit(0);
 	}
 
@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
 	}
 
 	//---------------------------------------------------------------
-#if 1
+#if 0
 	/* 
 	 * TCP client bind specific interface using bind()
 	 * this method not works!!
@@ -76,14 +76,14 @@ int main(int argc, char* argv[])
 	printf("bind success.\n");
 #endif
 
-#if 0
+#if 1
 	/* 
 	 * bind the socket to one network device using setsockopt()
 	 * this method works well!!
 	 */
 	const char* device = "wlp4s0";
 	int rc;
-	rc = setsockopt(client_fd, SOL_SOCKET, SO_BINDTODEVICE, device, strlen(device));
+	rc = setsockopt(client_fd, SOL_SOCKET, SO_BINDTODEVICE, argv[4], strlen(argv[4]));
 	if (rc != 0)
 	{
 		perror("setsockopt");
