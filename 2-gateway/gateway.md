@@ -28,18 +28,22 @@ route add -net 192.168.1.0 netmask 255.255.255.0 gw 192.168.2.1 dev eno1
   
 <抓包实验>  
 以三台机器为例：  
-A：ip-192.168.1.10 mac-aa:aa:aa:aa:aa:aa  
-B: ip-192.168.1.11 mac-bb:bb:bb:bb:bb:bb  
+host-A: ip-192.168.1.10 mac-aa:aa:aa:aa:aa:aa  
+host-B: ip-192.168.1.11 mac-bb:bb:bb:bb:bb:bb  
   
-C: ip-192.168.1.1  mac-cc:cc:cc:cc:cc:cc   gateway  
+host-C: 双网卡
+   ip-192.168.1.1  mac-cc:cc:cc:cc:cc:cc   gateway  
    ip-192.168.2.1  mac-dd:dd:dd:dd:dd:dd   gateway  
   
-D: ip-192.168.2.11 mac-dd:dd:dd:dd:dd:dd  
+host-D: ip-192.168.2.11 mac-ee:ee:ee:ee:ee:ee  
   
-A ping B  
+host-A ping host-B  
 S: 192.168.1.10 aa:aa:aa:aa:aa:aa  D: 192.168.1.11 bb:bb:bb:bb:bb:bb  
   
-A ping D  
-S: 192.168.1.10 aa:aa:aa:aa:aa:aa  D:192.168.2.11 cc:cc:cc:cc:cc:cc  
-A ping D，AD不在一个网段，A是不会有D的mac地址的，A会将mac地址填写为网关的mac地址，  
-将数据发送给网关。  
+host-A ping host-D  
+S: 192.168.1.10 aa:aa:aa:aa:aa:aa  D:192.168.2.11 ee:ee:ee:ee:ee:ee  
+host-A ping host-D，host-A,host-D不在一个网段，host-A是不会有host-D的mac地址的，host-A会
+将mac地址填写为网关的mac地址，将数据发送给网关。  
+
+<路由最长匹配原则>  
+

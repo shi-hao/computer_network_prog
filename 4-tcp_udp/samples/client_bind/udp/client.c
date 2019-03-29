@@ -42,8 +42,10 @@ int main(int argc, char* argv[])
 	int client_fd;
 	struct sockaddr_in ser_addr;
 
+	printf("\n usage : \n   server ip \n   server port \n   local_IP \n   device \n");
+
 	if(argc < 5){
-		printf("\n usage : ip port local_IP device \n");
+		printf("param is not enough\n");
 		exit(0);
 	}
 
