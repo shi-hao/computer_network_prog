@@ -21,5 +21,5 @@ iwconfig  [interface]
 2. set the wireless card mode key essid channel  
 sudo  iwconfig  wlp4s0  mode  ad-hoc  
 sudo  iwconfig  wlp4s0  channel  auto  
-sudo  iwconfig  wlp4s0  essid  'mywifi'  
+sudo  iwconfig  wlp4s0  essid  wifi_name   
 sudo  iwconfig  wlp4s0  key  1234567890  
