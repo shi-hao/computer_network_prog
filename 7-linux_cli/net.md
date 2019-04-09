@@ -1,13 +1,13 @@
 # wireless command  
 ## ifconfig  
 
-1.print all net card info  
+1. print all net card info  
 ifconfig -a  
 
-2.set the net card ip  
+2. set the net card ip  
 ifconfig [interface] [ip] netmask  [mask]  [dev]  
 
-3.on/off the card  
+3. on/off the card  
 ifconfig [interface] down  
 ifconfig [interface] up  
 
