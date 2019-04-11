@@ -1,60 +1,43 @@
 NAT(Network Address Translation)网络地址转换  
 
-NAT主要类型：
-
-Static NAT is used to do a one-to-one mapping between an inside address and an outside address. 
-Static NAT also allows connections from an outside host to an inside host. 
-Usually, static NAT is used for servers inside your network. For example, you may have a web 
-server with the inside IP address 192.168.0.10 and you want it to be accessible when a 
-remote host makes a request to 209.165.200.10. For  this to work, you must do a static NAT 
-mapping between those to IPs. 
-静态NAT，将一个内网地址映射为一个外网地址，主要用于WEB服务器，比如一台内部的WEB服务器需要被
-外网访问，可以通过NAT设置将其暴露到外网。
-举例说明：
-一台内网服务器ip-192.168.1.100，和网关路由的接口0相连，ip-192.168.1.1，网关的外网接口1的公网
-地址为20.10.10.9，通过静态NAT，将地址192.168.1.100映射为20.10.10.9，那么外网所有的以ip为
-20.10.10.9的ip数据包，都会被网关路由转换地址后发给服务器192.168.1.100
-
-DMZ主机
+NAT技术的细节，各个厂家的设备可能都略微有差异，名称上也不太统一。  
+从转换地址的角度出发，分析其技术细节，可以将所有的NAT分为SNAT和DNAT。  
 
 
-Dynamic NAT is used when you have a “pool” of public IP addresses that you want to assign 
-to your internal hosts dynamically. Don’t use dynamic NAT for servers or other devices that 
-need to be accessible from the Internet.
-
-NAT Overload, sometimes also called PAT(Port Addresses Translation), is probably the most 
-used type of NAT.
-
-
-
-Static NAT (Network Address Translation) 
-Static NAT (Network Address Translation)is one-to-one mapping of a private IP address to 
-a public IP address. Static NAT (Network Address Translation) is useful when a network 
-device inside a private network needs to be accessible from internet.
-
-
-
-
-
-
-  
 SNAT和DNAT。  
 SNAT ： 将ip数据包的源地址替换为指定地址。  
 DNAT ： 将ip数据包的目的地址替换为指定地址。  
   
 SNAT是家用路由器的基本功能，所有的ip数据包经过家用路由器，家用路由器都会将其源地址替换  
-为WAN口地址再发送出去。  
-  
-???nat 端口号 映射吗？？？？？  
-  
-<家用路由上网原理>  
+为WAN口地址再发送出去。路由器会在本地生成并保存一张ip映射关系表。如果是TCP/UDP协议，还  
+会保存port映射关系，如果是icmp协议，会保存identifier映射信息。  
+<pre>
+nat mapping table
+source_ip       source_port       nat_ip         nat_port
+192.168.10.10   1000              192.1.1.10     1000
+</pre>
+
+思考1：为什么要记录端口号呢？  
+在一台pc上，端口的作用是区分tcp/udp包是发给哪个应用程序的，nat记录端口号的目的  
+是为了区分tcp/udp回包是发给哪个pc设备的。所以在当源地址不同，源端口相同时，nat  
+会改变源端口为另外一个端口。有时，nat会将所有的源端口都改掉，统一规划。  
+对于icmp协议，没有port信息，会保存对应的identifier信息，作用是类似的。  
+
+思考2：nat会改变源mac地址吗？  
+nat table是不包含mac地址映射关系这一项的，但是nat在解包完数据，转换完成地址和  
+端口号后，会将ip数据包重新打包从另一个端口发出，此时，ip协议栈会重新加mac头，  
+此时的mac地址自然会被替换为对应接口的mac，所以源mac地址也变了，但是这种变化  
+并不是nat直接去改变的。  
+
+
+<实验：家用路由上网原理>  
 家用路由器基本上可以理解为 NAT + 交换机  
 简化网络拓扑如下图所示：  
   
 |internet| <--> |router-运营商| <--> |switch-运营商| <--> |router-家用|  <--> | pc-家用|  
   
 (1)运营商宽带入户，会有一个接口分配到各家各户。  
-(2)家用路由器有wan口和lan口之分，各个lan口类似与交换机的各个接口，说明家用路由器有交换功能，wan口  
+(2)家用路由器有wan口和lan口之分，各个lan口类似与交换机的各个接口，家用路由器有交换功能，wan口  
 有ip地址，用来路由ip数据包。  
   
 <pre>
@@ -62,7 +45,7 @@ SNAT是家用路由器的基本功能，所有的ip数据包经过家用路由�
  ||  
  \/  
 |lan interface|  
-|  router B   |  路由B将收到的ip数据包的源地址转换为自己的wan口地址，将源端口号转换为新的端口号。  
+|  router B   |  路由B将收到的ip数据包的源地址转换为自己的wan口地址  
 |wan interface|  S-192.168.1.10:6688 D-220.1.1.10:999  -->  S-192.1.1.20:9999  D-220.1.1.10:999  
  ||  
  \/  
@@ -73,3 +56,9 @@ SNAT是家用路由器的基本功能，所有的ip数据包经过家用路由�
 |router A   |  
 |interface 2|  
 </pre>
+
+DNAT是路由网关的经典功能，简单来说，就是替换收到的ip数据包的目的地址为指定的地址。改变为  
+哪个ip地址，会根据本地的nat table去查找对应关系，此时端口号(tcp/udp)和标识符(icmp)就  
+很重要了。  
+(1)DNAT可以将收到的所有的ip包，全部导向另一台主机。  
+(2)DNAT可以将收到的TCP/UDP的指定端口的包，导向另一台主机。
