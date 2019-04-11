@@ -26,3 +26,5 @@ client   ---discovery--broadcasting-->      server
 client   <--offer------unicast/broadcast--  server  
 client   ---request----broadcast----->      server  
 client   <--acknowledgement----------       server  
+
+在dhcp协议的字段中，包含一些可选的字段，用于dhcp server向client发送网关，子网掩码，dns等信息。  
