@@ -46,10 +46,12 @@ S-MAC:40-77-03-8C-FE-04   S-IP:192.168.3.6    S-PORT:9000
 D-MAC:1c-15-1f-46-81-34   D-IP:192.168.8.113  D-PORT:800  
 </pre>
 
-数据出去后，根据mac地址，数据发送到网关Router-B，Router-B收到数据后，进行SNAT， 
-**nat table**    
+数据出去后，根据mac地址，数据发送到网关Router-B，Router-B收到数据后，进行SNAT，   
+<pre>
+nat table    
 S                                  NAT  
 S-IP:192.168.3.6    S-PORT:9000    S-IP:192.168.8.120    S-PORT:9000   
+</pre>
 SNAT完毕后，通过哦wan口发送出去，完整的包结构如下。
 
 <pre>
@@ -67,8 +69,10 @@ D-MAC:1c-15-1f-46-81-34    D-IP:192.168.8.120    D-PORT:9000
 
 Router-A收到数据后，直接根据mac地址转发到Router-B，Router-B根据收到数据的port号，  
 查询自己的nat table，进行DNAT操作。  
-**nat table**    
+<pre>
+nat table    
 D-IP:192.168.8.120    D-PORT:9000 -->  D-IP:192.168.3.6    D-PORT:9000 
+</pre>
 转换完毕后，Router-B查询自己的route table，arp table将数据包发送出去，完整的  
 包结构如下。  
 <pre>
