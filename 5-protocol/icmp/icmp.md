@@ -66,3 +66,6 @@ Address                  HWtype  HWaddress           Flags Mask            Iface
   
 3.ip头，mac头填充完毕，数据会被发送到对应的网口上，发送出去。  
 </pre>
+
+**icmp报文格式**  
+
