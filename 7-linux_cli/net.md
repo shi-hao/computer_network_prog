@@ -5,7 +5,8 @@
 ifconfig  -a  
 
 2. set the net card ip  
-ifconfig  [interface]  [ip]  netmask   [mask]   [dev]  
+ifconfig  [interface]  [ip]  netmask [mask]    
+ifconfig  eht0 192.168.10.10 netmask 255.255.255.0  
 
 3. on/off the card  
 ifconfig  [interface]  down  
