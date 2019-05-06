@@ -14,6 +14,11 @@
 #define SERVER_IP "39.105.113.152"
 //#define SERVER_IP "127.0.0.1"
 
+
+
+/*
+ * udp client:向指定的ip和端口发送udp包，然后阻塞接收回应数据，收到后，继续发送数据包。
+ */
 void udp_msg_sender(int fd, struct sockaddr* dst)
 {
 	socklen_t len;
