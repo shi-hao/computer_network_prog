@@ -19,18 +19,81 @@ osi七层模型
 (1)如果路由带网关，那么再添加以太网帧头时，目的mac地址就填写为网关的mac地址。
 (2)如果路由没有网关，那么协议栈要根据本地的mac地址表（arp表），填写目标ip的mac地址，
 如果本地的mac地址表没有指定ip的mac地址，那么主机需要向网络中发送arp广播请求包来请求mac地址。
+</pre>
 
 
-
+## 经典常用协议
+<pre>
 传输层：TCP/UDP
   |
 网络层：IP
   |
 数据链路层：Ethernet Protocol
   |
-物理层：MAC
+物理层：
+</pre>
+
+### Ethernet Protocol
+以太网协议  
+
+<pre>
+Ethernet Header
+------------------------------------------------------------------------------
+|preamble | SFD | des MAC addr | src MAC addr| EtherType |   payload  | FCS  |
+|7 bytes  |1byte| 6bytes       | 6 bytes     | 2 bytes   |46-1500bytes|4bytes|
+------------------------------------------------------------------------------
+</pre>
+SFD : start of frame delimiter  
+FCS : frame checke sequence(32-bit CRC)  
+以太网报文使用CRC校验算法。  
 
 
+问：以太网协议报文中并没有frame长度的信息，那如何去判断一个frame的长度呢？  
+答：frame中虽然没有长度信息，但是物理层有标识长度的机制，以太网依赖于物理层去区分  
+两个frame数据包。  
+
+问：以太网报文的最大长度？  
+答：以太网报文最大长度不会超过1500bytes，这是报文格式规定的最大长度，即，MTU为1500bytes。    
+
+### internet protocol
+网络协议，分IPv4和IPv6。  
+
+<pre>
+IPv4 Header
+---------------------------------------------
+|ver  |IHL |DSCP|ECN|total length           |
+|4b   |4b  |6b  |2b |2 bytes                |
+---------------------------------------------
+|identification     |flags|fragmen offset   |
+|2 bytes            |3bits|13bits           |
+--------------------------------------------
+|ttl     |protocol  |Header checksum        |
+|8 bits  |8 bits    |2 bytes                |
+---------------------------------------------
+|source IP address                          |
+|4 bytes                                    |
+---------------------------------------------
+|destination IP address                     |
+|4 bytes                                    |
+---------------------------------------------
+|options (up to 32 bits)                    |
+---------------------------------------------
+</pre>
+
+version:for IPv4, this is always equal to 4.  
+IHL:internet header length  
+DSCP:Differentiated Services Code Point   
+ECN:Explicit Congestion Notification  
+ttl:time to live  
+
+IP header中既包含了ip头长度的字段，也包含了整个ip包长度的字段，MTU为65535bytes。  
+
+
+
+### TCP & UDP
+
+
+<pre>
 TCP Header
 --------------------------------------------
 |source port number |destination port number|
@@ -46,12 +109,18 @@ TCP Header
 |4bits |3bits|9bits|2bytes                  |
 ---------------------------------------------
 |checksum          | urgent pointer         |
-|2 bytes           | 2bytes                 |
+|2 bytes           | 2 bytes                |
 --------------------------------------------
 |optional data                              |
 | 0-40bytes                                 |
 --------------------------------------------
+</pre>
 
+
+offset:data offset，用来标识TCP头的长度。  
+
+
+<pre>
 UDP Header
 --------------------------------------------
 |source port number |destination port number|
@@ -60,38 +129,35 @@ UDP Header
 |length             |checksum               |
 |2 bytes            |2 bytes                |
 ---------------------------------------------
+</pre>
 
-IP Header
----------------------------------------------
-|ver  |H len|pri&ser|total len              |
-|4bits|4bits|8bits  |2 bytes                |
----------------------------------------------
-|identification     |flags|fragmented offset|
-|2 bytes            |3bits|13bits           |
---------------------------------------------
-|ttl     |protocol  |Header checksum        |
-|8 bits  |8 bits    |2 bytes                |
----------------------------------------------
-|source IP address                          |
-|4 bytes                                    |
----------------------------------------------
-|destination IP address                     |
-|4 bytes                                    |
----------------------------------------------
-|options (up to 32 bits)                    |
----------------------------------------------
+length:整体的报文长度，包含头和数据部分，MTU为65535。   
 
-Ethernet Header
-------------------------------------------------------------------------------
-|preamble | SFD | des MAC addr | src MAC addr| EtherType |   payload  | FCS  |
-|7 bytes  |1byte| 6bytes       |6 bytes      |2 bytes    |46-1500bytes|4bytes|
-------------------------------------------------------------------------------
+
+## MTU(maximum transmission unit)
+<pre>
+-------------------------------------------------
+|protocol       |  MTU(byte)                 |
+-------------------------------------------------
+|ethernet       |  1500                      |
+-------------------------------------------------
+|ip             |  65535                     |
+-------------------------------------------------
+|TCP            |  65535                     |
+-------------------------------------------------
+|UDP            |  65535                     |
+-------------------------------------------------
+</pre>
+以上协议中，只有TCP在报文中没有包长度字段，但是window size的最大值是65535，所以  
+最大包的长度也是65535。  
+因为数据链路层的以太网协议最大的MTU只有1500，所以，包长的瓶颈在数据链路层，如果  
+上层的数据包长度大于1500，那么在数据链路层会发生数据拆包。所以一般而言，TCP/IP的  
+最大包长都设置为1500。  
 
 
 
-
-
-实验：
+## 实验：
+<pre>
 -----------------
  |   switch    |
 -----------------
