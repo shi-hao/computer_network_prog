@@ -21,6 +21,7 @@
 // This is our server's IP address. In case you're wondering, this one is an RFC 5737 address.
 //#define SRV_IP "203.0.113.61"
 #define SRV_IP "39.105.113.152"
+//#define SRV_IP "127.0.0.1"
  
 // A small struct to hold a UDP endpoint. We'll use this to hold each peer's endpoint.
 struct client
@@ -41,8 +42,12 @@ int main(int argc, char* argv[])
     struct sockaddr_in si_me, si_other;
     int s, i, f, j, k, slen=sizeof(si_other);
     struct client buf;
+	struct sockaddr_in my_buf;
+
     struct client server;
+
     struct client peers[10]; // 10 peers. Notice that we're not doing any bound checking.
+	struct sockaddr_in my_peers[10];
     int n = 0;
  
     if ((s=socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP))==-1)
@@ -82,11 +87,14 @@ int main(int argc, char* argv[])
         // peer communications. We discriminate by using the remote host endpoint data, but
         // remember that IP addresses are easily spoofed (actually, that's what the NAT is
         // doing), so remember to do some kind of validation in here.
-        if (recvfrom(s, &buf, sizeof(buf), 0, (struct sockaddr*)(&si_other), &slen)==-1)
+        //if (recvfrom(s, &buf, sizeof(buf), 0, (struct sockaddr*)(&si_other), &slen)==-1)
+        if (recvfrom(s, &my_buf, sizeof(my_buf), 0, (struct sockaddr*)(&si_other), &slen)==-1)
             diep("recvfrom");
         printf("Received packet from %s:%d\n", inet_ntoa(si_other.sin_addr), ntohs(si_other.sin_port));
         if (server.host == si_other.sin_addr.s_addr && server.port == (short)(si_other.sin_port))
         {
+			//printf("%d:%d", buf.host, buf.port);
+
             // The datagram came from the server. The server code is set to send us a
             // datagram for each peer, in which the payload contains the peer's UDP
             // endpoint data. We're receiving binary data here, sent using the server's
@@ -96,7 +104,8 @@ int main(int argc, char* argv[])
             // Now we just have to add the reported peer into our peer list
             for (i = 0; i < n && f == 0; i++)
             {
-                if (peers[i].host == buf.host && peers[i].port == buf.port)
+                //if (peers[i].host == buf.host && peers[i].port == buf.port)
+                if (my_peers[i].sin_addr.s_addr == my_buf.sin_addr.s_addr && my_peers[i].sin_port == my_buf.sin_port)
                 {
                     f = 1;
                 }
@@ -106,10 +115,14 @@ int main(int argc, char* argv[])
             {
                 peers[n].host = buf.host;
                 peers[n].port = buf.port;
+
+				my_peers[n] = my_buf;
                 n++;
             }
             si_other.sin_addr.s_addr = buf.host;
             si_other.sin_port = buf.port;
+
+			si_other = my_buf;
             printf("Added peer %s:%d\n", inet_ntoa(si_other.sin_addr), ntohs(si_other.sin_port));
             printf("Now we have %d peers\n", n);
             // And here is where the actual hole punching happens. We are going to send
@@ -125,13 +138,15 @@ int main(int argc, char* argv[])
             // our NAT may get an ICMP Destination Unreachable, but most NATs are
             // configured to simply discard them) but when the peer sends us a datagram,
             // it will pass through the hole punch into our local endpoint.
-            for (k = 0; k < 10; k++)
+            for (k = 0; k < 2; k++)
             {
                 // Send 10 datagrams.
                 for (i = 0; i < n; i++)
                 {
                     si_other.sin_addr.s_addr = peers[i].host;
                     si_other.sin_port = peers[i].port;
+
+					si_other = my_peers[i];
                     // Once again, the payload is irrelevant. Feel free to send your VoIP
                     // data in here.
                     if (sendto(s, "hi", 2, 0, (struct sockaddr*)(&si_other), slen)==-1)
@@ -145,7 +160,10 @@ int main(int argc, char* argv[])
             for (i = 0; i < n; i++)
             {
                 // Identify which peer it came from
-                if (peers[i].host == buf.host && peers[i].port == (short)(buf.port))
+                //if (peers[i].host == buf.host && peers[i].port == (short)(buf.port))
+                //if (peers[i].host == si_other.sin_addr.s_addr && peers[i].port == si_other.sin_port)
+                if ((my_peers[i].sin_addr.s_addr ==  si_other.sin_addr.s_addr) &&
+						(my_peers[i].sin_port == si_other.sin_port))
                 {
                     // And do something useful with the received payload
                     printf("Received from peer %d!\n", i);

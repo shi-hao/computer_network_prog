@@ -20,5 +20,7 @@ int main(int argc,char **argv)
 
 	printf("myaddr.sin_addr = %s\n", inet_ntoa(myaddr.sin_addr));
 	printf("myaddr.sin_port = %d\n", ntohs(myaddr.sin_port));
+
+	printf("sizeof(sockaddr_in)=%ld\n", sizeof(struct sockaddr_in));
 	return 0;
 }
