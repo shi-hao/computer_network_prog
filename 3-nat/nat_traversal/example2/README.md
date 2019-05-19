@@ -11,6 +11,7 @@ for a higher success rate.
 # improve
 communication protocol 
 
+<pre>
 --------------------------------------
 | opcode     |   payload            |
 | 1 byte     |                      |
@@ -50,3 +51,4 @@ opcode = 0x04
 | opcode | 
 | 1 byte |
 -----------
+</pre>
