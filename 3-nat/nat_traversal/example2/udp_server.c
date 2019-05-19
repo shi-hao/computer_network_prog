@@ -65,11 +65,11 @@ int main(void)
 		// well.
 		printf("Received packet from %s:%d\n", inet_ntoa(si_other.sin_addr), ntohs(si_other.sin_port));
 
-		//
-		if(buf[0] == client_hello){
+		char opcode = buf[0];
+		if(opcode == client_hello){
 
 			//add member
-			my_group.member_array[my_group.pos].id = buf[0];
+			my_group.member_array[my_group.pos].id = buf[1];
 			my_group.member_array[my_group.pos++].si = si_other;
 
 			//server_hello
@@ -84,19 +84,16 @@ int main(void)
 			buf[1] = my_group.pos;
 			int ppos=2;
 
-			//member id
-			for(int cnt=0; cnt<my_group.pos; cnt++)
-				buf[ppos+cnt] = my_group.member_array[cnt].id;
-
-			ppos += my_group.pos;
-			//member sockaddr_in
-			for(int cnt=0; cnt<my_group.pos; cnt++)
-				memcpy(buf+ppos+cnt*16, &(my_group.member_array[cnt].si), sizeof(si_other));
+			//member id and member sockaddr_in
+			int step = sizeof(member);
+			for(int cnt=0; cnt<my_group.pos; cnt++){
+				memcpy(&buf[2+cnt*step], &(my_group.member_array[cnt]), step);
+			}
 
 			//send the all member info to every member
 			for(int cnt=0; cnt<my_group.pos; cnt++){
 				si_other = my_group.member_array[cnt].si; 
-				int len = my_group.pos * sizeof(si_other) + my_group.pos + 2;
+				int len = my_group.pos * sizeof(member) + 2;
 				if (sendto(s, buf, len, 0, (struct sockaddr*)(&si_other), slen)==-1)
 					diep("sendto");
 			}

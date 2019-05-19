@@ -33,10 +33,16 @@ opcode = 0x01
 
 3.member report
 opcode = 0x02
-------------------------------------------------------------------------
-| opcode |  member sum = s | member id array| member sock_addr_in array|
-| 1 byte |  1 byte         | 1byte * s      | 16byte *  s              |
-------------------------------------------------------------------------
+---------------------------------------------------
+| opcode |  member sum = s | member info  array  |
+| 1 byte |  1 byte         | (1byte+16byte) *  s |
+---------------------------------------------------
+
+member id and sock_addr_in array structure
+------------------------------------------------
+|id    |sock_addr_in  |id    |sock_addr_in  |
+|1byte |16byte        |1byte |16byte        |
+------------------------------------------------
 
 4.member talk
 opcode = 0x03

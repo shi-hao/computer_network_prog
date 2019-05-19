@@ -104,10 +104,10 @@ int main(int argc, char* argv[])
 			}else if(opcode == member_report){
 				printf("member_report\n");
 				char size = buf[1];
+				int step = sizeof(member);
 				my_group.pos = size;
 				for(int cnt=0; cnt<size; cnt++){
-					my_group.member_array[cnt].id = buf[2+cnt];
-					memcpy(&(my_group.member_array[cnt].si), buf+2+size+cnt*16, sizeof(si_me));
+					memcpy(&(my_group.member_array[cnt]), buf+2+cnt*step, sizeof(member));
 				}
 				printf("Now we have %d peers\n", my_group.pos);
 

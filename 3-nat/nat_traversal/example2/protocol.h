@@ -3,11 +3,13 @@
 
 #define   group_size  10
 
+#pragma pack(1)
 //member info
 typedef struct _member_{
     char id;
     struct sockaddr_in si;
 }member;
+#pragma pack()
 
 //member group
 typedef struct _group_{
