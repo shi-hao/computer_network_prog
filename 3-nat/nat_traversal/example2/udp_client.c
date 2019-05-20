@@ -25,13 +25,6 @@
 #define SRV_IP "39.105.113.152"
 //#define SRV_IP "127.0.0.1"
 
-// A small struct to hold a UDP endpoint. We'll use this to hold each peer's endpoint.
-struct client
-{
-	int host;
-	short port;
-};
-
 // Just a function to kill the program when something goes wrong.
 void diep(char *s)
 {
@@ -45,6 +38,7 @@ int main(int argc, char* argv[])
 	struct sockaddr_in si_me, si_other, si_server;
 	int s, slen=sizeof(si_other);
 	char buf[BUFLEN];
+	int data_len;
 	group my_group;
 
 	memset(&my_group, 0, sizeof(my_group));
@@ -76,7 +70,8 @@ int main(int argc, char* argv[])
 	// as well.
 	buf[0] = client_hello;
 	buf[1] = 0x10;
-	if (sendto(s, buf, 2, 0, (struct sockaddr*)(&si_other), slen)==-1)
+	data_len = 2;
+	if (sendto(s, buf, data_len, 0, (struct sockaddr*)(&si_other), slen)==-1)
 		diep("sendto");
 
 	// Right here, our NAT should have a session entry between our host and the server.
@@ -99,7 +94,8 @@ int main(int argc, char* argv[])
 			char opcode = buf[0];
 			if(opcode == server_hello){
 				memcpy(&si_me, &buf[1], sizeof(si_me));
-				printf("server_hello\n");
+				printf("server_hello, my endpoint %s:%d\n", inet_ntoa(si_me.sin_addr), 
+						ntohs(si_me.sin_port));
 
 			}else if(opcode == member_report){
 				printf("member_report\n");
@@ -116,9 +112,12 @@ int main(int argc, char* argv[])
 				buf[1] = 2;
 				buf[2] = 'h';
 				buf[3] = 'i';
+				data_len = 4;
 				for(int cnt=0; cnt<my_group.pos; cnt++){
 					si_other = my_group.member_array[cnt].si;
-					if (sendto(s, buf, 4, 0, (struct sockaddr*)(&si_other), slen)==-1)
+					printf("member talk %s:%d\n", inet_ntoa(si_other.sin_addr), 
+							ntohs(si_other.sin_port));
+					if (sendto(s, buf, data_len, 0, (struct sockaddr*)(&si_other), slen)==-1)
 						diep("sendto()");
 				}
 			}
@@ -138,6 +137,10 @@ int main(int argc, char* argv[])
 		}
 		else
 		{
+			//
+			printf("received data from member %s:%d\n", inet_ntoa(si_other.sin_addr),
+					ntohs(si_other.sin_port));
+
 			// The datagram came from a peer
 			for (int i = 0; i < my_group.pos; i++)
 			{

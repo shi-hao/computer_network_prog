@@ -1,9 +1,3 @@
-// UDP hole punching example, server code
-// Base UDP code stolen from http://www.abc.se/~m6695/udp.html
-// By Oscar Rodriguez
-// This code is public domain, but you're a complete lunatic
-// if you plan to use this code in any real program.
-
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <stdio.h>
@@ -32,6 +26,7 @@ int main(void)
 	struct sockaddr_in si_me, si_other;
 	char buf[BUFLEN];
 	int s, slen=sizeof(si_other);
+	int data_len;
 	group my_group;
 
 	memset(&my_group, 0, sizeof(my_group));
@@ -63,21 +58,24 @@ int main(void)
 		// we'd have clients send their own private UDP endpoints
 		// encoded in some way inside the payload, and store those as
 		// well.
-		printf("Received packet from %s:%d\n", inet_ntoa(si_other.sin_addr), ntohs(si_other.sin_port));
+		printf("Received packet from %s:%d\n", inet_ntoa(si_other.sin_addr), 
+				ntohs(si_other.sin_port));
 
 		char opcode = buf[0];
 		if(opcode == client_hello){
-
 			//add member
 			my_group.member_array[my_group.pos].id = buf[1];
-			my_group.member_array[my_group.pos++].si = si_other;
+			my_group.member_array[my_group.pos].si = si_other;
+
+			//
+			my_group.pos++;
 
 			//server_hello
 			buf[0] = server_hello;
 			memcpy(&buf[1], &si_other, sizeof(si_other));
-			if(sendto(s, buf, 1, 0, (struct sockaddr*)(&si_other), slen)==-1)
+			data_len = sizeof(si_other)+1;
+			if(sendto(s, buf, data_len, 0, (struct sockaddr*)(&si_other), slen)==-1)
 				diep("sendto");
-
 
 			//member report
 			buf[0] = member_report;
@@ -93,10 +91,16 @@ int main(void)
 			//send the all member info to every member
 			for(int cnt=0; cnt<my_group.pos; cnt++){
 				si_other = my_group.member_array[cnt].si; 
-				int len = my_group.pos * sizeof(member) + 2;
-				if (sendto(s, buf, len, 0, (struct sockaddr*)(&si_other), slen)==-1)
+				data_len = my_group.pos * sizeof(member) + 2;
+				if (sendto(s, buf, data_len, 0, (struct sockaddr*)(&si_other), slen)==-1)
 					diep("sendto");
 			}
+		}else if(opcode == heart_beat){
+			buf[0] = heart_beat;
+			data_len = 1; 
+			//ack
+			if (sendto(s, buf, data_len, 0, (struct sockaddr*)(&si_other), slen)==-1)
+				diep("sendto");
 		}
 
 		printf("Now we have %d clients\n", my_group.pos);
