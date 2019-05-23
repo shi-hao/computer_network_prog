@@ -79,6 +79,9 @@ int main(int argc, char* argv[])
 	// send datagrams to other clients using our same private endpoint.
 	while (1)
 	{
+		//init the buf
+		memset(buf, 0, sizeof(buf));
+
 		// Receive data from the socket. Notice that we use the same socket for server and
 		// peer communications. We discriminate by using the remote host endpoint data, but
 		// remember that IP addresses are easily spoofed (actually, that's what the NAT is
@@ -94,11 +97,11 @@ int main(int argc, char* argv[])
 			char opcode = buf[0];
 			if(opcode == server_hello){
 				memcpy(&si_me, &buf[1], sizeof(si_me));
-				printf("server_hello, my endpoint %s:%d\n", inet_ntoa(si_me.sin_addr), 
+				printf("received server_hello, my endpoint %s:%d\n", inet_ntoa(si_me.sin_addr), 
 						ntohs(si_me.sin_port));
 
 			}else if(opcode == member_report){
-				printf("member_report\n");
+				printf("received member_report\n");
 				char size = buf[1];
 				int step = sizeof(member);
 				my_group.pos = size;
@@ -115,12 +118,19 @@ int main(int argc, char* argv[])
 				data_len = 4;
 				for(int cnt=0; cnt<my_group.pos; cnt++){
 					si_other = my_group.member_array[cnt].si;
+<<<<<<< HEAD
 					for(int cnt=0; cnt<10; cnt++){
 						printf("member talk %s:%d\n", inet_ntoa(si_other.sin_addr), 
 								ntohs(si_other.sin_port));
 						if (sendto(s, buf, data_len, 0, (struct sockaddr*)(&si_other), slen)==-1)
 							diep("sendto()");
 					}
+=======
+					printf("sending member talk %s:%d\n", inet_ntoa(si_other.sin_addr), 
+							ntohs(si_other.sin_port));
+					if (sendto(s, buf, data_len, 0, (struct sockaddr*)(&si_other), slen)==-1)
+						diep("sendto()");
+>>>>>>> e889463c4267d9f2de62ce86789dabcd2cb45928
 				}
 			}
 			// And here is where the actual hole punching happens. We are going to send
@@ -139,10 +149,6 @@ int main(int argc, char* argv[])
 		}
 		else
 		{
-			//
-			printf("received data from member %s:%d\n", inet_ntoa(si_other.sin_addr),
-					ntohs(si_other.sin_port));
-
 			// The datagram came from a peer
 			for (int i = 0; i < my_group.pos; i++)
 			{
@@ -150,9 +156,14 @@ int main(int argc, char* argv[])
 				if ((my_group.member_array[i].si.sin_addr.s_addr ==  si_other.sin_addr.s_addr) &&
 						(my_group.member_array[i].si.sin_port == si_other.sin_port))
 				{
-					// And do something useful with the received payload
-					printf("Received from peer %d!\n", i);
-					break;
+					//opcode 
+					char opcode = buf[0];
+
+					if(opcode == member_talk){
+						// And do something useful with the received payload
+						printf("Received member_talk from peer %d:%s\n", i, &buf[2]);
+						break;
+					}
 				}
 			}
 
