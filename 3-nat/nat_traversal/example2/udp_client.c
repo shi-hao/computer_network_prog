@@ -115,10 +115,12 @@ int main(int argc, char* argv[])
 				data_len = 4;
 				for(int cnt=0; cnt<my_group.pos; cnt++){
 					si_other = my_group.member_array[cnt].si;
-					printf("member talk %s:%d\n", inet_ntoa(si_other.sin_addr), 
-							ntohs(si_other.sin_port));
-					if (sendto(s, buf, data_len, 0, (struct sockaddr*)(&si_other), slen)==-1)
-						diep("sendto()");
+					for(int cnt=0; cnt<10; cnt++){
+						printf("member talk %s:%d\n", inet_ntoa(si_other.sin_addr), 
+								ntohs(si_other.sin_port));
+						if (sendto(s, buf, data_len, 0, (struct sockaddr*)(&si_other), slen)==-1)
+							diep("sendto()");
+					}
 				}
 			}
 			// And here is where the actual hole punching happens. We are going to send
