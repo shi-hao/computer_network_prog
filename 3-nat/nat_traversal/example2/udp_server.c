@@ -75,6 +75,8 @@ int main(void)
 			data_len = sizeof(si_other)+1;
 			if(sendto(s, buf, data_len, 0, (struct sockaddr*)(&si_other), slen)==-1)
 				diep("sendto");
+
+			printf("Now we have %d clients\n", my_group.pos);
 		}else if(opcode == heart_beat){
 			printf("received heart_beat packet\n");
 			buf[0] = ack;
@@ -102,12 +104,11 @@ int main(void)
 				if (sendto(s, buf, data_len, 0, (struct sockaddr*)(&si_other), slen)==-1)
 					diep("sendto");
 			}
-		
+
 		}else{
 			printf("unsurported protocol packet\n");
 		}
 
-		printf("Now we have %d clients\n", my_group.pos);
 		// And we go back to listening. Notice that since UDP has no notion
 		// of connections, we can use the same socket to listen for data
 		// from different clients.
