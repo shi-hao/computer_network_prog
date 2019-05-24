@@ -51,10 +51,35 @@ opcode = 0x03
 | 1 byte |  1 byte            | s byte   |
 --------------------------------------------
 
-5.ack
+5.heart beat
 opcode = 0x04
 -----------
 | opcode | 
 | 1 byte |
 -----------
+
+6.heart beat
+opcode = 0x05
+-----------
+| opcode | 
+| 1 byte |
+-----------
+
+7.member request
+opcode = 0x06
+-----------
+| opcode | 
+| 1 byte |
+-----------
+
+client                    server
+      ---client hello-->
+      <--server hello---
+
+      --member request-->
+      <--member report---
+
+      --heart beat--->
+      <--ack----------
+
 </pre>

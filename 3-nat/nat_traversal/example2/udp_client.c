@@ -62,12 +62,11 @@ void signal_func(){
 	data_len = 4;
 	for(int cnt=0; cnt<my_group.pos; cnt++){
 		si_other = my_group.member_array[cnt].si;
-		printf("sending member talk %s:%d\n", inet_ntoa(si_other.sin_addr), 
+		printf("sending member talk to %s:%d\n", inet_ntoa(si_other.sin_addr), 
 				ntohs(si_other.sin_port));
 		if (sendto(s, buf, data_len, 0, (struct sockaddr*)(&si_other), slen)==-1)
 			diep("sendto()");
 	}
-	printf("sending member_talk to all members\n");
 }
 
 void set_my_timer(){
@@ -105,9 +104,7 @@ int main(int argc, char* argv[])
 	my_group.capacity = group_size;
 
 	/////////////////////////////////////////////////////////////////////////
-	/*
-	 *check the nat type
-	 */
+	//check nat type
 	//create socket
 	if ((s=socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP))==-1)
 		diep("socket");
@@ -138,7 +135,7 @@ int main(int argc, char* argv[])
 	char opcode = buf[0];
 	if(opcode == server_hello){
 		memcpy(&si_me, &buf[1], sizeof(si_me));
-		printf("received server_hello, my endpoint %s:%d\n", inet_ntoa(si_me.sin_addr), 
+		printf("received server_hello, my endpoint 1 =  %s:%d\n", inet_ntoa(si_me.sin_addr), 
 				ntohs(si_me.sin_port));
 	}
 
@@ -159,7 +156,7 @@ int main(int argc, char* argv[])
 
 	if(opcode == server_hello){
 		memcpy(&si_meme, &buf[1], sizeof(si_meme));
-		printf("received server_hello, my endpoint %s:%d\n", inet_ntoa(si_meme.sin_addr), 
+		printf("received server_hello, my endpoint 2 = %s:%d\n", inet_ntoa(si_meme.sin_addr), 
 				ntohs(si_meme.sin_port));
 	}
 
@@ -233,7 +230,7 @@ int main(int argc, char* argv[])
 				for(int cnt=0; cnt<my_group.pos; cnt++){
 					si_other = my_group.member_array[cnt].si;
 					for(int cnt=0; cnt<1; cnt++){
-						printf("sending member talk %s:%d\n", inet_ntoa(si_other.sin_addr), 
+						printf("sending member talk to %s:%d\n", inet_ntoa(si_other.sin_addr), 
 								ntohs(si_other.sin_port));
 						if (sendto(s, buf, data_len, 0, (struct sockaddr*)(&si_other), slen)==-1)
 							diep("sendto()");
