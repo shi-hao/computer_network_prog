@@ -63,11 +63,6 @@ int main(void)
 
 		char opcode = buf[0];
 		if(opcode == client_hello){
-			printf("received client_hello packet\n");
-			//add member
-			my_group.member_array[my_group.pos].id = buf[1];
-			my_group.member_array[my_group.pos].si = si_other;
-			my_group.pos++;
 
 			//server_hello
 			buf[0] = server_hello;
@@ -75,36 +70,6 @@ int main(void)
 			data_len = sizeof(si_other)+1;
 			if(sendto(s, buf, data_len, 0, (struct sockaddr*)(&si_other), slen)==-1)
 				diep("sendto");
-		}else if(opcode == heart_beat){
-			printf("received heart_beat packet\n");
-			buf[0] = ack;
-			data_len = 1; 
-			//ack
-			if (sendto(s, buf, data_len, 0, (struct sockaddr*)(&si_other), slen)==-1)
-				diep("sendto");
-		}else if(opcode == member_request){
-			printf("received member_request packet\n");
-			//member report
-			buf[0] = member_report;
-			buf[1] = my_group.pos;
-			int ppos=2;
-
-			//member id and member sockaddr_in
-			int step = sizeof(member);
-			for(int cnt=0; cnt<my_group.pos; cnt++){
-				memcpy(&buf[2+cnt*step], &(my_group.member_array[cnt]), step);
-			}
-
-			//send all member info to every member
-			for(int cnt=0; cnt<my_group.pos; cnt++){
-				si_other = my_group.member_array[cnt].si; 
-				data_len = my_group.pos * sizeof(member) + 2;
-				if (sendto(s, buf, data_len, 0, (struct sockaddr*)(&si_other), slen)==-1)
-					diep("sendto");
-			}
-		
-		}else{
-			printf("unsurported protocol packet\n");
 		}
 
 		printf("Now we have %d clients\n", my_group.pos);

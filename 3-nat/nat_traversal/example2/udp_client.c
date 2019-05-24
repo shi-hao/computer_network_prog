@@ -12,6 +12,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/time.h>
+#include<signal.h>
 
 #include "protocol.h"
 
@@ -22,7 +24,8 @@
 
 // This is our server's IP address. In case you're wondering, this one is an RFC 5737 address.
 //#define SRV_IP "203.0.113.61"
-#define SRV_IP "39.105.113.152"
+#define  SRV_IP    "39.105.113.152"
+#define  SRV_IP_2  "47.93.8.236"
 //#define SRV_IP "127.0.0.1"
 
 // Just a function to kill the program when something goes wrong.
@@ -32,33 +35,143 @@ void diep(char *s)
 	exit(1);
 }
 
+//global socket handler 
+int s;
+group my_group;  //add lock to my_group is more safe
+struct sockaddr_in si_server;
+
+//SIGALRM 
+void signal_func(){
+	char buf[BUFLEN];
+	int data_len = 0;
+	struct sockaddr_in si_other;
+	int slen=sizeof(si_other);
+
+	//send heart_beat
+	buf[0] = heart_beat;
+	data_len = 1;
+	if (sendto(s, buf, data_len, 0, (struct sockaddr*)(&si_server), slen)==-1)
+		diep("sendto()");
+	printf("sending heart_beat to server\n");
+
+	//send member talk
+	buf[0] = member_talk;
+	buf[1] = 2;
+	buf[2] = 'h';
+	buf[3] = 'i';
+	data_len = 4;
+	for(int cnt=0; cnt<my_group.pos; cnt++){
+		si_other = my_group.member_array[cnt].si;
+		printf("sending member talk %s:%d\n", inet_ntoa(si_other.sin_addr), 
+				ntohs(si_other.sin_port));
+		if (sendto(s, buf, data_len, 0, (struct sockaddr*)(&si_other), slen)==-1)
+			diep("sendto()");
+	}
+	printf("sending member_talk to all members\n");
+}
+
+void set_my_timer(){
+#define     timer_seconds    4
+	int res = 0;
+	struct itimerval tick;
+
+	//set SIGALRM response function
+	signal(SIGALRM, signal_func);
+
+	//Timeout to run first time
+	memset(&tick, 0, sizeof(tick));
+	tick.it_value.tv_sec = timer_seconds;
+	tick.it_value.tv_usec = 0;
+
+	//After first, the Interval time for clock
+	tick.it_interval.tv_sec = timer_seconds;
+	tick.it_interval.tv_usec = 0;
+
+	//set timer
+	if(setitimer(ITIMER_REAL, &tick, NULL) < 0)
+		printf("Set timer failed!\n");
+}
+
+
 int main(int argc, char* argv[])
 {
-#define   BUFLEN   512
-	struct sockaddr_in si_me, si_other, si_server;
-	int s, slen=sizeof(si_other);
+#define     BUFLEN           512
+	struct sockaddr_in si_me,si_meme, si_other;
+	int slen=sizeof(si_other);
 	char buf[BUFLEN];
 	int data_len;
-	group my_group;
 
 	memset(&my_group, 0, sizeof(my_group));
 	my_group.capacity = group_size;
 
+	/////////////////////////////////////////////////////////////////////////
+	/*
+	 *check the nat type
+	 */
+	//create socket
 	if ((s=socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP))==-1)
 		diep("socket");
 
 	// Our own endpoint data
 	memset((char *) &si_me, 0, sizeof(si_me));
-	si_me.sin_family = AF_INET;
-	si_me.sin_port = htons(PORT); // This is not really necessary, we can also use 0 (any port)
-	si_me.sin_addr.s_addr = htonl(INADDR_ANY);
+	memset((char *) &si_meme, 0, sizeof(si_meme));
 
 	// The server's endpoint data
 	memset((char *) &si_other, 0, sizeof(si_other));
 	si_other.sin_family = AF_INET;
 	si_other.sin_port = htons(PORT);
-	if (inet_aton(SRV_IP, &si_other.sin_addr)==0)
+	if (inet_aton(SRV_IP_2, &si_other.sin_addr)==0)
 		diep("aton");
+
+	//client_hello data
+	buf[0] = client_hello;
+	buf[1] = 0x10;
+	data_len = 2;
+
+	//send client_hello to server 1
+	if(sendto(s, buf, data_len, 0, (struct sockaddr*)(&si_other), slen)==-1)
+		diep("sendto");
+
+	if(recvfrom(s, &buf, sizeof(buf), 0, (struct sockaddr*)(&si_other), &slen)==-1)
+		diep("recvfrom");
+
+	char opcode = buf[0];
+	if(opcode == server_hello){
+		memcpy(&si_me, &buf[1], sizeof(si_me));
+		printf("received server_hello, my endpoint %s:%d\n", inet_ntoa(si_me.sin_addr), 
+				ntohs(si_me.sin_port));
+	}
+
+	//client_hello data
+	buf[0] = client_hello;
+	buf[1] = 0x10;
+	data_len = 2;
+
+	//send client_hello to server 2
+	if(inet_aton(SRV_IP, &si_other.sin_addr)==0)
+		diep("aton");
+
+	if(sendto(s, buf, data_len, 0, (struct sockaddr*)(&si_other), slen)==-1)
+		diep("sendto");
+
+	if(recvfrom(s, &buf, sizeof(buf), 0, (struct sockaddr*)(&si_other), &slen)==-1)
+		diep("recvfrom");
+
+	if(opcode == server_hello){
+		memcpy(&si_meme, &buf[1], sizeof(si_meme));
+		printf("received server_hello, my endpoint %s:%d\n", inet_ntoa(si_meme.sin_addr), 
+				ntohs(si_meme.sin_port));
+	}
+
+	if((si_me.sin_addr.s_addr == si_meme.sin_addr.s_addr) && 
+			(si_me.sin_port == si_meme.sin_port)){
+		printf("nat type is not symmetric nat, udp hole punching is useful\n");
+
+	}else{
+		printf("nat type is symmetric nat, udp hole punching is useless, exit\n");
+		exit(0);
+	}
+	///////////////////////////////////////////////////////////////////
 
 	// Store the server's endpoint data so we can easily discriminate between server and peer datagrams.
 	si_server = si_other;
@@ -68,11 +181,12 @@ int main(int argc, char* argv[])
 	// The datagram payload is irrelevant, but if we wanted to support multiple
 	// clients behind the same NAT, we'd send our won private UDP endpoint information
 	// as well.
-	buf[0] = client_hello;
-	buf[1] = 0x10;
-	data_len = 2;
+	buf[0] = member_request;
+	data_len = 1;
 	if (sendto(s, buf, data_len, 0, (struct sockaddr*)(&si_other), slen)==-1)
 		diep("sendto");
+
+	set_my_timer();
 
 	// Right here, our NAT should have a session entry between our host and the server.
 	// We can only hope our NAT maps the same public endpoint (both host and port) when we
@@ -118,13 +232,15 @@ int main(int argc, char* argv[])
 				data_len = 4;
 				for(int cnt=0; cnt<my_group.pos; cnt++){
 					si_other = my_group.member_array[cnt].si;
-					for(int cnt=0; cnt<10; cnt++){
+					for(int cnt=0; cnt<1; cnt++){
 						printf("sending member talk %s:%d\n", inet_ntoa(si_other.sin_addr), 
 								ntohs(si_other.sin_port));
 						if (sendto(s, buf, data_len, 0, (struct sockaddr*)(&si_other), slen)==-1)
 							diep("sendto()");
 					}
 				}
+			}else if(opcode == ack){
+				printf("received ack packet\n");
 			}
 			// And here is where the actual hole punching happens. We are going to send
 			// a bunch of datagrams to each peer. Since we're using the same socket we

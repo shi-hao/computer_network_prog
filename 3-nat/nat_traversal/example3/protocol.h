@@ -19,12 +19,11 @@ typedef struct _group_{
 }group;
 
 
-#define  client_hello      0x00
-#define  server_hello      0x01
-#define  member_report     0x02
-#define  member_talk       0x03
-#define  heart_beat        0x04
-#define  ack               0x05
-#define  member_request    0x06
+#define  client_hello    0x00
+#define  server_hello    0x01
+#define  member_report   0x02
+#define  member_talk     0x03
+#define  heart_beat      0x04
+#define  ack             0x05
 
 #endif
