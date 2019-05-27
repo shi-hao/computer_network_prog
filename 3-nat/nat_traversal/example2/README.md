@@ -58,7 +58,7 @@ opcode = 0x04
 | 1 byte |
 -----------
 
-6.heart beat
+6.ack
 opcode = 0x05
 -----------
 | opcode | 
