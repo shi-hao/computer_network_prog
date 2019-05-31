@@ -1,7 +1,6 @@
 #!/bin/bash
 
-#./run &
-./run &
+sudo ./main.elf & 
 
 route -n
 ifconfig -a
