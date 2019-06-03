@@ -11,8 +11,8 @@ for a higher success rate.
 # improve
 communication protocol 
 
-<pre>
 ## packet type
+<pre>
 --------------------------------------
 | opcode     |   payload            |
 | 1 byte     |                      |
@@ -72,9 +72,10 @@ opcode = 0x06
 | opcode | 
 | 1 byte |
 -----------
+</pre>
 
 ## communication sequence
-
+<pre>
 -------------------------------------
 client |                   | server
        |---client hello--> |
@@ -86,5 +87,4 @@ client |                   | server
        |--heart beat--->   |
        |<--ack----------   |
 -------------------------------------
-
 </pre>
