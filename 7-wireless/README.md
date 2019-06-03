@@ -51,4 +51,4 @@ wifi peer-to-peer mode.
 
 8. Tunneled Direct Link Setup(TDLS)
 
-  0 <img src="https://github.com/shi-hao/computer_network_prog/blob/master/7-wireless/wifi_app_mode.jpg" width    ="364" height="450" />
+  0 <img src="https://github.com/shi-hao/computer_network_prog/blob/master/7-wireless/wifi_app_mode.jpg" width    ="606" height="886" />
