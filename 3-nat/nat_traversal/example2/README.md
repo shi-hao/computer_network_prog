@@ -12,6 +12,7 @@ for a higher success rate.
 communication protocol 
 
 <pre>
+## packet type
 --------------------------------------
 | opcode     |   payload            |
 | 1 byte     |                      |
@@ -72,14 +73,18 @@ opcode = 0x06
 | 1 byte |
 -----------
 
-client                    server
-      ---client hello-->
-      <--server hello---
+## communication sequence
 
-      --member request-->
-      <--member report---
-
-      --heart beat--->
-      <--ack----------
+-------------------------------------
+client |                   | server
+       |---client hello--> |
+       |<--server hello--- |
+       |                   |
+       |--member request-->|
+       |<--member report---|
+       |                   |
+       |--heart beat--->   |
+       |<--ack----------   |
+-------------------------------------
 
 </pre>
