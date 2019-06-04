@@ -104,13 +104,13 @@ Joining multicast group  224.0.67.67
 Receiving 1470 byte datagrams  
 UDP buffer size: 60.0 KByte (default)  
 ------------------------------------------------------------  
-   [  3] local 224.0.67.67 port 5001 connected with <IP Addr node5> port 1025  
-   [ ID] Interval       Transfer     Bandwidth       Jitter   Lost/Total Datagrams  
-   [  3]  0.0- 1.0 sec   129 KBytes   1.0 Mbits/sec  0.778 ms   61/  151 (40%)  
-   [  3]  1.0- 2.0 sec   128 KBytes   1.0 Mbits/sec  0.236 ms    0/   89 (0%)  
-   [  3]  2.0- 3.0 sec   128 KBytes   1.0 Mbits/sec  0.264 ms    0/   89 (0%)  
-   [  3]  3.0- 4.0 sec   128 KBytes   1.0 Mbits/sec  0.248 ms    0/   89 (0%)  
-   [  3]  0.0- 4.3 sec   554 KBytes   1.0 Mbits/sec  0.298 ms   61/  447 (14%)  
+    [  3] local 224.0.67.67 port 5001 connected with <IP Addr node5> port 1025  
+    [ ID] Interval       Transfer     Bandwidth       Jitter   Lost/Total Datagrams  
+    [  3]  0.0- 1.0 sec   129 KBytes   1.0 Mbits/sec  0.778 ms   61/  151 (40%)  
+    [  3]  1.0- 2.0 sec   128 KBytes   1.0 Mbits/sec  0.236 ms    0/   89 (0%)  
+    [  3]  2.0- 3.0 sec   128 KBytes   1.0 Mbits/sec  0.264 ms    0/   89 (0%)  
+    [  3]  3.0- 4.0 sec   128 KBytes   1.0 Mbits/sec  0.248 ms    0/   89 (0%)  
+    [  3]  0.0- 4.3 sec   554 KBytes   1.0 Mbits/sec  0.298 ms   61/  447 (14%)  
   
 Start multiple clients or servers as explained above, sending data to the same multicast server.   
 (If you have multiple servers listening on the multicast address, each of the servers will be getting the data)  
