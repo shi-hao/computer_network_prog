@@ -1,4 +1,4 @@
-linux socket tcp-udp  
+# linux socket tcp-udp  
   
 1.有无连接  
 tcp是面向连接的，udp则是无连接  
