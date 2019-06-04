@@ -89,22 +89,21 @@ int main(void)
 			//member report
 			buf[0] = member_report;
 			buf[1] = my_group.pos;
-			int ppos=2;
+			int offset = 2;
 
 			//member id and member sockaddr_in
 			int step = sizeof(member);
 			for(int cnt=0; cnt<my_group.pos; cnt++){
-				memcpy(&buf[2+cnt*step], &(my_group.member_array[cnt]), step);
+				memcpy(&buf[offset+cnt*step], &(my_group.member_array[cnt]), step);
 			}
 
 			//send all member info to every member
 			for(int cnt=0; cnt<my_group.pos; cnt++){
 				si_other = my_group.member_array[cnt].si; 
-				data_len = my_group.pos * sizeof(member) + 2;
+				data_len = my_group.pos * sizeof(member) + offset;
 				if (sendto(s, buf, data_len, 0, (struct sockaddr*)(&si_other), slen)==-1)
 					diep("sendto");
 			}
-
 		}else{
 			printf("unsurported protocol packet\n");
 		}
