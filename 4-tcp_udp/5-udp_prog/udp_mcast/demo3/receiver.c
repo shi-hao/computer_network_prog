@@ -70,7 +70,7 @@ int main(int argc, char **argv)
 	 * struct ip_mreq
 	 * ip_mreq.imr_multiaddr.s_addr   设置要加入的组播地址 
 	 * ip_mreq.imr_interface.s_addr   设置将哪个网卡加入组播地址，使用netstat -gn可以查看是否成功加入
-	 * setsockopt()                     将设置写入系统配置
+	 * setsockopt()                   将设置写入系统配置
 	 */
 	bzero(&mreq, sizeof(struct ip_mreq));
 	if (argv[1]) {

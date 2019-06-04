@@ -42,7 +42,7 @@ void handle_udp_msg(int fd)
 			printf("recieve data fail!\n");
 			return;
 		}
-		printf("client:%s\n",buf);  //打印client发过来的信息
+		printf("recv client:%s\n",buf);  //打印client发过来的信息
 		printf("client_addr.sin_addr:%s\n",inet_ntoa(client_addr.sin_addr));  //打印client ip
 		printf("client_addr.sin_port:%d\n",ntohs(client_addr.sin_port));  //打印client port
 

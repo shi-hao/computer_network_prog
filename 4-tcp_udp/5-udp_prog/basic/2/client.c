@@ -15,7 +15,6 @@
 //#define SERVER_IP "127.0.0.1"
 
 
-
 /*
  * udp client:向指定的ip和端口发送udp包，然后睡眠一段时间，继续发送数据包。
  */
@@ -26,10 +25,10 @@ void udp_msg_sender(int fd, struct sockaddr* dst)
 	int count=0;
 	while(1)
 	{
-		char buf[BUFF_LEN] = "TEST UDP MSG!\n";
-		sprintf(buf, "TEST UDP MSG %d !\n", count++);
+		char buf[BUFF_LEN] = "TEST UDP MSG!";
+		sprintf(buf, "TEST UDP MSG %d !", count++);
 		len = sizeof(*dst);
-		printf("client:%s\n",buf);  //打印自己发送的信息
+		printf("client sending:%s\n",buf);  //打印自己发送的信息
 		sendto(fd, buf, BUFF_LEN, 0, dst, len);
 
 #if 0
