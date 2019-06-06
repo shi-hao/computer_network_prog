@@ -5,12 +5,14 @@
   
 使用route -n查看本地的路由表，如下。  
   
+<pre>
 Kernel IP routing table  
 Destination     Gateway         Genmask         Flags Metric Ref    Use Iface  
 0.0.0.0         192.168.0.1     0.0.0.0         UG    100    0        0 eno1  
 169.254.0.0     0.0.0.0         255.255.0.0     U     1000   0        0 eno1  
 172.17.0.0      0.0.0.0         255.255.0.0     U     0      0        0 docker0  
 192.168.0.0     0.0.0.0         255.255.255.0   U     100    0        0 eno1  
+</pre>
   
 路由设置的有几个重要要素：  
   
