@@ -9,3 +9,7 @@
 ## symmetric nat
 
 udp hole punching is possible except the symmetric nat!!  
+
+
+# internet peer to peer communication
+
