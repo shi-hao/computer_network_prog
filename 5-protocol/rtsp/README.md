@@ -9,6 +9,10 @@ Transport Protocol (RTP) in conjunction with Real-time Control Protocol (RTCP) f
 However, some vendors implement proprietary transport protocols.  
 
 Like HTTP,RTSP uses TCP to maintain an end-to-end connection.  
+using RTP,RTCP deliverying media streaming.  
+
+
+RTP, real-time transport protocol 
 
 
 # RTMP
