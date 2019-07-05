@@ -1,8 +1,8 @@
 #/bin/bash
 
 #create bridge device 
-sudo ip link add name br0 type bridge
-sudo ip link set br0 up
+sudo ip link add name mybr0 type bridge
+sudo ip link set mybr0 up
 
 #create veth device
 sudo ip link add veth0 type veth peer name veth1 
@@ -12,5 +12,5 @@ sudo ip link set veth0 up
 sudo ip link set veth1 up 
 
 
-#veth0 connect to br0
-sudo ip link set dev veth0 master br0
+#veth0 connect to mybr0
+sudo ip link set dev veth0 master mybr0
