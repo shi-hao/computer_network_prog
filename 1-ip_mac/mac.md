@@ -14,4 +14,3 @@ mac地址。网卡的物理地址的第一个字节的最低位必须是0！！
 ## 广播(broadcast)  
 广播的mac地址很固定，是全1，即：    
 0xff-0xff-0xff-0xff-0xff-0xff    
-  
