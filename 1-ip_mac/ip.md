@@ -65,7 +65,7 @@ A/B/C类地址的网络号对应的掩码必须是255，
 基本步骤如下：    
 ifconfig  [interface]  down   
 ifconfig  [interface]  [ip]  netmask  [mask]   
-route add default gw [gateway]  
+route add default gw [gateway_ip] [interface] 
 ifconfig  [interface]  up   
 
 在ubuntu18下使用指令配置网卡地址时，出现过很多奇怪的现象，比如使用ifconfig配置ip后，  
