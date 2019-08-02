@@ -2,8 +2,15 @@
 
 # Interface
 #my_inter="wlp4s0"
-#my_inter="enp0s31f6"
-my_inter="enx000ec6be0723"
+my_inter="enp0s31f6"
+#my_inter="enx000ec6be0723"
+
+# Del the default gateway
+if [ "$1" == "clear" ] ;then
+	sudo route del default dev $my_inter
+	echo exit
+	exit 1
+fi
 
 # Read ip mask gateway
 OLD_IFS=$IFS
