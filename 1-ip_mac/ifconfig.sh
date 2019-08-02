@@ -5,14 +5,6 @@
 #my_inter="enp0s31f6"
 my_inter="enx000ec6be0723"
 
-## ip mask gateway array 
-#ip_array=("11.15.244.63" "192.168.8.192")
-#mask_array=("255.255.255.0" "255.255.255.0")
-#gw_ip=("11.15.244.254" "192.168.8.1")
-#msg=("白石桥AS" "local")
-#
-#len=$((${#ip_array[*]}-1))
-
 # Read ip mask gateway
 OLD_IFS=$IFS
 IFS=" "
