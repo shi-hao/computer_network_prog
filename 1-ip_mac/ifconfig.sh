@@ -1,8 +1,9 @@
 #!/bin/bash 
 
 # Interface
-my_inter="enp0s31f6"
-#my_inter="enx000ec6be0723"
+#my_inter="wlp4s0"
+#my_inter="enp0s31f6"
+my_inter="enx000ec6be0723"
 
 ## ip mask gateway array 
 #ip_array=("11.15.244.63" "192.168.8.192")
@@ -46,8 +47,8 @@ my_gw=${gw_ip[$num]}
 # Config the interface ip using cmd
 sudo ifconfig $my_inter down
 sudo ifconfig $my_inter $my_ip netmask $my_mask
-sudo route del default $my_inter
-sudo route add default gw  $my_gw  $my_inter
+sudo route del default dev $my_inter
+sudo route add default gw  $my_gw dev $my_inter
 #sudo ifconfig $my_inter up
 
 # Check the interface config
