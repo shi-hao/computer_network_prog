@@ -4,6 +4,7 @@
 #my_inter="wlp4s0"
 my_inter="enp0s31f6"
 #my_inter="enx000ec6be0723"
+echo -e "\033[31m interface:$my_inter \033[0m"
 
 # Del the default gateway
 if [ "$1" == "clear" ] ;then
@@ -27,10 +28,10 @@ IFS=$OLD_IFS
 len=$((${#ip_array[*]}-1))
 
 # Echo all ip mask gw
-echo -en "ip \t mask \t gw \t info \n"
+echo -en "ID \t IP \t MASK \t GW \t INFO \n"
 for((i=0;i<=len;i++));
 do
-	echo -en "${ip_array[i]} \t  ${mask_array[i]} \t ${gw_ip[i]} \t  ${msg[i]} \n"
+	echo -en "[$i] \t ${ip_array[i]} \t ${mask_array[i]} \t ${gw_ip[i]} \t ${msg[i]} \n"
 done 
 
 # Choosing config
