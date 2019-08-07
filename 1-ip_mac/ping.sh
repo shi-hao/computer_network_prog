@@ -1,5 +1,8 @@
 #!/bin/bash 
 
+#trap ctrl-c
+trap 'echo "INTERRUPTED!"; exit' INT
+
 # Read ip
 OLD_IFS=$IFS
 IFS=" "
@@ -7,7 +10,7 @@ while read line
 do 
 	arr=($line)
 	ip_array+=(${arr[0]})
-	msg+=(${arr[3]})
+	msg+=(${arr[1]})
 done <./ip_host.txt
 IFS=$OLD_IFS
 len=$((${#ip_array[*]}-1))
@@ -24,5 +27,8 @@ do
 	for((i=0;i<=len;i++));
 		do
 			ping -c 1 ${ip_array[i]} 
+			if [ $? -eq 1 ]; then
+				echo -e "\033[31m ${msg[i]} ping faild\033[0m"
+			fi
 		done 
 done
