@@ -1,7 +1,7 @@
 #!/bin/bash 
 
 #trap ctrl-c
-trap 'echo "INTERRUPTED!"; exit' INT
+trap 'echo "exit ping"; exit' INT
 
 # Read ip
 OLD_IFS=$IFS

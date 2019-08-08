@@ -9,8 +9,8 @@ echo -e "\033[31m interface:$my_inter \033[0m"
 # Del the default gateway
 if [ "$1" == "clear" ] ;then
 	sudo route del default dev $my_inter
-	echo exit
-	exit 1
+	echo "route del default dev $my_inter"
+	exit 0
 fi
 
 # Read ip mask gateway
