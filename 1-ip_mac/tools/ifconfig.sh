@@ -23,7 +23,7 @@ do
 	mask_array+=(${arr[1]})
 	gw_ip+=(${arr[2]})
 	msg+=(${arr[3]})
-done <./ip_cnf.txt
+done </home/bleach/myfile/ip_cnf.txt
 IFS=$OLD_IFS
 len=$((${#ip_array[*]}-1))
 

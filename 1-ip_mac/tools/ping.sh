@@ -11,7 +11,7 @@ do
 	arr=($line)
 	ip_array+=(${arr[0]})
 	msg+=(${arr[1]})
-done <./ip_host.txt
+done </home/bleach/myfile/ip_host.txt
 IFS=$OLD_IFS
 len=$((${#ip_array[*]}-1))
 
