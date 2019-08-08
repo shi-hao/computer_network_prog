@@ -25,16 +25,17 @@ do
 done 
 
 # Ping all ip
+sleep_s=4
 while true 
 do
 	for((i=0;i<=len;i++));
-		do
-			ping -c 1 ${ip_array[i]} 
-			if [ $? -eq 1 ]; then
-				echo -e "\033[31m ${msg[i]}--${ip_array[i]} ping faild\033[0m"
-				echo -e "\a" #alarm 
-			else
-				sleep 4
-			fi
-		done 
+	do
+		ping -c 1 ${ip_array[i]} 
+		if [ $? -eq 1 ]; then
+			echo -e "\033[31m ${msg[i]}--${ip_array[i]} ping faild\033[0m"
+			echo -e "\a" #alarm 
+		else
+			sleep $sleep_s
+		fi
+	done 
 done
