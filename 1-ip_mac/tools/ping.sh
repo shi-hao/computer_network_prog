@@ -3,6 +3,9 @@
 #trap ctrl-c
 trap 'echo "exit ping"; exit' INT
 
+# Config file
+cnf_file=/home/bleach/myfile/ip_host.txt
+
 # Read ip
 OLD_IFS=$IFS
 IFS=" "
@@ -11,7 +14,7 @@ do
 	arr=($line)
 	ip_array+=(${arr[0]})
 	msg+=(${arr[1]})
-done </home/bleach/myfile/ip_host.txt
+done <$cnf_file
 IFS=$OLD_IFS
 len=$((${#ip_array[*]}-1))
 

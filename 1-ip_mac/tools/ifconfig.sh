@@ -13,6 +13,9 @@ if [ "$1" == "clear" ] ;then
 	exit 0
 fi
 
+# Config file
+cnf_file=/home/bleach/myfile/ip_cnf.txt
+
 # Read ip mask gateway
 OLD_IFS=$IFS
 IFS=" "
@@ -23,7 +26,7 @@ do
 	mask_array+=(${arr[1]})
 	gw_ip+=(${arr[2]})
 	msg+=(${arr[3]})
-done </home/bleach/myfile/ip_cnf.txt
+done <$cnf_file
 IFS=$OLD_IFS
 len=$((${#ip_array[*]}-1))
 
@@ -39,7 +42,7 @@ echo -e "\033[31m please inpute 0~$len to choose the ip config\033[0m"
 read num 
 echo "choosing ip:${ip_array[$num]}  mask:${mask_array[$num]}  gw:${gw_ip[$num]}"
 
-#
+# Var--ip mask gateway
 my_ip=${ip_array[$num]}
 my_mask=${mask_array[$num]}
 my_gw=${gw_ip[$num]}
