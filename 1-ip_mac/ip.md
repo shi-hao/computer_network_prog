@@ -71,7 +71,8 @@ ifconfig  [interface]  up
 在ubuntu18下使用指令配置网卡地址时，出现过很多奇怪的现象，比如使用ifconfig配置ip后，  
 ip会自动丢失；ip配置好后，内核没有生成对应的路由，导致配置网关失败，也无法正常通信。    
 个人感觉，手动配置ip地址跟系统的network-manager软件可能存在冲突，导致网络故障，所以  
-ubuntu18下，手动修改ip还是建议使用network-manager。  
+ubuntu18下，手动修改ip可以考虑使用network-manager。如果确实需要使用命令行，那么建议  
+先把network-manager网络配置中，对应的网卡配置关闭，然后再使用命令行配置。  
   
 （2）使用network-manager  
 ubuntu18的图形化的网络管理软件，配置好ip，需要重启网卡，使配置尽快生效。    
