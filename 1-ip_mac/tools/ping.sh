@@ -31,7 +31,7 @@ do
 		do
 			ping -c 1 ${ip_array[i]} 
 			if [ $? -eq 1 ]; then
-				echo -e "\033[31m ${msg[i]} ping faild\033[0m"
+				echo -e "\033[31m ${msg[i]}--${ip_array[i]} ping faild\033[0m"
 				echo -e "\a" #alarm 
 			else
 				sleep 4
