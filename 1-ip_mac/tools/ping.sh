@@ -25,7 +25,7 @@ do
 done 
 
 # Ping all ip
-sleep_s=2
+sleep_s=$1  #间隔时间
 while true 
 do
 	for((i=0;i<=len;i++));
