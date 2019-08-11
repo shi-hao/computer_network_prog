@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-#trap ctrl-c
+# Trap ctrl-c
 trap 'echo "exit ping"; exit' INT
 
 # Config file
