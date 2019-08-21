@@ -33,12 +33,12 @@ do
 		outstr=$(ping -c 1 ${ip_array[i]})
 		if [ $? -eq 1 ]; then
 			echo "------------------------------------------------"
-			echo -e "\033[31m $outstr \033[0m"
+			echo -e "\033[34m $outstr \033[0m"
 			echo -e "\033[31m ${msg[i]}--${ip_array[i]} ping faild \033[0m"
 			echo -e "\a" #alarm 
 		else
 			echo "------------------------------------------------"
-			echo $outstr
+			echo -e "\033[37m $outstr \033[0m"
 			echo -e "\033[32m ${msg[i]}--${ip_array[i]} alive \033[0m"
 			sleep $sleep_s
 		fi
