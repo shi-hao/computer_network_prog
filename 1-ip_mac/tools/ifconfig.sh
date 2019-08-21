@@ -1,9 +1,29 @@
 #!/bin/bash 
 
+# All interface
+all_inter=$(ls /sys/class/net)
+inter_arr=($all_inter)
+len=$((${#inter_arr[*]}-1))
+
+# Echo all interfaces
+#echo -en "ID \t Interface \n"
+printf "%-5s %-20s \n" ID Interface
+for((i=0;i<=len;i++));
+do
+#	echo "______________________________"
+#	echo -en "[$i] \t ${inter_arr[i]} \n"
+	printf "%-5s %-20s \n" $i ${inter_arr[i]}
+done 
+
+# Choosing interface
+echo -e "\033[31m please inpute 0~$len to choose the interface\033[0m"
+read num 
+
 # Interface
 #my_inter="wlp4s0"
-my_inter="enp0s31f6"
+#my_inter="enp0s31f6"
 #my_inter="enx000ec6be0723"
+my_inter=${inter_arr[$num]}
 echo -e "\033[31m interface:$my_inter \033[0m"
 
 # Del the default gateway
@@ -31,10 +51,13 @@ IFS=$OLD_IFS
 len=$((${#ip_array[*]}-1))
 
 # Echo all ip mask gw
-echo -en "ID \t IP \t MASK \t GW \t INFO \n"
+#echo -en "ID \t IP \t MASK \t GW \t INFO \n"
+printf "%-5s%-20s%-20s%-20s%-20s\n" ID IP MASK GW INFO  
 for((i=0;i<=len;i++));
 do
-	echo -en "[$i] \t ${ip_array[i]} \t ${mask_array[i]} \t ${gw_ip[i]} \t ${msg[i]} \n"
+	echo "_____________________________________________________________________________"
+#	echo -en "[$i] \t ${ip_array[i]} \t ${mask_array[i]} \t ${gw_ip[i]} \t ${msg[i]} \n"
+	printf "%-5s%-20s%-20s%-20s%-20s\n" $i ${ip_array[i]}  ${mask_array[i]} ${gw_ip[i]} ${msg[i]}
 done 
 
 # Choosing config
@@ -52,7 +75,6 @@ sudo ifconfig $my_inter down
 sudo ifconfig $my_inter $my_ip netmask $my_mask
 sudo route del default dev $my_inter
 sudo route add default gw  $my_gw dev $my_inter
-#sudo ifconfig $my_inter up
 
 # Check the interface config
 ifconfig $my_inter
