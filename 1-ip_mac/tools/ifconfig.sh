@@ -6,12 +6,9 @@ inter_arr=($all_inter)
 len=$((${#inter_arr[*]}-1))
 
 # Echo all interfaces
-#echo -en "ID \t Interface \n"
 printf "%-5s %-20s \n" ID Interface
 for((i=0;i<=len;i++));
 do
-#	echo "______________________________"
-#	echo -en "[$i] \t ${inter_arr[i]} \n"
 	printf "%-5s %-20s \n" $i ${inter_arr[i]}
 done 
 
@@ -29,7 +26,7 @@ echo -e "\033[31m interface:$my_inter \033[0m"
 # Del the default gateway
 if [ "$1" == "clear" ] ;then
 	sudo route del default dev $my_inter
-	echo "route del default dev $my_inter"
+	route -n
 	exit 0
 fi
 
@@ -51,19 +48,17 @@ IFS=$OLD_IFS
 len=$((${#ip_array[*]}-1))
 
 # Echo all ip mask gw
-#echo -en "ID \t IP \t MASK \t GW \t INFO \n"
 printf "%-5s%-20s%-20s%-20s%-20s\n" ID IP MASK GW INFO  
 for((i=0;i<=len;i++));
 do
 	echo "_____________________________________________________________________________"
-#	echo -en "[$i] \t ${ip_array[i]} \t ${mask_array[i]} \t ${gw_ip[i]} \t ${msg[i]} \n"
 	printf "%-5s%-20s%-20s%-20s%-20s\n" $i ${ip_array[i]}  ${mask_array[i]} ${gw_ip[i]} ${msg[i]}
 done 
 
 # Choosing config
 echo -e "\033[31m please inpute 0~$len to choose the ip config\033[0m"
 read num 
-echo "choosing ip:${ip_array[$num]}  mask:${mask_array[$num]}  gw:${gw_ip[$num]}"
+echo "choosing IP:${ip_array[$num]}  MASK:${mask_array[$num]}  GW:${gw_ip[$num]}  INFO:${msg[$num]}"
 
 # Var--ip mask gateway
 my_ip=${ip_array[$num]}
