@@ -29,6 +29,7 @@ echo -e "\033[31m interface:$my_inter \033[0m"
 # Del the default gateway
 if [ "$1" == "clear" ] ;then
 	sudo route del default dev $my_inter
+	sudo ifconfig $my_inter down
 	echo "route del default dev $my_inter"
 	exit 0
 fi
