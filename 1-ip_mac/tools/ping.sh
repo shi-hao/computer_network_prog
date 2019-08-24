@@ -12,6 +12,13 @@ IFS=" "
 while read line
 do 
 	arr=($line)
+
+	# If contain # then break
+	if [[ ${arr[0]} =~ "#"  ]] 
+	then 
+		break
+	fi 
+
 	ip_array+=(${arr[0]})
 	msg+=(${arr[1]})
 done <$cnf_file
