@@ -32,7 +32,7 @@ do
 done 
 
 # Ping all ip
-sleep_s=$1  #间隔时间
+sleep_s=$1  #interval
 while true 
 do
 	for((i=0;i<=len;i++));
