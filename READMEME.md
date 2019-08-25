@@ -1,6 +1,6 @@
 # network topology
 
-<img src="https://github.com/shi-hao/computer_network_prog/blob/master/8-network_topology/topology-1.jpg" width="364" height="450" />
+<img src="https://github.com/shi-hao/computer_network_prog/blob/master/topology-1.jpg" width="364" height="450" />
 
 1.DHCP  
 首先，设备PC2，PC3接入到Router-B，PC1和Router-B接入到Router-A，四个设备  
