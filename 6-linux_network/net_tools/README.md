@@ -1,3 +1,4 @@
+<pre>
 #config the interface  
 #ifconfig [interface]  up/down  打开关闭网卡  
 #ifconfig [interface] [ip] netmask [mask]  设置网卡ip及其掩码  
@@ -127,3 +128,4 @@ traceroute  www.baidu.com
 # 10  * 61.135.169.121  21.849 ms  21.861 ms  
 #  
 #   -T 表示使用tcp  
+</pre>

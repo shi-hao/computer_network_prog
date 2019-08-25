@@ -53,4 +53,4 @@ wifi peer-to-peer mode.
   
   
 ## linux wifi typical network   
-<img src="https://github.com/shi-hao/computer_network_prog/blob/master/7-wireless/wifi_app_mode.jpg" width    ="606" height="886" />  
+<img src="https://github.com/shi-hao/computer_network_prog/blob/master/./wifi_app_mode.jpg" width    ="606" height="886" />  
