@@ -17,9 +17,6 @@ echo -e "\033[31m please inpute 0~$len to choose the interface\033[0m"
 read num 
 
 # Interface
-#my_inter="wlp4s0"
-#my_inter="enp0s31f6"
-#my_inter="enx000ec6be0723"
 my_inter=${inter_arr[$num]}
 echo -e "\033[31m interface:$my_inter \033[0m"
 
@@ -27,6 +24,16 @@ echo -e "\033[31m interface:$my_inter \033[0m"
 if [ "$1" == "clear" ] ;then
 	sudo route del default dev $my_inter
 	echo "route del default dev $my_inter"
+	route -n
+	exit 0
+fi
+
+# DHCP
+if [ "$1" == "dhcp" ] ;then
+	sudo dhclient -r $my_inter
+	sudo dhclient $my_inter
+
+	ifconfig $my_inter
 	route -n
 	exit 0
 fi
@@ -59,7 +66,7 @@ done
 # Choosing config
 echo -e "\033[31m please inpute 0~$len to choose the ip config\033[0m"
 read num 
-echo "choosing IP:${ip_array[$num]}  MASK:${mask_array[$num]}  GW:${gw_ip[$num]}  INFO:${msg[$num]}"
+echo "chosing IP:${ip_array[$num]} MASK:${mask_array[$num]} GW:${gw_ip[$num]} INFO:${msg[$num]}"
 
 # Var--ip mask gateway
 my_ip=${ip_array[$num]}
