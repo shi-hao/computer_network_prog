@@ -63,7 +63,7 @@ do
 	printf "%-5s%-20s%-20s%-20s%-20s\n" $i ${ip_array[i]}  ${mask_array[i]} ${gw_ip[i]} ${msg[i]}
 done 
 
-# Choosing config
+# Chosing config
 echo -e "\033[31m please inpute 0~$len to choose the ip config\033[0m"
 read num 
 echo "chosing IP:${ip_array[$num]} MASK:${mask_array[$num]} GW:${gw_ip[$num]} INFO:${msg[$num]}"
