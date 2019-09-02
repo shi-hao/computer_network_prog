@@ -7,8 +7,6 @@ trap 'echo "exit ping"; exit' INT
 cnf_file=/home/bleach/myfile/ip_host.txt
 
 # Read ip
-OLD_IFS=$IFS
-IFS=" "
 while read line
 do 
 	arr=($line)
@@ -22,7 +20,6 @@ do
 	ip_array+=(${arr[0]})
 	msg+=(${arr[1]})
 done <$cnf_file
-IFS=$OLD_IFS
 len=$((${#ip_array[*]}-1))
 
 # Echo all ip
