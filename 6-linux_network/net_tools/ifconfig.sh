@@ -42,8 +42,6 @@ fi
 cnf_file=/home/bleach/myfile/ip_cnf.txt
 
 # Read ip mask gateway
-OLD_IFS=$IFS
-IFS=" "
 while read line
 do 
 	arr=($line)
@@ -52,7 +50,6 @@ do
 	gw_ip+=(${arr[2]})
 	msg+=(${arr[3]})
 done <$cnf_file
-IFS=$OLD_IFS
 len=$((${#ip_array[*]}-1))
 
 # Echo all ip mask gw
