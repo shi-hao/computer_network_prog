@@ -65,7 +65,7 @@ D-MAC:1c-15-1f-46-81-34   D-IP:192.168.8.113  D-PORT:800
 数据出去后，根据mac地址，数据发送到网关Router-B，Router-B收到数据后，进行SNAT，     
 <pre>  
 nat table      
-S                                  NAT    
+Source                             NAT    
 S-IP:192.168.3.6    S-PORT:9000    S-IP:192.168.8.120    S-PORT:9000     
 </pre>  
 SNAT完毕后，通过哦wan口发送出去，完整的包结构如下。  
