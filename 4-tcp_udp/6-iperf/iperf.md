@@ -1,13 +1,13 @@
-IPERF  
+# IPERF  
 The ultimate speed test tool for TCP, UDP and SCTP  
 实用的TCP，UDP，SCTP测试工具。  
 官方网站：https://iperf.fr/en/  
 
-1.iperf安装
+## 1.iperf安装
 win :解压出压缩包后，将文件直接拷贝到/windowd/system32目录下，打开cmd界面，直接运行iperf。    
 ubuntu:直接使用apt-get install iperf  
   
-2.使用iperf测试udp组播  
+## 2.使用iperf测试udp组播  
 (1)本次实验环境的网络拓扑如下。  
 <pre>
 --------  
@@ -55,6 +55,7 @@ iperf在运行时，client模式，可以使用-B指定具体的网卡发送数�
 但是在server模式下，运行组播模式，-B用来指定组播地址，无法指定具体的网卡接收组播数据，一般而言如果有线
 和无线网卡都启用了，iperf会默认使用有线网卡，所以可以通过禁用网卡来让iperf使用我们预意向的网卡  
   
+<pre>
 -------------------------------------------------------------------------------------------  
 iperf官网组播演示例子：  
 Multicast  
@@ -110,11 +111,13 @@ UDP buffer size: 60.0 KByte (default)
   [  3]  3.0- 4.0 sec   128 KBytes   1.0 Mbits/sec  0.248 ms    0/   89 (0%)    
   [  3]  0.0- 4.3 sec   554 KBytes   1.0 Mbits/sec  0.298 ms   61/  447 (14%)    
   
-Start multiple clients or servers as explained above, sending data to the same multicast server.   
+Start multiple clients or servers as explained above, sending data to the same multicast server.
+
 (If you have multiple servers listening on the multicast address, each of the servers will be getting the data)  
 ------------------------------------------------------------  
+</pre>
 
-3.iperf测试TCP/UDP速率  
+## 3.iperf测试TCP/UDP速率  
 (1)TCP
 iperf默认使用tcp。
 
