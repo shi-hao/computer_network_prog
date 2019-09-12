@@ -1,24 +1,3 @@
-Nmap is one of the most popular network mappers in the infosec world. It’s utilized by    
-cybersecurity professionals and newbies alike to audit and discover local and remote open    
-ports, as well as hosts and network information.   
-   
-Some of this tool’s best features are that it’s open-source, free, multi-platform and    
-receives constant updates each year. It also has a big plus: it’s one of the most complete    
-host and network scanners available. It includes a large set of options to enhance your    
-scanning and mapping tasks, and brings with it an incredible community and comprehensive   
-documentation to help you understand this tool from the very start. Nmap can be used to:   
-   
-  Create a complete computer network map.   
-  Find remote IP addresses of any hosts.   
-  Get the OS system and software details.   
-  Detect open ports on local and remote systems.   
-  Audit server security standards.   
-  Find vulnerabilities on remote and local hosts.   
-   
-It was mentioned in the Top 20 OSINT Tools article we published, and today we’ll explore a    
-little bit more about this essential security tool with some practical terminal-based    
-Nmap commands.   
-   
 Best 15 Nmap command examples   
 Let’s get to know a few useful command-line based scans that can be performed using Nmap.   
    
