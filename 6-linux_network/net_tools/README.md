@@ -76,7 +76,7 @@ ping [ip]
 ping失败可以说明主机不在线吗？  
 不一定，可能主机禁掉了icmp回包，导致没有回复。  
   
-## 6.check the network ip route   
+## 6.check the network ip packet route   
 数据包在网络内路由，如何才能知道数据经过了哪些路由设备呢？这是一个很有意思的事情。        
 traceroute工具是用来做这个事情的，traceroute的基本原理是利用了ip header中的ttl字段，      
 通过使用tcp,udp或者icmp协议，设置ip包的ttl值依次从1递增，发送数据包，因为路由在收到      
