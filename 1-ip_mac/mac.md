@@ -1,16 +1,27 @@
-# MAC(media access control address)  
-mac地址，又称为物理地址(pyhsical address)，长度固定，6个字节，mac地址也分为三种，单播，组播，
-广播地址。    
+# MAC(media access control address)    
+mac地址，又称为物理地址(pyhsical address)，长度固定，6个字节，mac地址也分为三种，单播，组播，  
+广播地址。      
+    
+## 单播(unicast)    
+单播地址，就是对应网卡的实际物理地址，根据ip包的目的ip地址，查询arp表获取，或者是网关的    
+mac地址。网卡的物理地址的第一个字节的最低位必须是0！！      
+    
+## 组播(multicast)    
+组播mac地址的第一个字节的最低位必须是1，比如如下都是组播地址。      
+0x01-0xff-0xff-0xff-0xff-0xff      
+0x33-0x00-0x00-0x00-0x00-0x00      
+    
+## 广播(broadcast)    
+广播的mac地址很固定，是全1，即：      
+0xff-0xff-0xff-0xff-0xff-0xff      
   
-## 单播(unicast)  
-单播地址，就是对应网卡的实际物理地址，根据ip包的目的ip地址，查询arp表获取，或者是网关的  
-mac地址。网卡的物理地址的第一个字节的最低位必须是0！！    
   
-## 组播(multicast)  
-组播mac地址的第一个字节的最低位必须是1，比如如下都是组播地址。    
-0x01-0xff-0xff-0xff-0xff-0xff    
-0x33-0x00-0x00-0x00-0x00-0x00    
+# 交换机基本原理  
+交换机正常工作后，会在本地建立一个端口地址表，表内存储端口号和对应的MAC地址，比如：  
+接口			MAC地址  
+inter0			0xdd-0xee-0xcc-0x11-0xff-0xff      
+				0xee-0xee-0xcc-0x11-0xff-0xff      
+				0xcc-0xee-0xcc-0x11-0xff-0xff      
   
-## 广播(broadcast)  
-广播的mac地址很固定，是全1，即：    
-0xff-0xff-0xff-0xff-0xff-0xff    
+inter1			0xaa-0xee-0xcc-0x11-0xff-0xff      
+当受到以太网数据帧时，会根据目的MAC，然后查询端口地址表，从相应的接口转发出去。  
