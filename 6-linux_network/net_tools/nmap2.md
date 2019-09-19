@@ -1,11 +1,9 @@
-# namp usefull command  
-  
+# practical commands of nmap
   
 ## host up  
 nmap使用icmp来判断主机是否在线。  
   
 ## tcp/udp port scanning state  
-  
 TCP PORT SCANNING  
 -sS(TCP SYN scan)  
 <pre>  
