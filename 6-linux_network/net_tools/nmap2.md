@@ -1,9 +1,9 @@
 # practical commands of nmap
   
-## host up  
+## 1.Host up  
 nmap使用icmp来判断主机是否在线。  
   
-## tcp/udp port scanning state  
+## 2.TCP/UDP port state  
 TCP PORT SCANNING  
 -sS(TCP SYN scan)  
 <pre>  
@@ -34,3 +34,32 @@ open|filtered 目标主机没有回应，无法确定目标主机状态。
 -p  port1,port2  
 -p  port1-port2  
 指定扫描的端口号或者端口区间  
+
+## 3.Scan multiple IP address or IP range
+nmap ip1 ip2      multiple ip
+nmap 8.8.8.1-14   ip range 8.8.8.1-8.8.8.14
+
+
+## 4.Scan hosts and IP addresses reading from a text file 
+In this case, Nmap is also useful to read files that contain hosts and IPs inside.
+
+Let’s suppose you create a list.txt file that contains these lines inside:
+
+192.168.1.106
+cloudflare.com
+microsoft.com
+securitytrails.com
+
+The “-iL” parameter lets you read from that file, and scan all those hosts for you:
+
+nmap -iL list.txt
+
+## 5.Save your Nmap scan results to a file 
+On the other hand, in the following example we will not be reading from a file, but 
+exporting/saving our results into a text file:
+
+nmap -oN output.txt securitytrails.com
+
+Nmap has the ability to export files into XML format as well, see the next example:
+
+nmap -oX output.xml securitytrails.com
