@@ -175,11 +175,4 @@ traceroute to www.baidu.com (61.135.169.121), 30 hops max, 60 byte packets
   -T 表示使用tcp        
 </pre>      
     
-## 7.check the tcp/udp port    
-使用nmap工具来判断主机的tcp/udp端口开放情况，即是否有tcp/udp server在此端口接收连接。    
-    
-nmap -p [port] [ip or domain]    
-    
-nmap  www.baidu.com    
-nmap  192.168.0.129    
-nmap  -p  9000 www.baidu.com     
+## 7.nmap scan tcp/udp port    
