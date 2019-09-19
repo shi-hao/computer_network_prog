@@ -1,5 +1,5 @@
 # practical commands of nmap  
-    
+
 ## 1.Host up    
 nmap使用icmp来判断主机是否在线。    
     
@@ -30,14 +30,18 @@ open|filtered 目标主机没有回应，无法确定目标主机状态。
 -Pn    
 默认目标主机是在线的。当主机屏蔽ICMP时，强制使用此选项来扫描端口。    
     
+指定扫描的端口号或者端口区间    
+<pre>
 -p  port1    
 -p  port1,port2    
 -p  port1-port2    
-指定扫描的端口号或者端口区间    
+</pre>
   
 ## 3.Scan multiple IP address or IP range  
+<pre>
 nmap ip1 ip2      multiple ip    
 nmap 8.8.8.1-14   ip range 8.8.8.1-8.8.8.14    
+</pre>
   
   
 ## 4.Scan hosts and IP addresses reading from a text file   
