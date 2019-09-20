@@ -68,14 +68,14 @@ ifconfig  [interface]  [ip]  netmask  [mask]
 route add default gw [gateway_ip] [interface]   
 ifconfig  [interface]  up     
   
-手动配置有线网卡的地址？  
+**手动配置有线网卡的地址？**  
 在ubuntu18下使用指令配置网卡地址时，出现过很多奇怪的现象，比如使用ifconfig配置ip后，    
 ip会自动丢失；ip配置好后，内核没有生成对应的路由，导致配置网关失败，也无法正常通信。      
 个人感觉，手动配置ip地址跟系统的network-manager软件可能存在冲突，导致网络故障，所以    
 ubuntu18下，手动修改ip可以考虑使用network-manager。如果确实需要使用命令行，那么建议    
 先把network-manager网络配置中，对应的网卡配置关闭，然后再使用命令行配置。    
   
-手动配置无线网卡的地址？  
+**手动配置无线网卡的地址？**  
 ubuntu下，连接上无线网络后，network-manager会通过DHCP获取地址，如果DHCP获取地址失败，  
 network-manager会认为网络连接失败，会自动断开无线连接，这种模式跟很多支持wifi的无线  
 设备类似，所以为了手动配置无线网卡的地址，必须将network-manager中，dhcp地址关闭，才  
