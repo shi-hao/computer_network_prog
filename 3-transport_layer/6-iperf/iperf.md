@@ -139,7 +139,7 @@ iperf -c 192.168.8.121 -B 192.168.8.130 -w 130k  -T 1  -t 60 -i 1
 -w window size   
   
 iperf -s  
-iperf -c 192.168.8.121-t 60 -i 1    
+iperf -c 192.168.8.121 -t 60 -i 1    
   
 (2)UDP  
 udp server:    
