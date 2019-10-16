@@ -1,18 +1,18 @@
 #!/bin/bash 
 
-# All interface
+# Get all interfaces
 all_inter=$(ls /sys/class/net)
 inter_arr=($all_inter)
 len=$((${#inter_arr[*]}-1))
 
 # Echo all interfaces
-printf "%-5s %-20s \n" ID Interface
+printf "%-5s %-20s\n" ID Interface
 for((i=0;i<=len;i++));
 do
-	printf "%-5s %-20s \n" $i ${inter_arr[i]}
+	printf "%-5s %-20s\n" $i ${inter_arr[i]}
 done 
 
-# Choosing interface
+# Chosing interface
 echo -e "\033[31m please inpute 0~$len to choose the interface\033[0m"
 read num 
 
@@ -53,15 +53,15 @@ done <$cnf_file
 len=$((${#ip_array[*]}-1))
 
 # Echo all ip mask gw
-printf "%-5s%-20s%-20s%-20s%-20s\n" ID IP MASK GW INFO  
+printf "\033[33m%-5s%-20s%-20s%-20s%-20s\n\033[0m" ID IP MASK GW INFO  
 for((i=0;i<=len;i++));
 do
-	echo "_____________________________________________________________________________"
-	printf "%-5s%-20s%-20s%-20s%-20s\n" $i ${ip_array[i]}  ${mask_array[i]} ${gw_ip[i]} ${msg[i]}
+	printf "\033[4m%-5s%-20s%-20s%-20s%-20s\n\n\033[0m"  \
+		$i ${ip_array[i]}  ${mask_array[i]} ${gw_ip[i]} ${msg[i]}
 done 
 
 # Chosing config
-echo -e "\033[31m please inpute 0~$len to choose the ip config\033[0m"
+echo -e "\033[31m please inpute 0~$len to chose the ip config\033[0m"
 read num 
 echo "chosing IP:${ip_array[$num]} MASK:${mask_array[$num]} GW:${gw_ip[$num]} INFO:${msg[$num]}"
 
@@ -70,7 +70,7 @@ my_ip=${ip_array[$num]}
 my_mask=${mask_array[$num]}
 my_gw=${gw_ip[$num]}
 
-# Config the interface ip using cmd
+# Config the interface ip using commands
 sudo ifconfig $my_inter down
 sudo ifconfig $my_inter $my_ip netmask $my_mask
 sudo route del default dev $my_inter
