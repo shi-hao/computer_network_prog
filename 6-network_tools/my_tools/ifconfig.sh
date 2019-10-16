@@ -6,14 +6,14 @@ inter_arr=($all_inter)
 len=$((${#inter_arr[*]}-1))
 
 # Echo all interfaces
-printf "%-5s %-20s\n" ID Interface
+printf "%-5s %-20s\n" "ID" "Interface"
 for((i=0;i<=len;i++));
 do
 	printf "%-5s %-20s\n" $i ${inter_arr[i]}
 done 
 
 # Chosing interface
-echo -e "\033[31m please inpute 0~$len to choose the interface\033[0m"
+echo -e "\033[31m please inpute 0~$len to chose the interface\033[0m"
 read num 
 
 # Interface
@@ -53,7 +53,7 @@ done <$cnf_file
 len=$((${#ip_array[*]}-1))
 
 # Echo all ip mask gw
-printf "\033[33m%-5s%-20s%-20s%-20s%-20s\n\033[0m" ID IP MASK GW INFO  
+printf "\033[33m%-5s%-20s%-20s%-20s%-20s\n\033[0m" "ID" "IP" "MASK" "GW" "INFO"  
 for((i=0;i<=len;i++));
 do
 	printf "\033[4m%-5s%-20s%-20s%-20s%-20s\n\n\033[0m"  \
