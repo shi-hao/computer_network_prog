@@ -13,22 +13,6 @@ route add -host 192.168.100.100 dev enp0s31f6
 route add -net  [ip] netmask [mask] gw [ip] dev [interface]  
 route add -net  192.168.100.0 netmask 255.255.255.0 gw 192.168.100.1 dev enp0s31f6  
 
-
-<pre>
-route   
-win的路由表工具，功能类似于linux的route。  
-
-查看路由表：    
-route print   
-
-增加静态路由：  
-route  add [网段]  mask [掩码]  [网关]  if  [接口号]  
-if = interface    
-接口号可以使用route print查看对应网卡的接口号。  
-</pre>
-
-
-  
   
 ## traceroute  
 数据包在网络内路由，如何才能知道数据经过了哪些路由设备呢？这是一个很有意思的事情。  
@@ -129,12 +113,24 @@ traceroute to www.baidu.com (61.135.169.121), 30 hops max, 60 byte packets
   -T 表示使用tcp  
 </pre>  
 
-<pre>
-tracert    
-trace route = trace + rt    
-win系统的路由跟踪工具，功能类似于traceroute  
-</pre>
-  
 ## arp  
 查看本地arp表：  
 arp -n  
+
+<pre>
+Win System Tools
+(1)route   
+win的路由表工具，功能类似于linux的route。  
+
+查看路由表：    
+route print   
+
+增加静态路由：  
+route  add [网段]  mask [掩码]  [网关]  if  [接口号]  
+if = interface    
+接口号可以使用route print查看对应网卡的接口号。  
+
+(2)tracert    
+trace route = trace + rt    
+win系统的路由跟踪工具，功能类似于traceroute  
+</pre>
