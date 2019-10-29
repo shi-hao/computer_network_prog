@@ -17,10 +17,6 @@ ifconfig [interface] [ip] netmask [mask]
   
 ifconfig enp0s31f6 11.15.244.64 netmask 255.255.255.0  
 
-<pre>
-ipconfig    
-win系统的网络工具，功能类似ifconfig   
-</pre>
   
 ## iwconfig  
 (1)查看无线网卡信息：  
@@ -33,3 +29,8 @@ sudo  iwconfig  wlp4s0  channel  auto
 sudo  iwconfig  wlp4s0  essid  wifi_name  
 sudo  iwconfig  wlp4s0  key  1234567890  
 
+<pre>
+## win system toools
+ipconfig    
+win系统的网络工具，功能类似ifconfig   
+</pre>
