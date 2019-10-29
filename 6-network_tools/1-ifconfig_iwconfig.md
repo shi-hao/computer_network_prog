@@ -29,7 +29,8 @@ sudo  iwconfig  wlp4s0  channel  auto
 sudo  iwconfig  wlp4s0  essid  wifi_name  
 sudo  iwconfig  wlp4s0  key  1234567890  
 
-=======================================================================
+
+----------------------------------------------------------
 <pre>
 Win System Toools
 
