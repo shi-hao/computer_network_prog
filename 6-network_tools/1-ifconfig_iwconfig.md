@@ -31,9 +31,7 @@ sudo  iwconfig  wlp4s0  key  1234567890
 
 
 ----------------------------------------------------------
-<pre>
-Win System Toools
+# Win System Toools
 
 ipconfig    
 win系统的网络工具，功能类似ifconfig   
-</pre>
