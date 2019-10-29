@@ -14,7 +14,7 @@ route add -net  [ip] netmask [mask] gw [ip] dev [interface]
 route add -net  192.168.100.0 netmask 255.255.255.0 gw 192.168.100.1 dev enp0s31f6  
 
 
-### route   
+#### route   
 win的路由表工具，功能类似于linux的route。  
 
 查看路由表：    
@@ -127,7 +127,7 @@ traceroute to www.baidu.com (61.135.169.121), 30 hops max, 60 byte packets
   -T 表示使用tcp  
 </pre>  
 
-### tracert    
+#### tracert    
 trace route = trace + rt    
 win系统的路由跟踪工具，功能类似于traceroute  
   

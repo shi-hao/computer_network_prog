@@ -17,7 +17,7 @@ ifconfig [interface] [ip] netmask [mask]
   
 ifconfig enp0s31f6 11.15.244.64 netmask 255.255.255.0  
 
-### ipconfig    
+#### ipconfig    
 win系统的网络工具，功能类似ifconfig   
   
 ## iwconfig  
