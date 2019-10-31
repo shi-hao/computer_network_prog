@@ -1,5 +1,6 @@
 #!/bin/bash 
 
+#pause function
 pause(){
 	while true
 	do
@@ -34,8 +35,26 @@ route -n
 pause
 
 echo "step2：ping主机"
+if [ -n "$gateway" ];
+then
+	ping  -c 5 $gateway
+	sudo traceroute  $tracert_pro  $gateway
+fi
+
 if [ -n "$host_ip" ];
 then
 	ping  -c 5 $host_ip
-	traceroute  $tracert_pro  $host_ip
+	sudo traceroute  $tracert_pro  $host_ip
+fi
+
+echo "step3：查看远程主机TCP/UDP的端口情况"
+
+if [ -n "$nmap_tcp_port" ];
+then
+	sudo nmap -sS -p $nmap_tcp_port  $host_ip
+fi
+
+if [ -n "$nmap_udp_port" ];
+then
+	sudo nmap -sU -p $nmap_udp_port  $host_ip
 fi
