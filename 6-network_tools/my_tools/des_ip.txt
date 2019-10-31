@@ -1,0 +1,9 @@
+
+# 目标主机ip，网关
+host_ip=www.baidu.com
+gateway=192.168.1.1
+
+
+# 目标主机tcp/udp端口
+tcp_port=7660
+udp_port=7660
