@@ -1,7 +1,10 @@
+# 本地网卡
+local_card=enp0s31f6
+
 
 # 目标主机ip，网关
 host_ip=www.baidu.com
-gateway=192.168.1.1
+gateway=
 
 
 # traceroute使用的协议
@@ -10,4 +13,4 @@ tracert_pro=-I
 
 # 目标主机tcp/udp端口
 nmap_tcp_port=7660
-nmap_udp_port=7660
+nmap_udp_port=

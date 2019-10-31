@@ -5,9 +5,11 @@ pause(){
 	while true
 	do
 		isContinue='y'
-		read -p 'continue? [y/n]' isContinue
+		read -p '请输入y继续，输入n退出 [y/n]' isContinue
 		if [ "$isContinue" == "y" ]; then
 			break
+		elif [ "$isContinue" == "n" ]; then
+			exit
 		fi
 	done
 }
@@ -17,24 +19,30 @@ do
 eval "$line"  
 done < des_ip.txt  
 
-echo "----------------------------------"
-echo "目标主机ip为$host_ip"
-echo "目标主机网关为$gateway"
-echo "目标主机traceroute协议为$tracert_pro"
-echo "目标主机TCP端口为$nmap_tcp_port"
-echo "目标主机UDP端口为$nmap_udp_port"
-echo "----------------------------------"
+echo "--------------------------------------------"
+echo -e "\033[32m 
+		本地网卡：$local_card 
+
+		目标主机ip：$host_ip  
+		目标主机网关：$gateway 
+
+		目标主机traceroute协议：$tracert_pro 
+
+		目标主机TCP端口：$nmap_tcp_port 
+		目标主机UDP端口：$nmap_udp_port 
+        \033[0m"
+echo "--------------------------------------------"
 
 pause
 
-echo "step1：查看本地网卡和路由配置"
+echo -e "\033[31m step1：查看本地网卡和路由配置\033[0m"
 
-ifconfig 
+ifconfig $local_card 
 route -n
 
 pause
 
-echo "step2：ping主机"
+echo -e "\033[31m step2：网络连通测试\033[0m"
 if [ -n "$gateway" ];
 then
 	ping  -c 5 $gateway
@@ -47,7 +55,9 @@ then
 	sudo traceroute  $tracert_pro  $host_ip
 fi
 
-echo "step3：查看远程主机TCP/UDP的端口情况"
+pause
+
+echo -e "\033[31m step3：目标主机端口测试\033[0m"
 
 if [ -n "$nmap_tcp_port" ];
 then
