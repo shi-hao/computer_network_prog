@@ -1,7 +1,3 @@
-# 本地网卡
-local_card=enp0s31f6
-
-
 # 目标主机ip，网关
 host_ip=www.baidu.com
 gateway=

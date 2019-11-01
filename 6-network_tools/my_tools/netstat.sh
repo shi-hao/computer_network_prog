@@ -21,8 +21,6 @@ done < des_ip.txt
 
 echo "--------------------------------------------"
 echo -e "\033[32m 
-		本地网卡：$local_card 
-
 		目标主机ip：$host_ip  
 		目标主机网关：$gateway 
 
@@ -33,7 +31,26 @@ echo -e "\033[32m
         \033[0m"
 echo "--------------------------------------------"
 
-pause
+# Get all interfaces
+all_inter=$(ls /sys/class/net)
+inter_arr=($all_inter)
+len=$((${#inter_arr[*]}-1))
+
+# Echo all interfaces
+printf "\033[31m%-5s  %-20s\n\033[0m" "ID" "Interface"
+for((i=0;i<=len;i++));
+do
+	printf "\033[4m%-5s  %-20s\n\033[0m" $i ${inter_arr[i]}
+done 
+
+# Chosing interface
+echo -e "\033[31m please inpute 0~$len to chose the interface\033[0m"
+read num 
+
+# Interface
+local_card=${inter_arr[$num]}
+echo -e "\033[31m interface:$local_card \033[0m"
+
 
 echo -e "\033[31m step1：查看本地网卡和路由配置\033[0m"
 
