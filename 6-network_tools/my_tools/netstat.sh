@@ -20,6 +20,7 @@ eval "$line"
 done < des_ip.txt  
 
 echo "--------------------------------------------------------------------"
+echo -e "\033[31m 配置文件信息：\033[0m"
 echo -e "\033[32m 
 		目标主机ip：$host_ip  
 		目标主机网关：$gateway 
@@ -29,33 +30,14 @@ echo -e "\033[32m
 		目标主机TCP端口：$nmap_tcp_port 
 		目标主机UDP端口：$nmap_udp_port 
         \033[0m"
-echo "--------------------------------------------------------------------"
 
-# Get all interfaces
-all_inter=$(ls /sys/class/net)
-inter_arr=($all_inter)
-len=$((${#inter_arr[*]}-1))
-
-# Echo all interfaces
-printf "\033[31m%-5s  %-20s\n\033[0m" "ID" "Interface"
-for((i=0;i<=len;i++));
-do
-	printf "\033[4m%-5s  %-20s\n\033[0m" $i ${inter_arr[i]}
-done 
-
-# Chosing interface
-echo -e "\033[31m please inpute 0~$len to chose the interface\033[0m"
-read num 
-
-# Interface
-local_card=${inter_arr[$num]}
-echo -e "\033[31m interface:$local_card \033[0m"
-
+pause
 
 echo "--------------------------------------------------------------------"
 echo -e "\033[31m step1：查看本地网卡和路由配置\033[0m"
 
-ifconfig $local_card 
+#ifconfig $local_card 
+ifconfig
 route -n
 
 pause
@@ -88,3 +70,6 @@ if [ -n "$nmap_udp_port" ];
 then
 	sudo nmap -sU -p $nmap_udp_port  $host_ip
 fi
+
+echo "--------------------------------------------------------------------"
+echo -e "\033[31m step4：抓包查看协议数据测试\033[0m"
