@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-#adding dns config??
+# Adding dns config??
 
 # Get all interfaces
 all_inter=$(ls /sys/class/net)

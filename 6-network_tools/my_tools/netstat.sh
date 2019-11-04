@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-#pause function
+# pause function
 pause(){
 	while true
 	do
