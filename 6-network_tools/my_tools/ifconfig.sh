@@ -1,5 +1,7 @@
 #!/bin/bash 
 
+#adding dns config??
+
 # Get all interfaces
 all_inter=$(ls /sys/class/net)
 inter_arr=($all_inter)

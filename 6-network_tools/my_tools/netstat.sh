@@ -15,6 +15,11 @@ pause(){
 	done
 }
 
+# chose the config file ???
+path=/home/bleach/myfile
+all_cnf_files=$(ls -p  $path |	grep -v / | grep .txt )
+echo $all_cnf_files
+
 while read line
 do  
 eval "$line"  
