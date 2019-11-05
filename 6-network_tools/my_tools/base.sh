@@ -23,6 +23,16 @@ function echo_green(){
 	echo -e "\033[32m$1 \033[0m"
 }
 
+# echo function
+function echo_grn(){
+	echo -e "\033[37m$1 \033[0m"
+}
+
+# echo function
+function echo_blue(){
+	echo -e "\033[34m$1 \033[0m"
+}
+
 # printf function
 function printf_2_yell(){
 	printf "\033[33m%-5s %-20s\n\033[0m" $1 $2 

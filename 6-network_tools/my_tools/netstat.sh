@@ -12,7 +12,7 @@ files_arr=($all_cnf_files)
 len=$((${#files_arr[*]}-1))
 
 if [ $len -ge  0 ]; then
-	echo_red "find $[len+1] config file\n"
+	echo_red " find $[len+1] config file\n"
 else 
 	echo_red " find config file failed, exit \n  config pattern $cnf_file_pattern, \n  config path is $path"
 	exit
@@ -30,7 +30,7 @@ read num
 
 # target file
 target_file=${files_arr[$num]}
-echo -e "chosing file : $target_file" 
+echo -e " chosing file : $target_file" 
 
 while read line
 do  

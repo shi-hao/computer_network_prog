@@ -25,7 +25,7 @@ len=$((${#ip_array[*]}-1))
 # Echo all ip
 for((i=0;i<=len;i++));
 do
-	echo -en "[$i] \t ${ip_array[i]} \t  ${msg[i]} \n"
+	echo -e "[$i] \t ${ip_array[i]} \t  ${msg[i]}"
 done 
 
 # Ping all ip
