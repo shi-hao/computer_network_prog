@@ -1,19 +1,7 @@
 #!/bin/bash 
 
-# pause function
-pause(){
-	while true
-	do
-		isContinue='y'
-		echo -e "\033[31m 请输入y继续，输入n退出 [y/n] \033[0m"
-		read isContinue
-		if [ "$isContinue" == "y" ]; then
-			break
-		elif [ "$isContinue" == "n" ]; then
-			exit
-		fi
-	done
-}
+#import base.sh
+source ./base.sh
 
 # chose the config file ???
 cnf_file_pattern=.cnf
@@ -24,34 +12,34 @@ files_arr=($all_cnf_files)
 len=$((${#files_arr[*]}-1))
 
 if [ $len -ge  0 ]; then
-	echo -e "find $[len+1] config file\n"
+	echo_red "find $[len+1] config file\n"
 else 
-	echo -e "  find config file failed, exit \n  config pattern $cnf_file_pattern, \n  config path is $path"
+	echo_red " find config file failed, exit \n  config pattern $cnf_file_pattern, \n  config path is $path"
 	exit
 fi
 
-printf "%-5s %-20s\n" "ID" "file"
+printf_2_yell "ID" "file"
 for((i=0;i<=len;i++));
 do
-	printf "%-5s %-20s\n" $i ${files_arr[i]}
+	printf_2_default $i ${files_arr[i]}
 done 
 
 # Chosing config files
-echo -e "\033[31m please inpute 0~$len to chose the config file\033[0m"
+echo_red " please inpute 0~$len to chose the config file"
 read num 
 
 # target file
 target_file=${files_arr[$num]}
-echo -e "\033[31m interface:$my_inter \033[0m"
+echo -e "chosing file : $target_file" 
 
 while read line
 do  
 eval "$line"  
 done < $path$target_file 
 
-echo -e "\033[31m--------------------------------------------------------------------\033[0m"
-echo -e "\033[31m 配置文件信息：\033[0m"
-echo -e "\033[32m 
+echo_red "--------------------------------------------------------------------"
+echo_green " 配置文件信息："
+echo_green "
 		说明信息：$about_info		
 
 		目标主机ip：$host_ip  
@@ -60,13 +48,12 @@ echo -e "\033[32m
 		目标主机traceroute协议：$tracert_pro 
 
 		目标主机TCP端口：$nmap_tcp_port 
-		目标主机UDP端口：$nmap_udp_port 
-        \033[0m"
+		目标主机UDP端口：$nmap_udp_port"
 
 pause
 
-echo -e "\033[31m--------------------------------------------------------------------\033[0m"
-echo -e "\033[31m step1：查看本地网卡和路由配置\033[0m"
+echo_red "--------------------------------------------------------------------"
+echo_red " step1：查看本地网卡和路由配置"
 
 #ifconfig $local_card 
 ifconfig
@@ -75,8 +62,8 @@ route -n
 
 pause
 
-echo -e "\033[31m--------------------------------------------------------------------\033[0m"
-echo -e "\033[31m step2：网络连通测试\033[0m"
+echo_red "--------------------------------------------------------------------"
+echo_red " step2：网络连通测试"
 if [ -n "$gateway" ];
 then
 	ping  -c 5 $gateway
@@ -93,8 +80,8 @@ fi
 
 pause
 
-echo -e "\033[31m--------------------------------------------------------------------\033[0m"
-echo -e "\033[31m step3：目标主机端口测试\033[0m"
+echo_red "--------------------------------------------------------------------"
+echo_red " step3：目标主机端口测试"
 
 if [ -n "$nmap_tcp_port" ];
 then
@@ -108,5 +95,5 @@ then
 	echo -e "\n=================================\n"
 fi
 
-echo -e "\033[31m--------------------------------------------------------------------\033[0m"
-echo -e "\033[31m step4：抓包查看协议数据测试\033[0m"
+echo_red "--------------------------------------------------------------------"
+echo_red " step4：抓包查看协议数据测试"

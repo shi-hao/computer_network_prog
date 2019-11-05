@@ -2,25 +2,30 @@
 
 # Adding dns config??
 
+source ./base.sh
+
+# Trap ctrl-c
+trap 'echo "exit ping"; exit' INT
+
 # Get all interfaces
 all_inter=$(ls /sys/class/net)
 inter_arr=($all_inter)
 len=$((${#inter_arr[*]}-1))
 
 # Echo all interfaces
-printf "%-5s %-20s\n" "ID" "Interface"
+printf_2_yell "ID" "Interface"
 for((i=0;i<=len;i++));
 do
-	printf "%-5s %-20s\n" $i ${inter_arr[i]}
+	printf_2_default $i ${inter_arr[i]}
 done 
 
 # Chosing interface
-echo -e "\033[31m please inpute 0~$len to chose the interface\033[0m"
+echo_red "please inpute 0~$len to chose the interface"
 read num 
 
 # Interface
 my_inter=${inter_arr[$num]}
-echo -e "\033[31m interface:$my_inter \033[0m"
+echo_red "interface:$my_inter "
 
 # Del the default gateway
 if [ "$1" == "clear" ] ;then
@@ -55,17 +60,16 @@ done <$cnf_file
 len=$((${#ip_array[*]}-1))
 
 # Echo all ip mask gw
-printf "\033[33m%-5s%-20s%-20s%-20s%-20s\n\033[0m" "ID" "IP" "MASK" "GW" "INFO"  
+printf_5_yell "ID" "IP" "MASK" "GW" "INFO" 
 for((i=0;i<=len;i++));
 do
-	printf "\033[4m%-5s%-20s%-20s%-20s%-20s\n\n\033[0m"  \
-		$i ${ip_array[i]}  ${mask_array[i]} ${gw_ip[i]} ${msg[i]}
+	printf_5_under_line $i ${ip_array[i]}  ${mask_array[i]} ${gw_ip[i]} ${msg[i]}
 done 
 
 # Chosing config
-echo -e "\033[31m please inpute 0~$len to chose the ip config\033[0m"
+echo_red " please inpute 0~$len to chose the ip config"
 read num 
-echo "chosing IP:${ip_array[$num]} MASK:${mask_array[$num]} GW:${gw_ip[$num]} INFO:${msg[$num]}"
+echo_red "chosing IP:${ip_array[$num]} MASK:${mask_array[$num]} GW:${gw_ip[$num]} INFO:${msg[$num]}"
 
 # Var--ip mask gateway
 my_ip=${ip_array[$num]}
