@@ -1,18 +1,3 @@
-# pause function
-function pause(){
-	while true
-	do
-		isContinue='y'
-		echo -e "\033[31m 请输入y继续，输入n退出 [y/n] \033[0m"
-		read isContinue
-		if [ "$isContinue" == "y" ]; then
-			break
-		elif [ "$isContinue" == "n" ]; then
-			exit
-		fi
-	done
-}
-
 # echo function 
 function my_echo(){
 	if [ $# -le 1 ];
@@ -25,30 +10,44 @@ function my_echo(){
 	color_list=(["red"]="31" ["green"]="32" ["blue"]="34")
 	
 	code=${color_list[$1]}
-	echo -e "\033[${code}m $2 \033[0m"
+	echo -e "\033[${code}m$2\033[0m"
 } 
 
 # printf function 
 function my_printf(){
 	if [ $# -le 2 ];
 	then
-		echo -e "\033[31m Error:my_printf [color] [line/null] [info1] [info2] ...\033[0m"
+		echo -e "\033[31m Error:my_printf [color/null] [line/null] [info1] [info2] \033[0m"
 		return
 	fi
 
 	declare -A color_list
-	color_list=(["default"]="" ["red"]="31" ["green"]="32" ["yellow"]="33" ["blue"]="34")
+	color_list=( ["red"]="31" ["green"]="32" ["yellow"]="33" ["blue"]="34")
 	code1=${color_list[$1]}
 
 	declare -A shape
 	shape=(["line"]=";4")
 	code2=${shape[$2]}
 
-	for((cnt=3;cnt<=$#;cnt++));
+	for((parm_num=3;parm_num<=$#;parm_num++));
 	do
-		eval tmp=\$$cnt
-		#printf "\033[${code1}${code2}m%-10s\033[0m" "$tmp"
-		printf "\033[${code1}m%-10s\033[0m" "$tmp"
+		eval parm=\$$parm_num
+		printf "\033[${code1}${code2}m%-16s\033[0m" "$parm"
 	done
 	printf "\n"
+}
+
+# pause function
+function pause(){
+	while true
+	do
+		isContinue='y'
+		my_echo "red" " 请输入y继续，输入n退出 [y/n] "
+		read isContinue
+		if [ "$isContinue" == "y" ]; then
+			break
+		elif [ "$isContinue" == "n" ]; then
+			exit
+		fi
+	done
 }

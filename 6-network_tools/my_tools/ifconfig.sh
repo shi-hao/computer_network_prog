@@ -4,10 +4,6 @@
 
 source ./base.sh
 
-#my_printf "default" "null" "sss"  "ssss"
-#my_printf "default" "null" "sss"  "ssss"
-#my_printf "default" "null" "sss"  "ssss"
-
 # Trap ctrl-c
 trap 'echo "exit ping"; exit' INT
 
@@ -17,24 +13,24 @@ inter_arr=($all_inter)
 len=$((${#inter_arr[*]}-1))
 
 # Echo all interfaces
-my_printf "yellow" "null" "ID" "Interface"
+my_printf "green" "null" "ID" "Interface"
 for((i=0;i<=len;i++));
 do
-	my_printf "default" "null" "$i" "${inter_arr[i]}"
+	my_printf "null" "null" "$i" "${inter_arr[i]}"
 done 
 
 # Chosing interface
-my_echo "red" "please inpute 0~$len to chose the interface"
+my_echo "red" " please inpute 0~$len to chose the interface"
 read num 
 
 # Interface
 my_inter=${inter_arr[$num]}
-my_echo "red" "interface:$my_inter "
+my_echo "red" " chosing interface:$my_inter "
 
 # Del the default gateway
 if [ "$1" == "clear" ] ;then
 	sudo route del default dev $my_inter
-	echo "route del default dev $my_inter"
+	my_echo "red" "route del default dev $my_inter"
 	route -n
 	exit 0
 fi
@@ -50,7 +46,8 @@ if [ "$1" == "dhcp" ] ;then
 fi
 
 # Config file
-cnf_file=/home/bleach/myfile/ip_cnf.txt
+#cnf_file=/home/bleach/myfile/ip_cnf.txt
+cnf_file=./ip_cnf.txt
 
 # Read ip mask gateway
 while read line
@@ -64,16 +61,16 @@ done <$cnf_file
 len=$((${#ip_array[*]}-1))
 
 # Echo all ip mask gw
-printf_5_yell "ID" "IP" "MASK" "GW" "INFO" 
+my_printf "green" "null" "ID" "IP" "MASK" "GW" "INFO" 
 for((i=0;i<=len;i++));
 do
-	printf_5_under_line $i ${ip_array[i]}  ${mask_array[i]} ${gw_ip[i]} ${msg[i]}
+	my_printf "null" "line" $i ${ip_array[i]}  ${mask_array[i]} ${gw_ip[i]} ${msg[i]}
 done 
 
 # Chosing config
-echo_red " please inpute 0~$len to chose the ip config"
+my_echo "red" " please inpute 0~$len to chose the ip config"
 read num 
-echo_red "chosing IP:${ip_array[$num]} MASK:${mask_array[$num]} GW:${gw_ip[$num]} INFO:${msg[$num]}"
+my_echo "red" " chosing IP:${ip_array[$num]} MASK:${mask_array[$num]} GW:${gw_ip[$num]} INFO:${msg[$num]}"
 
 # Var--ip mask gateway
 my_ip=${ip_array[$num]}

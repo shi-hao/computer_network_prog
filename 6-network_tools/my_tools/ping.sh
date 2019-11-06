@@ -6,7 +6,8 @@ trap 'echo "exit ping"; exit' INT
 source ./base.sh
 
 # Config file
-cnf_file=/home/bleach/myfile/ip_host.txt
+#cnf_file=/home/bleach/myfile/ip_host.txt
+cnf_file=./ip_host.txt
 
 # Read ip
 while read line
@@ -39,13 +40,13 @@ do
 		outstr=$(ping -c 1 ${ip_array[i]})
 		if [ $? -eq 0 ]; then
 			echo "------------------------------------------------"
-			my_echo  "blue" " $outstr"
-			echo -e "\033[32m ${msg[i]}--${ip_array[i]} alive \033[0m"
+			my_echo "blue"  "$outstr"
+			my_echo "green" "${msg[i]}--${ip_array[i]} alive"
 			sleep $sleep_s
 		else
 			echo "------------------------------------------------"
-			my_echo  "blue" " $outstr"
-			echo -e "\033[31m ${msg[i]}--${ip_array[i]} ping faild \033[0m"
+			my_echo "blue" "$outstr"
+			my_echo "red"  "${msg[i]}--${ip_array[i]} ping faild"
 			echo -e "\a" #alarm 
 		fi
 	done 
