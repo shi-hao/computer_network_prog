@@ -6,7 +6,6 @@ source ./base.sh
 # chose the config file ???
 cnf_file_pattern=.cnf
 path=/home/bleach/myfile/
-path=./
 all_cnf_files=$(ls -p  $path |	grep -v / | grep "$cnf_file_pattern$")
 
 files_arr=($all_cnf_files)

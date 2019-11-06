@@ -46,8 +46,7 @@ if [ "$1" == "dhcp" ] ;then
 fi
 
 # Config file
-#cnf_file=/home/bleach/myfile/ip_cnf.txt
-cnf_file=./ip_cnf.txt
+cnf_file=/home/bleach/myfile/ip_cnf.txt
 
 # Read ip mask gateway
 while read line

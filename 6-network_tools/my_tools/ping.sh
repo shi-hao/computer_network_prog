@@ -6,8 +6,7 @@ trap 'echo "exit ping"; exit' INT
 source ./base.sh
 
 # Config file
-#cnf_file=/home/bleach/myfile/ip_host.txt
-cnf_file=./ip_host.txt
+cnf_file=/home/bleach/myfile/ip_host.txt
 
 # Read ip
 while read line
