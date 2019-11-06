@@ -4,9 +4,9 @@
 
 source ./base.sh
 
-my_printf "default" "null" "sss"  "ssss"
-my_printf "default" "null" "sss"  "ssss"
-my_printf "default" "null" "sss"  "ssss"
+#my_printf "default" "null" "sss"  "ssss"
+#my_printf "default" "null" "sss"  "ssss"
+#my_printf "default" "null" "sss"  "ssss"
 
 # Trap ctrl-c
 trap 'echo "exit ping"; exit' INT
@@ -20,7 +20,7 @@ len=$((${#inter_arr[*]}-1))
 my_printf "yellow" "null" "ID" "Interface"
 for((i=0;i<=len;i++));
 do
-	my_printf "default" "null" "$i" "${inter_arr[i]}";
+	my_printf "default" "null" "$i" "${inter_arr[i]}"
 done 
 
 # Chosing interface

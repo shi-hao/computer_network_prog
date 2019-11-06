@@ -25,7 +25,7 @@ function my_echo(){
 	color_list=(["red"]="31" ["green"]="32" ["blue"]="34")
 	
 	code=${color_list[$1]}
-	echo -e "\033[${code}m$2 \033[0m"
+	echo -e "\033[${code}m $2 \033[0m"
 } 
 
 # printf function 
@@ -43,11 +43,12 @@ function my_printf(){
 	declare -A shape
 	shape=(["line"]=";4")
 	code2=${shape[$2]}
-	echo $code2
 
-	for((i=3;i<=$#;i++));
+	for((cnt=3;cnt<=$#;cnt++));
 	do
-		eval tmp=\$$i
-		printf "\033[${code1}${code2}m%-10s\033[0m" "$tmp"
+		eval tmp=\$$cnt
+		#printf "\033[${code1}${code2}m%-10s\033[0m" "$tmp"
+		printf "\033[${code1}m%-10s\033[0m" "$tmp"
 	done
+	printf "\n"
 }
