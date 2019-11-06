@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-#import base.sh
+# import base.sh
 source ./base.sh
 
 # chose the config file ???

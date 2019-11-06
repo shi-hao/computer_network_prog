@@ -4,6 +4,10 @@
 
 source ./base.sh
 
+my_printf "default" "null" "sss"  "ssss"
+my_printf "default" "null" "sss"  "ssss"
+my_printf "default" "null" "sss"  "ssss"
+
 # Trap ctrl-c
 trap 'echo "exit ping"; exit' INT
 
@@ -13,19 +17,19 @@ inter_arr=($all_inter)
 len=$((${#inter_arr[*]}-1))
 
 # Echo all interfaces
-printf_2_yell "ID" "Interface"
+my_printf "yellow" "null" "ID" "Interface"
 for((i=0;i<=len;i++));
 do
-	printf_2_default $i ${inter_arr[i]}
+	my_printf "default" "null" "$i" "${inter_arr[i]}";
 done 
 
 # Chosing interface
-echo_red "please inpute 0~$len to chose the interface"
+my_echo "red" "please inpute 0~$len to chose the interface"
 read num 
 
 # Interface
 my_inter=${inter_arr[$num]}
-echo_red "interface:$my_inter "
+my_echo "red" "interface:$my_inter "
 
 # Del the default gateway
 if [ "$1" == "clear" ] ;then

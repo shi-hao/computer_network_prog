@@ -13,42 +13,41 @@ function pause(){
 	done
 }
 
-# echo function
-function echo_red(){
-	echo -e "\033[31m$1 \033[0m"
-}
+# echo function 
+function my_echo(){
+	if [ $# -le 1 ];
+	then
+		echo -e "\033[31m Error:my_echo [color] [info] \033[0m"
+		return
+	fi
 
-# echo function
-function echo_green(){
-	echo -e "\033[32m$1 \033[0m"
-}
-
-# echo function
-function echo_grn(){
-	echo -e "\033[37m$1 \033[0m"
-}
-
-# echo function
-function echo_blue(){
-	echo -e "\033[34m$1 \033[0m"
-}
-
-# printf function
-function printf_2_yell(){
-	printf "\033[33m%-5s %-20s\n\033[0m" $1 $2 
+	declare -A color_list
+	color_list=(["red"]="31" ["green"]="32" ["blue"]="34")
+	
+	code=${color_list[$1]}
+	echo -e "\033[${code}m$2 \033[0m"
 } 
 
-# printf function
-function printf_2_default(){
-	printf "%-5s %-20s\n" $1 $2 
-}
+# printf function 
+function my_printf(){
+	if [ $# -le 2 ];
+	then
+		echo -e "\033[31m Error:my_printf [color] [line/null] [info1] [info2] ...\033[0m"
+		return
+	fi
 
-# printf function
-function printf_5_yell(){
-	printf "\033[33m%-5s%-20s%-20s%-20s%-20s\n\033[0m" $1 $2 $3 $4 $5 
-}
+	declare -A color_list
+	color_list=(["default"]="" ["red"]="31" ["green"]="32" ["yellow"]="33" ["blue"]="34")
+	code1=${color_list[$1]}
 
-# printf function
-function printf_5_under_line(){
-	printf "\033[4m%-5s%-20s%-20s%-20s%-20s\n\033[0m" $1 $2 $3 $4 $5 
+	declare -A shape
+	shape=(["line"]=";4")
+	code2=${shape[$2]}
+	echo $code2
+
+	for((i=3;i<=$#;i++));
+	do
+		eval tmp=\$$i
+		printf "\033[${code1}${code2}m%-10s\033[0m" "$tmp"
+	done
 }
