@@ -2,7 +2,7 @@
 
 # Adding dns config??
 
-source ./base.sh
+source ./my_function.sh
 
 # Trap ctrl-c
 trap 'echo "exit ping"; exit' INT

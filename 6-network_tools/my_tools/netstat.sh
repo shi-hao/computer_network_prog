@@ -1,7 +1,7 @@
 #!/bin/bash 
 
-# import base.sh
-source ./base.sh
+# import shell script 
+source ./my_function.sh
 
 # chose the config file ???
 cnf_file_pattern=.cnf

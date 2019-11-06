@@ -3,7 +3,7 @@
 # Trap ctrl-c
 trap 'echo "exit ping"; exit' INT
 
-source ./base.sh
+source ./my_function.sh
 
 # Config file
 cnf_file=/home/bleach/myfile/ip_host.txt
