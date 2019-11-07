@@ -51,3 +51,23 @@ function pause(){
 		fi
 	done
 }
+
+#get card ip 
+function get_card_ip(){
+	if [ $# -le 0 ];
+	then
+		echo -e "\033[31m Error:get_card_ip [card_name]  \033[0m"
+		return
+	fi
+	ifconfig $1 | grep -w inet | awk '{print $2}'
+}
+
+#get card mac 
+function get_card_mac(){
+	if [ $# -le 0 ];
+	then
+		echo -e "\033[31m Error:get_card_mac [card_name]  \033[0m"
+		return
+	fi
+	ifconfig $1 | grep -w ether | awk '{print $2}'
+}

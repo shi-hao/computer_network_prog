@@ -13,10 +13,12 @@ inter_arr=($all_inter)
 len=$((${#inter_arr[*]}-1))
 
 # Echo all interfaces
-my_printf "green" "null" "ID" "Interface"
+my_printf "green" "null" "ID" "Interface" "IP" "MAC"
 for((i=0;i<=len;i++));
 do
-	my_printf "null" "null" "$i" "${inter_arr[i]}"
+	card_ip=$(get_card_ip "${inter_arr[i]}")
+	card_mac=$(get_card_mac "${inter_arr[i]}")
+	my_printf "null" "null" "$i" "${inter_arr[i]}" "$card_ip" "$card_mac"
 done 
 
 # Chosing interface
