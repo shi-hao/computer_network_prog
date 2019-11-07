@@ -71,3 +71,13 @@ function get_card_mac(){
 	fi
 	ifconfig $1 | grep -w ether | awk '{print $2}'
 }
+
+#get card mac 
+function Get_Card_Mac(){
+	if [ $# -le 0 ];
+	then
+		echo -e "\033[31m Error:get_card_mac [card_name]  \033[0m"
+		return
+	fi
+	cat	"/sys/class/net/$1/address"
+}
