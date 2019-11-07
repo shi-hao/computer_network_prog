@@ -5,7 +5,7 @@
 source ./my_function.sh
 
 # Trap ctrl-c
-trap 'echo "exit ping"; exit' INT
+trap 'echo -e "\n exit \n"; exit' INT
 
 # Get all interfaces
 all_inter=$(ls /sys/class/net)

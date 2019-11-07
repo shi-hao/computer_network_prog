@@ -5,6 +5,13 @@ trap 'echo "exit ping"; exit' INT
 
 source ./my_function.sh
 
+# Parameter check
+if [ $# -le 0 ];
+then
+	echo -e "\033[31m Error: ping [sleep_time:0-N] \033[0m"
+	exit
+fi
+
 # Config file
 cnf_file=/home/bleach/myfile/ip_host.txt
 
@@ -40,12 +47,12 @@ do
 		if [ $? -eq 0 ]; then
 			echo "------------------------------------------------"
 			my_echo "blue"  "$outstr"
-			my_echo "green" "${msg[i]}--${ip_array[i]} alive"
+			my_echo "green" " ${msg[i]}--${ip_array[i]} alive"
 			sleep $sleep_s
 		else
 			echo "------------------------------------------------"
 			my_echo "blue" "$outstr"
-			my_echo "red"  "${msg[i]}--${ip_array[i]} ping faild"
+			my_echo "red"  " ${msg[i]}--${ip_array[i]} ping faild"
 			echo -e "\a" #alarm 
 		fi
 	done 
