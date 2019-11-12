@@ -8,17 +8,17 @@ source ./my_function.sh
 trap 'echo -e "\n exit \n"; exit' INT
 
 # Get all interfaces
-all_inter=$(ls /sys/class/net)
-inter_arr=($all_inter)
-len=$((${#inter_arr[*]}-1))
+all_ifs=$(get_if_names)
+ifs_arr=($all_ifs)
+len=$((${#ifs_arr[*]}-1))
 
 # Echo all interfaces
 my_printf "green" "null" "ID" "Interface" "IP" "MAC"
 for((i=0;i<=len;i++));
 do
-	card_ip=$(get_card_ip "${inter_arr[i]}")
-	card_mac=$(Get_Card_Mac "${inter_arr[i]}")
-	my_printf "null" "null" "$i" "${inter_arr[i]}" "$card_ip" "$card_mac"
+	card_ip=$(get_card_ip "${ifs_arr[i]}")
+	card_mac=$(get_card_mac "${ifs_arr[i]}")
+	my_printf "null" "null" "$i" "${ifs_arr[i]}" "$card_ip" "$card_mac"
 done 
 
 # Chosing interface
@@ -26,23 +26,23 @@ my_echo "red" " please inpute 0~$len to chose the interface"
 read num 
 
 # Interface
-my_inter=${inter_arr[$num]}
-my_echo "red" " chosing interface:$my_inter "
+my_if=${ifs_arr[$num]}
+my_echo "red" " chosing interface:$my_if "
 
 # Del the default gateway
 if [ "$1" == "clear" ] ;then
-	sudo route del default dev $my_inter
-	my_echo "red" "route del default dev $my_inter"
+	sudo route del default dev $my_if
+	my_echo "red" "route del default dev $my_if"
 	route -n
 	exit 0
 fi
 
 # DHCP
 if [ "$1" == "dhcp" ] ;then
-	sudo dhclient -r $my_inter
-	sudo dhclient $my_inter
+	sudo dhclient -r $my_if
+	sudo dhclient $my_if
 
-	ifconfig $my_inter
+	ifconfig $my_if
 	route -n
 	exit 0
 fi
@@ -79,12 +79,12 @@ my_mask=${mask_array[$num]}
 my_gw=${gw_ip[$num]}
 
 # Config the interface ip using commands
-sudo ifconfig $my_inter down
-sudo ifconfig $my_inter $my_ip netmask $my_mask
-sudo route del default dev $my_inter
-sudo route add default gw  $my_gw dev $my_inter
+sudo ifconfig $my_if down
+sudo ifconfig $my_if $my_ip netmask $my_mask
+sudo route del default dev $my_if
+sudo route add default gw  $my_gw dev $my_if
 
 # Check the interface config
-ifconfig $my_inter
+ifconfig $my_if
 route -n
 ping $my_gw
