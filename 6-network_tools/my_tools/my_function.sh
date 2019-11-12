@@ -6,11 +6,11 @@ function my_echo(){
 		return
 	fi
 
-	declare -A color_list
+	declare -A local color_list
 	color_list=(["red"]="31" ["green"]="32" ["blue"]="34")
 	
-	code=${color_list[$1]}
-	echo -e "\033[${code}m$2\033[0m"
+	local color=${color_list[$1]}
+	echo -e "\033[${color}m$2\033[0m"
 } 
 
 # printf function 
@@ -21,18 +21,20 @@ function my_printf(){
 		return
 	fi
 
-	declare -A color_list
+	declare -A local color_list
 	color_list=( ["red"]="31" ["green"]="32" ["yellow"]="33" ["blue"]="34")
-	code1=${color_list[$1]}
+	local color=${color_list[$1]}
 
-	declare -A shape
-	shape=(["line"]=";4")
-	code2=${shape[$2]}
+	declare -A local style_list
+	style_list=(["line"]=";4")
+	local style=${style_list[$2]}
 
-	for((parm_num=3;parm_num<=$#;parm_num++));
+	local i
+	local parm
+	for((i=3;i<=$#;i++));
 	do
-		eval parm=\$$parm_num
-		printf "\033[${code1}${code2}m%-16s\033[0m" "$parm"
+		eval parm=\$$i
+		printf "\033[${color}${style}m%-16s\033[0m" "$parm"
 	done
 	printf "\n"
 }
@@ -41,7 +43,7 @@ function my_printf(){
 function pause(){
 	while true
 	do
-		isContinue='y'
+		local isContinue='y'
 		my_echo "red" " 请输入y继续，输入n退出 [y/n] "
 		read isContinue
 		if [ "$isContinue" == "y" ]; then
