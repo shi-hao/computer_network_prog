@@ -3,7 +3,6 @@ NAT(Network Address Translation)网络地址转换
 NAT技术的细节，各个厂家的设备可能都略微有差异，名称上也不太统一。  
 从转换地址的角度出发，分析其技术细节，可以将所有的NAT分为SNAT和DNAT。  
 
-SNAT和DNAT。  
 SNAT ： 将ip数据包的源地址替换为指定地址。  
 DNAT ： 将ip数据包的目的地址替换为指定地址。  
   
