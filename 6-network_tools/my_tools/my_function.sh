@@ -7,7 +7,7 @@ function my_echo(){
 	fi
 
 	declare -A local color_list
-	color_list=(["red"]="31" ["green"]="32" ["blue"]="34")
+	color_list=(["red"]="31" ["green"]="32" ["yellow"]="33" ["blue"]="34")
 	
 	local color=${color_list[$1]}
 	echo -e "\033[${color}m$2\033[0m"
@@ -58,7 +58,7 @@ function pause(){
 function get_card_ip(){
 	if [ $# -le 0 ];
 	then
-		echo -e "\033[31m Error:get_card_ip [card_name]  \033[0m"
+		my_echo "red" " Error:get_card_ip [card_name]  "
 		return
 	fi
 	ifconfig $1 | grep -w inet | awk '{print $2}'
@@ -68,7 +68,7 @@ function get_card_ip(){
 function get_card_mac(){
 	if [ $# -le 0 ];
 	then
-		echo -e "\033[31m Error:get_card_mac [card_name]  \033[0m"
+		my_echo "red" " Error:get_card_mac [card_name]  "
 		return
 	fi
 	#ifconfig $1 | grep -w ether | awk '{print $2}'
