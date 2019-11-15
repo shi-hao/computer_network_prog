@@ -8,7 +8,7 @@ source ./my_function.sh
 # Parameter check
 if [ $# -le 0 ];
 then
-	echo -e "\033[31m Error: ping [sleep_time:0-N] \033[0m"
+	my_echo "red" " Error: ping [sleep_time:0-N] "
 	exit
 fi
 
