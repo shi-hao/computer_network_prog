@@ -55,8 +55,7 @@ my_echo "red" " step1：查看本地网卡和路由配置"
 
 #ifconfig $local_card 
 ifconfig
-my_echo "null" "\n=================================\n"
-
+my_echo "red" "\n-----this is dividers-----\n"
 route -n
 
 pause
@@ -66,14 +65,14 @@ my_echo "red" " step2：网络连通测试"
 if [ -n "$gateway" ];
 then
 	ping  -c 5 $gateway
-	my_echo "null" "\n=================================\n"
+	my_echo "red" "\n-----this is dividers-----\n"
 	sudo traceroute  $tracert_pro  $gateway
 fi
 
 if [ -n "$host_ip" ];
 then
 	ping  -c 5 $host_ip
-	my_echo "null" "\n=================================\n"
+	my_echo "red" "\n-----this is dividers-----\n"
 	sudo traceroute  $tracert_pro  $host_ip
 fi
 
@@ -85,13 +84,13 @@ my_echo "red" " step3：目标主机端口测试"
 if [ -n "$nmap_tcp_port" ];
 then
 	sudo nmap -sS -p $nmap_tcp_port  $host_ip
-	my_echo "null" "\n=================================\n"
+	my_echo "red" "\n-----this is dividers-----\n"
 fi
 
 if [ -n "$nmap_udp_port" ];
 then
 	sudo nmap -sU -p $nmap_udp_port  $host_ip
-	my_echo "null" "\n=================================\n"
+	my_echo "red" "\n-----this is dividers-----\n"
 fi
 
 my_echo "red" "--------------------------------------------------------------------"
