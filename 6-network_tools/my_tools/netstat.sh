@@ -27,6 +27,10 @@ done
 # Chosing config files
 my_echo "red" " please inpute 0~$len to chose the config file"
 read num 
+if (( $num > $len )) || (( $num < 0 ));then
+	my_echo "red" " inpute error, exit!"
+	exit
+fi
 
 # target file
 target_file=${files_arr[$num]}

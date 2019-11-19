@@ -24,6 +24,10 @@ done
 # Chosing interface
 my_echo "red" " please inpute 0~$len to chose the interface"
 read num 
+if (( $num > $len )) || (( $num < 0 ));then 
+	my_echo "red" " inpute error, exit!"
+	exit
+fi
 
 # Interface
 my_if=${ifs_arr[$num]}
@@ -71,6 +75,10 @@ done
 # Chosing config
 my_echo "red" " please inpute 0~$len to chose the ip config"
 read num 
+if (( $num > $len )) || (( $num < 0 ));then 
+	my_echo "red" " inpute error, exit!"
+	exit
+fi
 my_echo "red" " chosing IP:${ip_array[$num]} MASK:${mask_array[$num]} GW:${gw_ip[$num]} INFO:${msg[$num]}"
 
 # Var--ip mask gateway
