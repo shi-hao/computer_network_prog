@@ -71,6 +71,6 @@ iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE && iptables-save
 ## Android连接PPTP服务器  
 设置->无线和网络->VPN  
       
-遇到的问题：      
+## troubleshooting
 win10连接上pptp服务后，百度竟然无法访问，可以访问其他网站！！      
 暂时没有解决这个问题！！      
