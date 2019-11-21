@@ -22,7 +22,7 @@ remoteip 192.168.10.100-200       #分配给VPN客户端的虚拟ip
   
 3.编辑用户配置文件添加用户  
 sudo vi /etc/ppp/chap-secrets  
-  
+
 <pre>  
 # Secrets for authentication using CHAP  
 # client    server   secret    IP addresses  
@@ -32,20 +32,26 @@ testvpn1    pptpd    test123   *
   
 4.修改ppp选项配置文件配置dns  
 sudo vi /etc/ppp/pptpd-options  
-  
+
 <pre>  
 ms-dns 8.8.8.8  
 ms-dns 114.114.114.114  
 </pre>  
   
 5.重启pptpd服务  
+<pre>  
 service pptpd restart  
+</pre>  
   
 验证pptp服务是否在运行：  
+<pre>  
 netstat -alpn | grep :1723  
+</pre>  
   
 6.修改iptable NAT转发  
+<pre>  
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE && iptables-save  
+</pre>  
   
   
 遇到的问题：  
