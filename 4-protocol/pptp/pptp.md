@@ -63,6 +63,7 @@ sudo sysctl -p
 <pre>      
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE && iptables-save      
 </pre>      
+系统重启后，iptables规则没有保存，待解决！！
       
   
 ## Win10连接PPTP服务器  
