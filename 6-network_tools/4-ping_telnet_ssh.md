@@ -43,3 +43,11 @@ User	  用户名   #用户名
 (2)SSH使用密钥对登录
 
 (3)SSH修改TCP服务端口
+vim /etc/ssh/sshd_config
+<pre>
+# Package generated configuration file
+# See the sshd_config(5) manpage for details
+
+# What ports, IPs and protocols we listen for
+Port 22
+</pre>
