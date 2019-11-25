@@ -22,15 +22,14 @@ do
 done 
 
 # Chosing interface
-my_echo "red" " please inpute 0~$len to chose the interface"
-read num 
-if (( $num > $len )) || (( $num < 0 ));then 
-	my_echo "red" " inpute error, exit!"
-	exit
-fi
+in_id=""
+while [[ ! "$in_id" =~ ^[+-]?[0-9]+$ ]] || [ "$in_id" -lt 0 -o "$in_id" -gt "$len" ]; do
+	my_echo "red" " please input 0~$len to chose the interface"
+	read in_id
+done
 
 # Interface
-my_if=${ifs_arr[$num]}
+my_if=${ifs_arr[$in_id]}
 my_echo "red" " chosing interface:$my_if "
 
 # Del the default gateway
@@ -73,18 +72,17 @@ do
 done 
 
 # Chosing config
-my_echo "red" " please inpute 0~$len to chose the ip config"
-read num 
-if (( $num > $len )) || (( $num < 0 ));then 
-	my_echo "red" " inpute error, exit!"
-	exit
-fi
-my_echo "red" " chosing IP:${ip_array[$num]} MASK:${mask_array[$num]} GW:${gw_ip[$num]} INFO:${msg[$num]}"
+in_id=""
+while [[ ! "$in_id" =~ ^[0-9]+$ || $in_id -gt $len || $in_id -lt 0 ]]; do
+	my_echo "red" " please inpute 0~$len to chose the ip config"
+	read in_id
+done
+my_echo "red" " chosing IP:${ip_array[$in_id]} MASK:${mask_array[$in_id]} GW:${gw_ip[$in_id]} INFO:${msg[$in_id]}"
 
 # Var--ip mask gateway
-my_ip=${ip_array[$num]}
-my_mask=${mask_array[$num]}
-my_gw=${gw_ip[$num]}
+my_ip=${ip_array[$in_id]}
+my_mask=${mask_array[$in_id]}
+my_gw=${gw_ip[$in_id]}
 
 # Config the interface ip using commands
 sudo ifconfig $my_if down

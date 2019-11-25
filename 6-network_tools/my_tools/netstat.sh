@@ -25,15 +25,14 @@ do
 done 
 
 # Chosing config files
-my_echo "red" " please inpute 0~$len to chose the config file"
-read num 
-if (( $num > $len )) || (( $num < 0 ));then
-	my_echo "red" " inpute error, exit!"
-	exit
-fi
+in_id=""
+while [[ ! "$in_id" =~ ^[0-9]+$ || $in_id -gt $len || $in_id -lt 0 ]]; do
+	my_echo "red" " please input 0~$len to chose the config file"
+	read in_id
+done
 
 # target file
-target_file=${files_arr[$num]}
+target_file=${files_arr[$in_id]}
 my_echo "red" " chosing file : $target_file" 
 
 while read line
