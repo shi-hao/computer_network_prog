@@ -74,7 +74,7 @@ done
 # Chosing config
 in_id=""
 while [[ ! "$in_id" =~ ^[0-9]+$ || $in_id -gt $len || $in_id -lt 0 ]]; do
-	my_echo "red" " please inpute 0~$len to chose the ip config"
+	my_echo "red" " please input 0~$len to chose the ip config"
 	read in_id
 done
 my_echo "red" " chosing IP:${ip_array[$in_id]} MASK:${mask_array[$in_id]} GW:${gw_ip[$in_id]} INFO:${msg[$in_id]}"
