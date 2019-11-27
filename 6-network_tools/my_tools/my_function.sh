@@ -40,7 +40,7 @@ function my_printf(){
 }
 
 # pause function
-function pause(){
+function my_pause(){
 	while true
 	do
 		local isContinue='y'

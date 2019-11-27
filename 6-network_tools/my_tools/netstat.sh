@@ -3,6 +3,9 @@
 # import shell script 
 source ./my_function.sh
 
+# Trap ctrl-c
+trap 'echo -e "\n exit \n"; exit' INT
+
 # chose the config file ???
 cnf_file_pattern=.cnf
 path=/home/bleach/myfile/
@@ -51,7 +54,7 @@ my_echo "null" "\t description：$about_info
 \t target tcp port：$nmap_tcp_port 
 \t target udp port：$nmap_udp_port"
 
-pause
+my_pause
 
 my_echo "red" "--------------------------------------------------------------------"
 my_echo "red" " step1：查看本地网卡和路由配置"
@@ -61,7 +64,7 @@ ifconfig
 my_echo "red" "\n-----this is dividers-----\n"
 route -n
 
-pause
+my_pause
 
 my_echo "red" "--------------------------------------------------------------------"
 my_echo "red" " step2：网络连通测试"
@@ -79,7 +82,7 @@ then
 	sudo traceroute  $tracert_pro  $host_ip
 fi
 
-pause
+my_pause
 
 my_echo "red" "--------------------------------------------------------------------"
 my_echo "red" " step3：目标主机端口测试"
