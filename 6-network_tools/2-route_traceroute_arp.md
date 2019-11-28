@@ -56,7 +56,7 @@ traceroute -I -n
     
 **(2)使用UDP探测**    
 <pre>    
-sudo traceroute  -n  www.baidu.com    
+sudo traceroute  -U -n  www.baidu.com    
 traceroute to www.baidu.com (61.135.169.125), 30 hops max, 60 byte packets    
  1  192.168.8.1  11.389 ms  11.384 ms  18.947 ms    
  2  192.168.3.1  28.230 ms  28.280 ms  28.372 ms    
@@ -112,6 +112,9 @@ traceroute to www.baidu.com (61.135.169.121), 30 hops max, 60 byte packets
     
   -T 表示使用tcp    
 </pre>    
+
+指定源地址，源端口，目标地址，目标端口进行测试：
+traceroute -s [src] --sport=[src port]  -p [dst port] -T [dst ip or domain]
   
 ## arp    
 查看本地arp表：    
