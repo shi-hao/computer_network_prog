@@ -10,6 +10,9 @@ if [ $# -le 0 ];
 then
 	my_echo "red" " Error: ping [sleep_time:0-N] "
 	exit
+elif [[ ! "$1" =~ ^[+-]?[0-9]+$ ]]; then 
+	my_echo "red" " Error: ping [sleep_time:0-N] "
+	exit
 fi
 
 # Config file
