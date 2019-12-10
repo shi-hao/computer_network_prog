@@ -5,7 +5,7 @@
 source ./my_function.sh
 
 # Trap ctrl-c
-trap 'echo -e "\n exit \n"; exit' INT
+my_break
 
 # Get all interfaces
 all_ifs=$(get_if_names)

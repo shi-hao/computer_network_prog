@@ -54,6 +54,11 @@ function my_pause(){
 	done
 }
 
+# break function
+function my_break(){
+	trap 'echo -e "\n break and exit \n"; exit' INT
+}
+
 #get card ip 
 function get_card_ip(){
 	if [ $# -le 0 ];

@@ -4,7 +4,7 @@
 source ./my_function.sh
 
 # Trap ctrl-c
-trap 'echo -e "\n exit \n"; exit' INT
+my_break
 
 # chose the config file ???
 cnf_file_pattern=.cnf

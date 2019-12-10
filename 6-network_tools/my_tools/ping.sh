@@ -1,7 +1,7 @@
 #!/bin/bash 
 
 # Trap ctrl-c
-trap 'echo "exit ping"; exit' INT
+my_break
 
 source ./my_function.sh
 
