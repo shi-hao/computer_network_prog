@@ -56,7 +56,7 @@ function my_pause(){
 
 # break function
 function my_break(){
-	trap 'echo -e "\n break and exit \n"; exit' INT
+	trap "my_echo \"red\" \"\n break and exit \n\"; exit" INT
 }
 
 #get card ip 
