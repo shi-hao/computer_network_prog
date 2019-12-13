@@ -96,7 +96,13 @@ fi
 if [ -n "$nmap_udp_port" ];
 then
 	sudo nmap -sU -p $nmap_udp_port  $host_ip
-	my_echo "red" "\n-----this is dividers-----\n"
+fi
+
+my_echo "red" "--------------------------------------------------------------------"
+my_echo "red" " ntp同步时间测试"
+if [ -n "$ntp_domain" ];
+then
+	ntpdate -q $ntp_domain
 fi
 
 my_echo "red" "--------------------------------------------------------------------"
