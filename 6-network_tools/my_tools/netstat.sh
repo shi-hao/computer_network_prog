@@ -90,7 +90,6 @@ my_echo "red" " step3：目标主机端口测试"
 if [ -n "$nmap_tcp_port" ];
 then
 	sudo nmap -sS -p $nmap_tcp_port  $host_ip
-	my_echo "red" "\n-----this is dividers-----\n"
 fi
 
 if [ -n "$nmap_udp_port" ];
@@ -98,10 +97,10 @@ then
 	sudo nmap -sU -p $nmap_udp_port  $host_ip
 fi
 
-my_echo "red" "--------------------------------------------------------------------"
-my_echo "red" " ntp同步时间测试"
 if [ -n "$ntp_domain" ];
 then
+	my_echo "red" "--------------------------------------------------------------------"
+	my_echo "red" " ntp同步时间测试"
 	ntpdate -q $ntp_domain
 fi
 
