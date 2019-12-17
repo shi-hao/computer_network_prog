@@ -52,7 +52,9 @@ my_echo "null" "\t description：$about_info
 \t traceroute protocol：$tracert_pro 
 
 \t target tcp port：$nmap_tcp_port 
-\t target udp port：$nmap_udp_port"
+\t target udp port：$nmap_udp_port
+
+\t ntp domain：$ntp_domain"
 
 my_pause
 
