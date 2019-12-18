@@ -59,7 +59,7 @@ function my_break(){
 	trap "my_echo \"red\" \"\n break and exit \n\"; exit" INT
 }
 
-#get card ip 
+# get card ip 
 function get_card_ip(){
 	if [ $# -le 0 ];
 	then
@@ -69,7 +69,7 @@ function get_card_ip(){
 	ifconfig $1 | grep -w inet | awk '{print $2}'
 }
 
-#get card mac 
+# get card mac 
 function get_card_mac(){
 	if [ $# -le 0 ];
 	then
@@ -80,7 +80,7 @@ function get_card_mac(){
 	cat	"/sys/class/net/$1/address"
 }
 
-#get all network card names
+# get all network card names
 function get_if_names(){
 	ls /sys/class/net
 }
