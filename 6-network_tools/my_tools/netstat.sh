@@ -44,17 +44,13 @@ eval "$line"
 done < $path$target_file 
 
 my_echo "red"   "--------------------------------------------------------------------"
-my_echo "null" "\t description：$about_info
-
-\t target ip：$host_ip
-\t target gw：$gateway
-
+my_echo "null" "\t description        ：$about_info
+\t target ip          ：$host_ip
+\t target gw          ：$gateway
 \t traceroute protocol：$tracert_pro 
-
-\t target tcp port：$nmap_tcp_port 
-\t target udp port：$nmap_udp_port
-
-\t ntp domain：$ntp_domain"
+\t nmap tcp port      ：$nmap_tcp_port 
+\t nmap udp port      ：$nmap_udp_port
+\t ntp domain         ：$ntp_domain"
 
 my_pause
 
@@ -74,14 +70,14 @@ if [ -n "$gateway" ];
 then
 	ping  -c 5 $gateway
 	my_echo "red" "\n-----this is dividers-----\n"
-	sudo traceroute  $tracert_pro  $gateway
+	sudo traceroute  $tracert_pro -n $gateway
 fi
 
 if [ -n "$host_ip" ];
 then
 	ping  -c 5 $host_ip
 	my_echo "red" "\n-----this is dividers-----\n"
-	sudo traceroute  $tracert_pro  $host_ip
+	sudo traceroute  $tracert_pro -n $host_ip
 fi
 
 my_pause
