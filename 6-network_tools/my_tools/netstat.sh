@@ -17,7 +17,7 @@ len=$((${#files_arr[*]}-1))
 if [ $len -ge  0 ]; then
 	my_echo "red" " find $[len+1] config file"
 else 
-	my_echo "red" " find config file failed, exit \n  config pattern $cnf_file_pattern, \n  config path is $path"
+	my_echo "red" " find config file failed, exit \n config pattern $cnf_file_pattern, \n config path is $path"
 	exit
 fi
 
