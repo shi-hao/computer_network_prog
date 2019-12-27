@@ -23,7 +23,7 @@ ubuntu16.04+iperf v2.0.5    win10+iperf v2.0.8
       
 (2)实测      
 ubuntu主机运行multicast接收程序:      
-iperf -s -u-B 239.1.1.88  -f m  -i  1        
+iperf -s -u -B 239.1.1.88 -f m  -i  1        
       
 -f 表示单位，此处为兆      
 -s 表示运行服务端      
@@ -73,10 +73,10 @@ Sending 1470 byte datagrams
 Setting multicast TTL to 5      
 UDP buffer size: 32.0 KByte (default)      
 ------------------------------------------------------------      
-[3] local <IP Addr node5> port 1025 connected with 224.0.67.67 port 5001        
-[ ID] Interval     Transfer     Bandwidth        
-[3]  0.0- 5.0 sec   642 KBytes   1.0 Mbits/sec        
-[3] Sent 447 datagrams        
+[ 3] local <IP Addr node5> port 1025 connected with 224.0.67.67 port 5001        
+[ID] Interval     Transfer     Bandwidth        
+[ 3]  0.0- 5.0 sec   642 KBytes   1.0 Mbits/sec        
+[ 3] Sent 447 datagrams        
       
 node5> iperf -s -u -B 224.0.67.67 -i 1      
 ------------------------------------------------------------      
@@ -86,14 +86,14 @@ Joining multicast group224.0.67.67
 Receiving 1470 byte datagrams      
 UDP buffer size: 32.0 KByte (default)      
 ------------------------------------------------------------      
-	[3] local 224.0.67.67 port 5001 connected with <IP Addr node5> port 1025        
-	[ ID] Interval     Transfer     Bandwidth       Jitter   Lost/Total Datagrams        
-	[3]  0.0- 1.0 sec   131 KBytes   1.0 Mbits/sec  0.007 ms    0/   91 (0%)        
-	[3]  1.0- 2.0 sec   128 KBytes   1.0 Mbits/sec  0.008 ms    0/   89 (0%)        
-	[3]  2.0- 3.0 sec   128 KBytes   1.0 Mbits/sec  0.010 ms    0/   89 (0%)        
-	[3]  3.0- 4.0 sec   128 KBytes   1.0 Mbits/sec  0.013 ms    0/   89 (0%)        
-	[3]  4.0- 5.0 sec   128 KBytes   1.0 Mbits/sec  0.008 ms    0/   89 (0%)        
-	[3]  0.0- 5.0 sec   642 KBytes   1.0 Mbits/sec  0.008 ms    0/  447 (0%)        
+	[ 3] local 224.0.67.67 port 5001 connected with <IP Addr node5> port 1025        
+	[ID] Interval     Transfer     Bandwidth       Jitter   Lost/Total Datagrams        
+	[ 3]  0.0- 1.0 sec   131 KBytes   1.0 Mbits/sec  0.007 ms    0/   91 (0%)        
+	[ 3]  1.0- 2.0 sec   128 KBytes   1.0 Mbits/sec  0.008 ms    0/   89 (0%)        
+	[ 3]  2.0- 3.0 sec   128 KBytes   1.0 Mbits/sec  0.010 ms    0/   89 (0%)        
+	[ 3]  3.0- 4.0 sec   128 KBytes   1.0 Mbits/sec  0.013 ms    0/   89 (0%)        
+	[ 3]  4.0- 5.0 sec   128 KBytes   1.0 Mbits/sec  0.008 ms    0/   89 (0%)        
+	[ 3]  0.0- 5.0 sec   642 KBytes   1.0 Mbits/sec  0.008 ms    0/  447 (0%)        
       
 node6> iperf -s -u -B 224.0.67.67 -i 1      
 ------------------------------------------------------------      
@@ -103,13 +103,13 @@ Joining multicast group224.0.67.67
 Receiving 1470 byte datagrams      
 UDP buffer size: 60.0 KByte (default)      
 ------------------------------------------------------------      
-  [  3] local 224.0.67.67 port 5001 connected with <IP Addr node5> port 1025        
-  [ ID] Interval       Transfer     Bandwidth       Jitter   Lost/Total Datagrams        
-  [  3]  0.0- 1.0 sec   129 KBytes   1.0 Mbits/sec  0.778 ms   61/  151 (40%)        
-  [  3]  1.0- 2.0 sec   128 KBytes   1.0 Mbits/sec  0.236 ms    0/   89 (0%)        
-  [  3]  2.0- 3.0 sec   128 KBytes   1.0 Mbits/sec  0.264 ms    0/   89 (0%)        
-  [  3]  3.0- 4.0 sec   128 KBytes   1.0 Mbits/sec  0.248 ms    0/   89 (0%)        
-  [  3]  0.0- 4.3 sec   554 KBytes   1.0 Mbits/sec  0.298 ms   61/  447 (14%)        
+  [ 3] local 224.0.67.67 port 5001 connected with <IP Addr node5> port 1025        
+  [ID] Interval       Transfer     Bandwidth       Jitter   Lost/Total Datagrams        
+  [ 3]  0.0- 1.0 sec   129 KBytes   1.0 Mbits/sec  0.778 ms   61/  151 (40%)        
+  [ 3]  1.0- 2.0 sec   128 KBytes   1.0 Mbits/sec  0.236 ms    0/   89 (0%)        
+  [ 3]  2.0- 3.0 sec   128 KBytes   1.0 Mbits/sec  0.264 ms    0/   89 (0%)        
+  [ 3]  3.0- 4.0 sec   128 KBytes   1.0 Mbits/sec  0.248 ms    0/   89 (0%)        
+  [ 3]  0.0- 4.3 sec   554 KBytes   1.0 Mbits/sec  0.298 ms   61/  447 (14%)        
       
 Start multiple clients or servers as explained above, sending data to the same multicast server.    
     
