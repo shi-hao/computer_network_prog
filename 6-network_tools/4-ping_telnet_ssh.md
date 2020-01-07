@@ -39,7 +39,17 @@ User	  用户名   #用户名
 来补全，非常方便。
 
 (2)SSH使用密钥对登录
-
+使用SSH工具登录服务器时，可以选择使用服务器的用户名和密码来验证登录，这种
+登录方式安全等级较低，使用密钥对登录更加安全，而且配置好密钥对后，可以直接
+登录，不需要输入密码，更加方便。
+SSH客户端使用非对称算法（默认RSA）生成密钥对，然后将生成的公钥保存到服务端，
+客户端在登录时，使用本地保存的私钥和服务端交互信息来进行身份认证。
+使用密钥生成工具在客户端生成密钥对。
+<pre>
+ssh-keygen
+</pre>
+在用户目录.ssh/下生成公钥和私钥，id_rsa  id_rsa.pub
+将id_rsa.pub公钥拷贝到服务端目录.ssh/authorized_keys文件内。
 
 (3)SSH修改TCP服务端口
 vim /etc/ssh/sshd_config
@@ -50,3 +60,6 @@ vim /etc/ssh/sshd_config
 # What ports, IPs and protocols we listen for
 Port 22
 </pre>
+
+(4)SSH修改认证模式
+vim /etc/ssh/sshd_config
