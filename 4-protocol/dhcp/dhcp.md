@@ -29,3 +29,6 @@ client   ---request----broadcast----->      server
 client   <--acknowledgement----------       server  
 
 在dhcp协议的字段中，包含一些可选的字段，用于dhcp server向client发送网关，子网掩码，dns等信息。  
+
+## troubleshooting
+当主机请求dhcp失败时，通常会被分配一个169.254.x.x的ip地址。  
