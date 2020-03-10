@@ -79,8 +79,8 @@ PPTP客户端服务端通过TCP，GRE建立数据隧道，然后在客户端服�
 隧道传输。  
 客户端和服务端会生成一个名字为pptpd的虚拟网卡！  
       
-      
-## ubuntu16配置pptp服务              
+## 应用      
+### ubuntu16配置pptp服务              
 1.安装pptp服务              
 sudo apt-get update               
 sudo apt-get install pptpd              
