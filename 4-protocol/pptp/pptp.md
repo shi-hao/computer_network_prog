@@ -82,8 +82,10 @@ PPTP客户端服务端通过TCP，GRE建立数据隧道，然后在客户端服�
 ## 应用      
 ### ubuntu16配置pptp服务              
 1.安装pptp服务              
+<pre>              
 sudo apt-get update               
 sudo apt-get install pptpd              
+</pre>              
               
               
 2.修改pptpd设置              
