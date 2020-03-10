@@ -43,32 +43,32 @@ PPTP报文格式如下所示:
 PPTP GRE报文格式如下所示：  
 <pre>  
 --------------------------------------------------------  
-|  2bytes                               | 2bytes       |  
-|Bits  0–4	5–7		8	9-12	13–15	| 16–31        |  
+|2bytes                                 |2bytes        |  
+|Bits 0–4   5–7     8   9-12    13–15   |16–31|  
 ---------------------------------------------------------  
-|C R K S s	Recur	A	Flags	Version	| Protocol Type|  
+|C R K S s  Recur   A   Flags   Version | Protocol Type|  
 ---------------------------------------------------------  
-|Key Payload Length	                    | Key Call ID  |  
+|Key Payload Length                     | Key Call ID  |  
 ---------------------------------------------------------  
-|				Sequence Number (optional)             |  
+|                  Sequence Number (optional)          |  
 ---------------------------------------------------------  
-|				Acknowledgement Number (optional)      |  
+|                  Acknowledgement Number (optional)   |  
 ---------------------------------------------------------  
 </pre>  
   
 PPP frames are variants of HDLC frames:  
 <pre>  
 -----------------------------------------------------------------------------------  
-|Name					Number of bytes			Description  
+|Name                   Number of bytes         Description  
 -----------------------------------------------------------------------------------  
-|Flag					1						0x7E, the beginning of a PPP frame  
-|Address				1						0xFF, standard broadcast address  
-|Control				1						0x03, unnumbered data  
-|Protocol				2						PPP ID of embedded data  
-|Information			variable (0 or more)	datagram  
-|Padding				variable (0 or more)	optional padding  
-|Frame Check Sequence	2						frame checksum  
-|Flag					1						0x7E, omitted for successive PPP packets   
+|Flag                   1                       0x7E, the beginning of a PPP frame  
+|Address                1                       0xFF, standard broadcast address  
+|Control                1                       0x03, unnumbered data  
+|Protocol               2                       PPP ID of embedded data  
+|Information            variable (0 or more)    datagram  
+|Padding                variable (0 or more)    optional padding  
+|Frame Check Sequence   2                       frame checksum  
+|Flag                   1                       0x7E, omitted for successive PPP packets   
 -----------------------------------------------------------------------------------  
 </pre>  
   
