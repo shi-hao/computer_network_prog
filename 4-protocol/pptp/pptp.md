@@ -4,8 +4,9 @@ PPTP使用传输控制协议（TCP，1723端口）创建控制通道来发送控
 Encapsulation）通道来封装点对点协议（PPP）数据包以发送数据。这个协议最早由微软等厂商主导开发，但因为它的加    
 密方式容易被破解，微软已经不再建议使用这个协议。           
 PPTP协议只有简单的协议安全机制，没有类似SSL VPN的认证加密机制。        
-        
-## 建立连接流程      
+
+## 核心技术  
+### 建立连接流程      
 1. 建立TCP连接，目的端口1723      
 2. 发送PPTP控制数据包，建立控制信道。      
 	ip_header + tcp_header + pptp_header    
@@ -72,7 +73,7 @@ PPP frames are variants of HDLC frames:
 -----------------------------------------------------------------------------------    
 </pre>    
     
-## 隧道技术    
+### 隧道技术    
 PPTP客户端服务端通过TCP，GRE建立数据隧道，然后在客户端服务端生成虚拟网卡，将隧道入口打开，  
 通过修改系统的路由表，将其他应用程序的数据导入到虚拟网卡，其他应用程序数据就可以通过数据  
 隧道传输。  
@@ -141,10 +142,10 @@ iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE && iptables-save
 系统重启后，iptables规则没有保存，待解决！！        
               
           
-## Win10连接PPTP服务器          
+### Win10连接PPTP服务器          
 网络->VPN->添加VPN          
           
-## Android连接PPTP服务器          
+### Android连接PPTP服务器          
 设置->无线和网络->VPN          
               
 ## troubleshooting        
