@@ -1,9 +1,9 @@
 #!/bin/bash 
 
+source ./my_function.sh
+
 # Trap ctrl-c
 my_break
-
-source ./my_function.sh
 
 # Parameter check
 if [ $# -le 0 ]; then
