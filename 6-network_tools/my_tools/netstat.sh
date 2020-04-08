@@ -6,7 +6,7 @@ source ./my_function.sh
 # Trap ctrl-c
 my_break
 
-# chose the config file ???
+# choose the config file ???
 cnf_file_pattern=.cnf
 path=/home/bleach/myfile/
 all_cnf_files=$(ls -p  $path |	grep -v / | grep "$cnf_file_pattern$")
@@ -27,7 +27,7 @@ do
 	my_printf "null" "null" $i ${files_arr[i]}
 done 
 
-# Chosing config files
+# Choosing config files
 in_id=""
 while [[ ! "$in_id" =~ ^[0-9]+$ || $in_id -gt $len || $in_id -lt 0 ]]; do
 	my_echo "red" " please input 0~$len to chose the config file"
