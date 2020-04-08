@@ -1,6 +1,6 @@
 # Network Card Config  
   
-**Config the local network card interface**      
+**Config the local network card interface!**      
   
 **ifconfig**  
 **iwconfig**  

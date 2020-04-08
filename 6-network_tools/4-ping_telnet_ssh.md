@@ -1,6 +1,6 @@
 # Login By Network
 
-**Link/Login to remote host**  
+**Link/Login to remote host!**  
 
 **ping**  
 **telnet**  
