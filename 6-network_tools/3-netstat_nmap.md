@@ -1,4 +1,9 @@
-# check the local TCP/UDP port state and remote TCP/UDP port state  
+# TCP/UDP Port State
+
+**Check the local and remote TCP/UDP port state!**   
+
+**netstat**  
+**nmap**  
   
 ## netstat  
 (1)查看本地tcp/udp连接状态：  
