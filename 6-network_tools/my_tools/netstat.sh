@@ -48,6 +48,7 @@ my_echo "null" "\t description        ：$about_info
 \t target ip          ：$host_ip
 \t target gw          ：$gateway
 \t traceroute protocol：$tracert_pro 
+\t nmap block ping    : $nmap_block_ping 
 \t nmap tcp port      ：$nmap_tcp_port 
 \t nmap udp port      ：$nmap_udp_port
 \t ntp domain         ：$ntp_domain"
@@ -87,12 +88,12 @@ my_echo "red" " step3：目标主机端口测试"
 
 if [ -n "$nmap_tcp_port" ];
 then
-	sudo nmap -sS -p $nmap_tcp_port  $host_ip
+	sudo nmap -sS $nmap_block_ping -p $nmap_tcp_port  $host_ip
 fi
 
 if [ -n "$nmap_udp_port" ];
 then
-	sudo nmap -sU -p $nmap_udp_port  $host_ip
+	sudo nmap -sU $nmap_block_ping -p $nmap_udp_port  $host_ip
 fi
 
 if [ -n "$ntp_domain" ];

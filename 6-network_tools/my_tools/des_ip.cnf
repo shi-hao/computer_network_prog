@@ -8,5 +8,6 @@ tracert_pro=-I
 
 
 # 目标主机tcp/udp端口
+nmap_block_ping=-Pn
 nmap_tcp_port=7660
 nmap_udp_port=
