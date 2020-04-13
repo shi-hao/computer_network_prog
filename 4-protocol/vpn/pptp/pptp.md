@@ -1,5 +1,5 @@
 # PPTP              
-点对点隧道协议（英语：Point to Point Tunneling Protocol，缩写为PPTP）是实现虚拟专用网（VPN）的方式之一。         
+点对点隧道协议（英语：Point to Point Tunneling Protocol，缩写为PPTP）是实现虚拟专用网（VPN）的方式之一。      
 PPTP使用传输控制协议（TCP，1723端口）创建控制通道来发送控制命令，以及利用通用路由封装（GRE,Generic Routing    
 Encapsulation）通道来封装点对点协议（PPP）数据包以发送数据。这个协议最早由微软等厂商主导开发，但因为它的加    
 密方式容易被破解，微软已经不再建议使用这个协议。           
