@@ -1,3 +1,9 @@
+# TCP/UDP
+
+**TCP/UDP SEQUENCE**
+**TCP/UDP PORT**
+
+## TCP/UDP sequence
 Connection establishment  
 To establish a connection, TCP uses a three-way handshake. Before a client  
 attempts to connect with a server, the server must first bind to and listen at  

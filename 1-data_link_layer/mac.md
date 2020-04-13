@@ -1,6 +1,10 @@
 # Data Link Layer
 数据链路层的核心协议是以太网协议，协议的核心字段是MAC地址。  
 
+**MAC**
+**单播/组播/广播**
+**ARP表**
+
 # MAC(media access control address)    
 mac地址，又称为物理地址(pyhsical address)，长度固定，6个字节，mac地址也分为三种，单播，组播，  
 广播地址。      

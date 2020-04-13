@@ -76,4 +76,3 @@ op code : operation code,
   
 </pre>  
 arp协议对下使用的ethernet协议，广播，并不使用ip协议！！    
-  
