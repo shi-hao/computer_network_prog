@@ -50,4 +50,15 @@ MAC地址表组成：MAC地址，接口，类型，VLAN-ID
 
 
 ## 交换机端口安全
+将交换机学习到的MAC地址转化为安全MAC地址。对接入设备的MAC地址和接入设备的数量进行限制。
+1.安全MAC配置方式
+安全MAC地址有三种配置方式：
+dynamic secure MAC 
+
+static secure MAC
+
+sticky secure MAC
+
+2.违规处理
+
 
