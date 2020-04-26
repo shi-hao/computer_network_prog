@@ -8,10 +8,11 @@
 4部分18字节
 <pre>
 --------------------------------------------------------------
-| des MAC addr | src MAC addr| EtherType |   payload  | FCS  |
-| 6bytes       | 6 bytes     | 2 bytes   |46-1500bytes|4bytes|
+| Des MAC addr | Src MAC addr| Type     |   Payload  | FCS  |
+| 6bytes       | 6 bytes     | 2 bytes  |46-1500bytes|4bytes|
 --------------------------------------------------------------
 </pre>
+Type : Payload的协议类型编码
 FCS : frame checke sequence(32-bit CRC)
 以太网报文使用CRC校验算法。
 
@@ -19,22 +20,10 @@ FCS : frame checke sequence(32-bit CRC)
 基于源MAC地址学习，基于目的MAC地址转发，防止环路。
 
 ### 地址学习
-根据接收到的以太网数据帧的源MAC地址，生成MAC地址表。
-
-MAC地址表组成：MAC地址，接口，类型，VLAN-ID 
-
-1.接口
-指的是学习到该MAC地址的接口编号，一个接口可以学习到多个MAC地址。
-
-2.类型
-用来表示MAC地址表条目的类型，分三种，动态(dynamic)，静态(static)，黑洞(blackhole)
---动态表示该MAC地址表条目是交换机根据收到的以太网帧的源MAC地址自主学习产生，默认老化时间300秒。
---静态表示该MAC地址条目是手动配置，不可老化。
---黑洞表示该MAC地址条目是手动配置的，用来过滤以某MAC地址为源和目的数据帧，不可老化。  
-
+根据接收到的以太网数据帧源MAC地址，生成MAC地址表。
 
 ### 帧的转发
-根据收到的以太网数据帧的目的MAC地址，进行数据转发，转发有三种
+根据收到的以太网数据帧目的MAC地址，进行数据转发，转发有三种
 方式，flooding/forwarding/discarding
 
 1.flooding(泛洪)
