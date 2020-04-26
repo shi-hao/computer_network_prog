@@ -7,7 +7,7 @@ IPv4 Header
 |ver  |IHL |DSCP|ECN|total length           |
 |4b   |4b  |6b  |2b |2 bytes                |
 ---------------------------------------------
-|identification     |flags|fragmen offset   |
+|identification     |flags|fragment offset  |
 |2 bytes            |3bits|13bits           |
 --------------------------------------------
 |ttl     |protocol  |Header checksum        |
@@ -25,10 +25,15 @@ IPv4 Header
 
 version:for IPv4, this is always equal to 4.  
 IHL:internet header length  
+
 DSCP:Differentiated Services Code Point   
 ECN:Explicit Congestion Notification  
+total length:
+flags:
+fragment offset:ip层包长度超过1500，分片？？？
+
 ttl:time to live  
-IP header中既包含了ip头长度的字段，也包含了整个ip包长度的字段，
+
 MTU为65535bytes。
 
 ## 路由表
