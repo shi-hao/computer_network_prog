@@ -1,4 +1,42 @@
-# route table & gateway      
+# ROUTE 路由         
+
+## IP帧格式
+<pre>
+IPv4 Header
+---------------------------------------------
+|ver  |IHL |DSCP|ECN|total length           |
+|4b   |4b  |6b  |2b |2 bytes                |
+---------------------------------------------
+|identification     |flags|fragmen offset   |
+|2 bytes            |3bits|13bits           |
+--------------------------------------------
+|ttl     |protocol  |Header checksum        |
+|8 bits  |8 bits    |2 bytes                |
+---------------------------------------------
+|source IP address                          |
+|4 bytes                                    |
+---------------------------------------------
+|destination IP address                     |
+|4 bytes                                    |
+---------------------------------------------
+|options (up to 32 bits)                    |
+---------------------------------------------
+</pre>
+
+version:for IPv4, this is always equal to 4.  
+IHL:internet header length  
+DSCP:Differentiated Services Code Point   
+ECN:Explicit Congestion Notification  
+ttl:time to live  
+IP header中既包含了ip头长度的字段，也包含了整个ip包长度的字段，
+MTU为65535bytes。
+
+## 路由表
+
+## 路由器主要功能
+
+## 网关
+
 gateway翻译为中文是门户，出入口，途径的意思，在网络设备中，被称之为网关。    
   
 网关在网络通信中的基本作用跟其字面意思很像：    
