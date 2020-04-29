@@ -18,7 +18,7 @@
 #define BUFF_LEN 65535
 
 /*
- * udp server:指定ip和端口号阻塞监听udp包，收到数据后，睡眠一段时间，继续阻塞接收。 
+ *udp server:指定ip和端口号阻塞监听udp包，收到数据后，睡眠一段时间，继续阻塞接收。 
  */
 
 void handle_udp_msg(int fd)
@@ -46,7 +46,7 @@ void handle_udp_msg(int fd)
 		printf("client_addr.sin_addr:%s\n",inet_ntoa(client_addr.sin_addr));  //打印client ip
 		printf("client_addr.sin_port:%d\n",ntohs(client_addr.sin_port));  //打印client port
 
-		//sleep(4);
+		sleep(4);
 
 #if 0
 		memset(buf, 0, BUFF_LEN);

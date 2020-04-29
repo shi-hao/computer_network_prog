@@ -6,4 +6,5 @@
 
 
 #broadcast ip
-./client.elf 192.168.8.129 9000
+#./client.elf 192.168.8.129 9000
+./client.elf 39.105.113.152 1723
