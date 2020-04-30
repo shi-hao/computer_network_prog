@@ -85,7 +85,7 @@ my_mask=${mask_array[$in_id]}
 my_gw=${gw_ip[$in_id]}
 
 # Config the interface ip using commands
-sudo ifconfig $my_if down
+#sudo ifconfig $my_if down
 sudo ifconfig $my_if $my_ip netmask $my_mask
 sudo route del default dev $my_if
 sudo route add default gw  $my_gw dev $my_if

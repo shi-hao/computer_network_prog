@@ -1,10 +1,45 @@
 # TCP/UDP
 
-**packet**
+**Packet**
 **TCP/UDP SEQUENCE**
 **TCP/UDP PORT**
 
-## TCP/UDP sequence
+## Packet
+<pre>
+TCP Header
+--------------------------------------------
+|source port number |destination port number|
+|2 bytes            |2 bytes                |
+---------------------------------------------
+|sequence number                            |
+|4 bytes                                    |
+--------------------------------------------
+|acknowlegement number                      |
+|4 bytes                                    |
+--------------------------------------------
+|offset|  rev|flags|window size             |
+|4bits |3bits|9bits|2bytes                  |
+---------------------------------------------
+|checksum          | urgent pointer         |
+|2 bytes           | 2 bytes                |
+--------------------------------------------
+|optional data                              |
+| 0-40bytes                                 |
+--------------------------------------------
+</pre>
+
+<pre>
+UDP Header
+--------------------------------------------
+|source port number |destination port number|
+|2 bytes            |2 bytes                |
+---------------------------------------------
+|length             |checksum               |
+|2 bytes            |2 bytes                |
+---------------------------------------------
+</pre>
+
+## TCP Sequence
 Connection establishment  
 To establish a connection, TCP uses a three-way handshake. Before a client  
 attempts to connect with a server, the server must first bind to and listen at  
@@ -22,3 +57,6 @@ SYN-ACK: In response, the server replies with a SYN-ACK. The acknowledgment numb
 ACK: Finally, the client sends an ACK back to the server. The sequence number is set to   
 	 the received acknowledgement value i.e.A+1, and the acknowledgement number is set   
 	 to one more than the received sequence number i.e. B+1.  
+
+
+## Port
