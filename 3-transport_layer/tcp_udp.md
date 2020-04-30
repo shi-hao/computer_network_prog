@@ -3,6 +3,7 @@
 **Packet**
 **TCP/UDP SEQUENCE**
 **TCP/UDP PORT**
+**TCP/UDP MTU**
 
 ## Packet
 <pre>

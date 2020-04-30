@@ -26,7 +26,8 @@ void handle_udp_msg(int fd)
 	{
 		memset(buf, 0, BUFF_LEN);
 		len = sizeof(clent_addr);
-		count = recvfrom(fd, buf, BUFF_LEN, 0, (struct sockaddr*)&clent_addr, &len);  //recvfrom是拥塞函数，没有数据就一直拥塞
+		//recvfrom是拥塞函数，没有数据就一直拥塞
+		count = recvfrom(fd, buf, BUFF_LEN, 0, (struct sockaddr*)&clent_addr, &len);  
 		if(count == -1)
 		{
 			printf("recieve data fail!\n");
@@ -40,7 +41,8 @@ void handle_udp_msg(int fd)
 		memset(buf, 0, BUFF_LEN);
 		sprintf(buf, "I have recieved %d bytes data!\n", count);  //回复client
 		//printf("server:%s\n",buf);  //打印自己发送的信息给
-		sendto(fd, buf, BUFF_LEN, 0, (struct sockaddr*)&clent_addr, len);  //发送信息给client，注意使用了clent_addr结构体指针
+        //发送信息给client，注意使用了clent_addr结构体指针
+		sendto(fd, buf, BUFF_LEN, 0, (struct sockaddr*)&clent_addr, len);  
 		sleep(1);
 #endif
 
