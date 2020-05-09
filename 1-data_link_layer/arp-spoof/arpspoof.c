@@ -102,13 +102,16 @@ int main(int argc, char* argv[])
 
 	struct arp_packet* arp;
 	if( gratuitous_arp_idx > 0 ){
-		strncpy(target_mac, "00:00:00:00:00:00", sizeof(target_mac));
 		if(strncmp(argv[gratuitous_arp_idx], "q", 1) == 0){
 			printf("gratuitous arp request : %s\n", argv[gratuitous_arp_idx]);
-			arp = create_gratuitous_arp_request_packet(sendr_mac, argv[hostip_idx]);
+			arp = create_arp_packet("ff:ff:ff:ff:ff:ff", sendr_mac,
+					ARPOP_REQUEST, sendr_mac, argv[hostip_idx],
+					"00:00:00:00:00:00", argv[hostip_idx]);
 		}else if(strncmp(argv[gratuitous_arp_idx], "p", 1) == 0){
 			printf("gratuitous arp reply : %s\n", argv[gratuitous_arp_idx]);
-			arp = create_gratuitous_arp_reply_packet(sendr_mac, argv[hostip_idx]);
+			arp = create_arp_packet("ff:ff:ff:ff:ff:ff", sendr_mac,
+					ARPOP_REPLY, sendr_mac, argv[hostip_idx],
+					"00:00:00:00:00:00", argv[hostip_idx]);
 		}
 	}else{
 		arp = create_arp_reply_packet(sendr_mac, argv[hostip_idx], target_mac, argv[targetip_idx]);

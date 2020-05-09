@@ -112,9 +112,9 @@ int send_arp_to(const struct arp_packet* pkt, int raw_sock_fd, int if_index)
 }
 
 struct arp_packet* create_arp_packet(const char* eth_dhost, const char* eth_shost,
-									 int op_code,
-									 const char* sendr_mac, const char* sendr_ip,
-									 const char* trgt_mac, const char* trgt_ip)
+									 int arp_op_code,
+									 const char* arp_snd_mac, const char* arp_snd_ip,
+									 const char* arp_trg_mac, const char* arp_trg_ip)
 {
 	struct arp_packet* ap = (struct arp_packet*) malloc(sizeof(struct arp_packet));
 
@@ -123,17 +123,17 @@ struct arp_packet* create_arp_packet(const char* eth_dhost, const char* eth_shos
 	memcpy(ap->ap_eth_shost, ether_aton(eth_shost)->ether_addr_octet, ETH_ALEN);
 	ap->ap_eth_type = htons(ETHERTYPE_ARP);
 
-	int spa = inet_addr(sendr_ip);
-	int tpa = inet_addr(trgt_ip);
+	int spa = inet_addr(arp_snd_ip);
+	int tpa = inet_addr(arp_trg_ip);
 
 	ap->ap_hrd = htons(1); /* Ethernet */
 	ap->ap_pro = htons(0x0800); /* Ipv4 */
 	ap->ap_hln = ETH_ALEN;
 	ap->ap_pln = 4;
-	ap->ap_op = htons(op_code);
-	memcpy(ap->ap_sha, ether_aton(sendr_mac)->ether_addr_octet, ETH_ALEN);
+	ap->ap_op = htons(arp_op_code);
+	memcpy(ap->ap_sha, ether_aton(arp_snd_mac)->ether_addr_octet, ETH_ALEN);
 	memcpy(ap->ap_spa, (void*) &spa, sizeof(ap->ap_spa));
-	memcpy(ap->ap_tha, ether_aton(trgt_mac)->ether_addr_octet, ETH_ALEN);
+	memcpy(ap->ap_tha, ether_aton(arp_trg_mac)->ether_addr_octet, ETH_ALEN);
 	memcpy(ap->ap_tpa, (void*) &tpa, sizeof(ap->ap_tpa));
 
 	return ap;
