@@ -151,3 +151,16 @@ struct arp_packet* create_arp_request_packet(const char* sendr_mac, const char* 
 	return create_arp_packet("ff:ff:ff:ff:ff:ff", sendr_mac, ARPOP_REQUEST,
                              sendr_mac, sendr_ip, "00:00:00:00:00:00", trgt_ip);
 }
+
+struct arp_packet* create_gratuitous_arp_reply_packet(const char* sendr_mac, const char* sendr_ip)
+{
+	return create_arp_packet("ff:ff:ff:ff:ff:ff", sendr_mac, ARPOP_REPLY,
+                             sendr_mac, sendr_ip, "00:00:00:00:00:00",sendr_ip);
+}
+
+struct arp_packet* create_gratuitous_arp_request_packet(const char* sendr_mac, const char* sendr_ip)
+{
+	return create_arp_packet("ff:ff:ff:ff:ff:ff", sendr_mac, ARPOP_REQUEST,
+                             sendr_mac, sendr_ip, "00:00:00:00:00:00", sendr_ip);
+}
+

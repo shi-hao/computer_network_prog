@@ -44,5 +44,7 @@ struct arp_packet* create_arp_reply_packet(const char* sendr_mac, const char* se
 										   const char* trgt_mac, const char* trgt_ip);
 
 struct arp_packet* create_arp_request_packet(const char* sendr_mac, const char* sendr_ip, const char* trgt_ip);
+struct arp_packet* create_gratuitous_arp_request_packet(const char* sendr_mac, const char* sendr_ip);
+struct arp_packet* create_gratuitous_arp_reply_packet(const char* sendr_mac, const char* sendr_ip);
 
 #endif // ARP_H
