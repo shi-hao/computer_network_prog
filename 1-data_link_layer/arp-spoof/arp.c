@@ -163,4 +163,3 @@ struct arp_packet* create_gratuitous_arp_request_packet(const char* sendr_mac, c
 	return create_arp_packet("ff:ff:ff:ff:ff:ff", sendr_mac, ARPOP_REQUEST,
                              sendr_mac, sendr_ip, "00:00:00:00:00:00", sendr_ip);
 }
-

