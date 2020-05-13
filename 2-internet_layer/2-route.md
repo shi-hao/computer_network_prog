@@ -1,47 +1,10 @@
 # ROUTE 路由           
-  
-## IP帧格式  
-<pre>  
-IPv4 Header  
----------------------------------------------  
-|ver  |IHL |DSCP|ECN|total length           |  
-|4b   |4b  |6b  |2b |2 bytes                |  
----------------------------------------------  
-|identification     |flags|fragment offset  |  
-|2 bytes            |3bits|13bits           |  
---------------------------------------------  
-|ttl     |protocol  |Header checksum        |  
-|8 bits  |8 bits    |2 bytes                |  
----------------------------------------------  
-|source IP address                          |  
-|4 bytes                                    |  
----------------------------------------------  
-|destination IP address                     |  
-|4 bytes                                    |  
----------------------------------------------  
-|options (up to 32 bits)                    |  
----------------------------------------------  
-</pre>  
-version:for IPv4, this is always equal to 4.    
-IHL:internet header length    
-DSCP:Differentiated Services Code Point(QoS)     
-ECN:Explicit Congestion Notification    
-total length:2字节，最大长度是65535  
-  
-identification/flags/fragment offset  
-这三个字段是IP包分片机制，虽然IP包的最大长度可以  
-是65535，但是二层的以太网帧最大允许的payload长度  
-是1500，所以payload大于1500的IP是无法通过一个以太  
-网帧发送的，这三个参数用于将大于1500字节的IP包进行  
-分片，然后再传入二层进行组包。  
-  
-ttl:time to live    
-protocol:payload的协议类型  
-header checksum:头部数据的校验，不包含payload  
-  
-## 路由表  
+基于网络层IP协议进行数据转发。  
   
 ## 路由器主要功能  
+路由：根据收到的IP包中IP地址进行数据转发。
+
+## 路由表  
   
 ## 网关  
   

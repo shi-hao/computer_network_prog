@@ -27,14 +27,6 @@ Computer 1 caches the response information in its ARP table and can now send the
 ## ARP基本原理        
 **arp报文格式**            
 <pre>          
----------------------------          
-| 14 byte Ethernet Header|           
----------------------------          
-| 28 byte arp packet     |          
---------------------------          
-| 4 byte Ethernet CRC    |          
---------------------------          
-          
 --------------------------------------------          
 | 6 byte destination mac                   |          
 --------------------------------------------          
@@ -74,6 +66,19 @@ op code : operation code,
 目标硬件地址：n个字节，n由硬件地址长度得到，一般为目标MAC地址。          
 目标协议地址：m个字节，m由协议地址长度得到，一般为目标IP地址？？？6字节？？？。          
 </pre>          
+
+<pre>
+ARP对下使用以太网协议，组包如下所示。
+---------------------------          
+| 14 byte Ethernet Header |           
+---------------------------          
+| 28 byte arp packet      |          
+---------------------------          
+| 18 byte Ethernet padding|          
+---------------------------          
+| 4 byte Ethernet CRC     |          
+---------------------------          
+</pre>
 主机A需要和主机B通信，已知B的IP地址为192.168.1.100，首先主机A发送ARP Request，        
 ARP报文中源MAC和源IP都填写A的实际地址，目的IP填写目的IP，目的MAC填全0，op code        
 填为ARP Request，然后进行以太网组包，源MAC地址填写A的地址，目的地址填写全1，即        
@@ -83,9 +88,8 @@ Reply给A，ARP包中源MAC和源IP填写B的地址，目的MAC和目的IP填写
 为ARP Reply，二层组包时源MAC填写B的地址，目的MAC填写A的地址，即单播回应。        
         
 ## ARP Table        
-1.原则上ARP表只包含两个内容，IP地址及其对应的MAC地址        
-2.ARP表是根据收到的ARP Reply的源IP和源MAC进行更新，ARP表实时更新的，收到ARP   
-  Reply就会刷新。    
+1.ARP表根据收到的ARP Reply产生，原则上只包含两个内容，IP地址和对应的MAC地址。
+2.ARP表实时更新，收到ARP Reply就会刷新。    
 3.ARP老化时间。  
   
 问：ARP表和MAC地址表的区别？      
