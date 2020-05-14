@@ -96,12 +96,13 @@ then
 	sudo nmap -sU $nmap_block_ping -p $nmap_udp_port  $host_ip
 fi
 
+my_echo "red" "--------------------------------------------------------------------"
+my_echo "red" " step4：抓包查看协议数据测试"
+
+
 if [ -n "$ntp_domain" ];
 then
 	my_echo "red" "--------------------------------------------------------------------"
 	my_echo "red" " ntp同步时间测试"
 	ntpdate -q $ntp_domain
 fi
-
-my_echo "red" "--------------------------------------------------------------------"
-my_echo "red" " step4：抓包查看协议数据测试"
