@@ -5,7 +5,8 @@
 **TCP/UDP PORT**
 **TCP/UDP MTU**
 
-## Packet
+## TCP
+### Packet
 <pre>
 TCP Header
 --------------------------------------------
@@ -28,22 +29,28 @@ TCP Header
 |optional data                              |
 | 0-40bytes                                 |
 --------------------------------------------
-</pre>
-
-
-<pre>
-UDP Header
+|payload(optional)                          |
 --------------------------------------------
-|source port number |destination port number|
-|2 bytes            |2 bytes                |
----------------------------------------------
-|length             |checksum               |
-|2 bytes            |2 bytes                |
----------------------------------------------
+
+source port number:源端口号
+destination port number:目的端口号
+
+sequence number:TCP包的序列号
+acknowlegement number：TCP应答序列号
+
+header length:TCP头长度，用来区分payload和header
+
+URG: urgent, URG bit is used to treat certain data on an urgent basis
+ACK: acknowlegement, ACK bit indicates whether acknowledgement number field is
+     valid or not.
+PSH: push, PSH bit is used to push the entire buffer immediately to the
+     receiving application.
+RST: reset, RST bit is used to reset the TCP connection.
+SYN: synchronize, SYN bit is used to synchronize the sequence numbers.
+FIN: finish, FIN bit is used to terminate the TCP connection.
 </pre>
 
-## TCP Sequence
-Connection establishment  
+### 3-step handshake
 To establish a connection, TCP uses a three-way handshake. Before a client  
 attempts to connect with a server, the server must first bind to and listen at  
 a port to open it up for connections: this is called a passive open. Once the  
@@ -60,6 +67,21 @@ SYN-ACK: In response, the server replies with a SYN-ACK. The acknowledgment numb
 ACK: Finally, the client sends an ACK back to the server. The sequence number is set to   
 	 the received acknowledgement value i.e.A+1, and the acknowledgement number is set   
 	 to one more than the received sequence number i.e. B+1.  
+
+
+
+<pre>
+UDP Header
+--------------------------------------------
+|source port number |destination port number|
+|2 bytes            |2 bytes                |
+---------------------------------------------
+|length             |checksum               |
+|2 bytes            |2 bytes                |
+---------------------------------------------
+</pre>
+
+## TCP Sequence
 
 
 ## Port
