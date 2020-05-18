@@ -21,7 +21,7 @@ else
 	exit
 fi
 
-my_printf "green" "null" "ID" "file"
+my_printf "null" "null" "ID" "file"
 for((i=0;i<=len;i++));
 do
 	my_printf "null" "null" $i ${files_arr[i]}

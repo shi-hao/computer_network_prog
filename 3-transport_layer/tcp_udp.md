@@ -17,10 +17,11 @@ TCP Header
 --------------------------------------------
 |acknowlegement number                      |
 |4 bytes                                    |
---------------------------------------------
-|offset|  rev|flags|window size             |
-|4bits |3bits|9bits|2bytes                  |
----------------------------------------------
+--------------------------------------------------
+|Header|resvd|URG|ACK|PSH|RST|SYN|FIN|window size|           
+|length|     |   |   |   |   |   |   |           |
+|4bits |6bits| 1b|1b |1b |1b |1b |1b |2bytes     |     
+--------------------------------------------------
 |checksum          | urgent pointer         |
 |2 bytes           | 2 bytes                |
 --------------------------------------------
@@ -28,6 +29,7 @@ TCP Header
 | 0-40bytes                                 |
 --------------------------------------------
 </pre>
+
 
 <pre>
 UDP Header
