@@ -11,15 +11,8 @@ ping失败，说明主机可能不在线，也可能是主机在线，但是禁�
 arp -n
 
 
-# ntpdate  
+## ntpdate  
 仅获取ntp server时间，不同步到本地时钟  
 <pre>
 ntpdate -q [ntp-server]  
-</pre>
-  
-  
-# host  
-通过域名查看IP信息  
-<pre>
-host [domain]  
 </pre>
