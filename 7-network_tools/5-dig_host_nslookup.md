@@ -19,7 +19,7 @@ dig +short [domain] [dns]
 
 
 ## host
-get the ip form domain
+get the ip from domain
 <pre>
 host [domain]
 </pre>
@@ -30,7 +30,7 @@ host [domain] [dns]
 </pre>
 
 ## nslookup
-get the ip form domain
+get the ip from domain
 <pre>
 nslookup [domain]
 </pre>
