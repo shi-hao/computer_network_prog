@@ -10,11 +10,18 @@
 get the ip from domain using, only output the ip 
 <pre>
 dig +short [domain]
+
+for example:
+dig +short www.example.com 
 </pre>
 
 get the ip from domain using specific dns server, only output the ip 
 <pre>
 dig +short [domain] [dns]
+
+for example:
+dig +short www.example.com @resolver1.opendns.com
+dig +short www.example.com @114.114.114.114
 </pre>
 
 
