@@ -121,11 +121,6 @@ traceroute to www.baidu.com (61.135.169.121), 30 hops max, 60 byte packets
 指定源地址，源端口，目标地址，目标端口进行测试：  
 traceroute -s [src] --sport=[src port]  -p [dst port] -T [dst ip or domain]  
     
-## arp      
-查看本地arp表：      
-arp -n      
-    
-    
 ----------------------------------------------------    
 # Win System Tools    
 (1)route       

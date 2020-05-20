@@ -1,18 +1,9 @@
 # Login By Network
 
-**Link/Login to remote host!**  
+**Login to remote host!**  
 
-**ping**  
 **telnet**  
 **ssh**  
-
-## ping
-判断主机是否在线的工具。
-ping [host_ip]
-
-ping成功，说明主机目前在线。
-ping失败，说明主机可能不在线，也可能是主机在线，但是禁掉了ICMP回包，或者某个网关，防火墙过滤了ICMP包。
-
 
 ## telnet
 telnet是一个应用协议用于提供命令行接口，使用TCP协议。
