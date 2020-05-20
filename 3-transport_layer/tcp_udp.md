@@ -23,8 +23,8 @@ TCP Header
 |length|     |      |                       |
 |4bits |6bits| 6bits|2bytes                 |     
 ---------------------------------------------
-|checksum          | urgent pointer         |
-|2 bytes           | 2 bytes                |
+|checksum           | urgent pointer        |
+|2 bytes            | 2 bytes               |
 --------------------------------------------
 |optional data                              |
 | 0-40bytes                                 |
@@ -32,7 +32,7 @@ TCP Header
 |payload(optional)                          |
 --------------------------------------------
 
-bits flags:
+6 bits flags:
 --------------------------
 |URG|ACK|PSH|RST|SYN|FIN|           
 |   |   |   |   |   |   |
@@ -122,4 +122,4 @@ UDP Header
 ## Port
 
 
-## TCP/UDP MTu
+## TCP/UDP MTU
