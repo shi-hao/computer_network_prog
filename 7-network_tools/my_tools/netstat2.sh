@@ -30,13 +30,13 @@ done
 # Choosing config files
 in_id=""
 while [[ ! "$in_id" =~ ^[0-9]+$ || $in_id -gt $len || $in_id -lt 0 ]]; do
-	my_echo "blue" " please input 0~$len to chose the config file"
+	my_echo "blue" " please input 0~$len to choose the config file"
 	read in_id
 done
 
 # Target file
 target_file=${files_arr[$in_id]}
-my_echo "blue" " chosing file : $target_file" 
+my_echo "blue" " choosing file : $target_file" 
 
 while read line
 do  
@@ -62,6 +62,7 @@ then
 	ip route list match $gateway
 	if [ $? -ne 0 ]; then
 		my_echo "red" "\nGateway $gateway route table match failed\n"
+		route -n
 	fi
 fi
 
@@ -70,6 +71,7 @@ then
 	ip route list match $host_ip
 	if [ $? -ne 0 ]; then
 		my_echo "red" "\nHost $host_ip route table match failed\n"
+		route -n
 	fi
 fi
 
@@ -82,6 +84,7 @@ then
 	out=eval ip neighbor show $gateway
 	if [ -z $out ]; then
 		my_echo "red" "\nGateway $gateway ARP table match failed\n"
+		arp -n
 	fi
 fi
 
@@ -90,6 +93,7 @@ then
 	out=eval ip neighbor show $host_ip
 	if [ -z $out ]; then
 		my_echo "red" "\nHost $host_ip ARP table match failed\n"
+		arp -n
 	fi
 fi
 

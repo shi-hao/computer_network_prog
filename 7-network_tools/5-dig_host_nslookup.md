@@ -7,7 +7,7 @@
 **nslookup**
 
 ## dig
-get the ip from domain using, only output the ip 
+get the ip from domain, only output the ip 
 <pre>
 dig +short [domain]
 
@@ -17,7 +17,7 @@ dig +short www.example.com
 
 get the ip from domain using specific dns server, only output the ip 
 <pre>
-dig +short [domain] [dns]
+dig +short [domain] @[dns]
 
 for example:
 dig +short www.example.com @resolver1.opendns.com
