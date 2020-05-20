@@ -2,9 +2,9 @@
 
 **get IP from the domain name**
 
-**dig**
-**host**
-**nslookup**
+**dig**  
+**host**  
+**nslookup**  
 
 ## dig
 get the ip from domain, only output the ip 
