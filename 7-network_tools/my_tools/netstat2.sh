@@ -81,8 +81,10 @@ my_echo "blue" "----------------------------------------------------------------
 my_echo "blue" " step2：Searching the local ARP table"
 if [ -n "$gateway" ];
 then
-	out=eval ip neighbor show $gateway
-	if [ -z $out ]; then
+	#out=eval ip neighbor show $host_ip
+	out=$(ip neighbor show $host_ip)
+	echo $out
+	if [ -z "$out" ]; then
 		my_echo "red" "\nGateway $gateway ARP table match failed\n"
 		arp -n
 	fi
@@ -90,8 +92,10 @@ fi
 
 if [ -n "$host_ip" ];
 then
-	out=eval ip neighbor show $host_ip
-	if [ -z $out ]; then
+	#out=eval ip neighbor show $host_ip
+	out=$(ip neighbor show $host_ip)
+	echo $out
+	if [ -z "$out" ]; then
 		my_echo "red" "\nHost $host_ip ARP table match failed\n"
 		arp -n
 	fi
