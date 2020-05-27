@@ -1,30 +1,22 @@
 # ARP--Address Resolution Protocol            
   
-## What is ARP?        
-The Address Resolution Protocol (ARP) is a communication protocol used for discovering the link         
-layer address, such as a MAC address, associated with a given internet layer address, typically         
-an IPv4 address. This mapping is a critical function in the Internet protocol suite. ARP was         
-defined in 1982 by RFC 827,[1] which is Internet Standard STD 37.             
-            
-The Address Resolution Protocol is a request-response protocol whose messages are encapsulated         
-by a link layer protocol. It is communicated within the boundaries of a single network, never         
-routed across internetworking nodes. This property places ARP into the link layer of the         
-Internet protocol suite.[2]            
-            
-Two computers in an office (Computer 1 and Computer 2) are connected to each other in a local         
-area network by Ethernet cables and network switches, with no intervening gateways or routers.        
-Computer 1 has a packet to send to Computer 2. Through DNS, it determines that Computer 2 has        
-the IP address 192.168.0.55. To send the message, it also requires Computer 2's MAC address.         
-First, Computer 1 uses a cached ARP table to look up 192.168.0.55 for any existing records of        
-Computer 2's MAC address (00:eb:24:b2:05:ac). If the MAC address is found, it sends an Ethernet        
-frame with destination address 00:eb:24:b2:05:ac, containing the IP packet onto the link. If        
-the cache did not produce a result for 192.168.0.55, Computer 1 has to send a broadcast ARP         
-message (destination FF:FF:FF:FF:FF:FF MAC address), which is accepted by all computers on the        
-local network, requesting an answer for 192.168.0.55. Computer 2 responds with its MAC and IP        
-addresses.  Computer 2 may insert an entry for Computer 1 into its ARP table for future use.            
-Computer 1 caches the response information in its ARP table and can now send the packet.[7]             
-            
-## ARP基本原理        
+## ARP是什么？用途是什么？
+名词解释：ARP，address resolution protocol，地址解析协议。
+用    途：已知目的主机的IP地址，请求目的主机的MAC地址。
+
+## 协议包结构
+<pre>
+ARP对下使用以太网协议，组包如下所示。
+---------------------------          
+| 14 byte Ethernet Header |           
+---------------------------          
+| 28 byte arp packet      |          
+---------------------------          
+| 18 byte Ethernet padding|          
+---------------------------          
+| 4 byte Ethernet CRC     |          
+---------------------------          
+</pre>
 **arp报文格式**            
 <pre>          
 --------------------------------------------          
@@ -67,33 +59,41 @@ op code : operation code,
 目标协议地址：m个字节，m由协议地址长度得到，一般为目标IP地址？？？6字节？？？。          
 </pre>          
 
+## ARP工作原理？
+ARP协议对下使用以太网协议，广播请求，单播回应。
+主机A(192.168.1.60)和主机B(192.168.1.100)通信，MAC地址未知。
 <pre>
-ARP对下使用以太网协议，组包如下所示。
----------------------------          
-| 14 byte Ethernet Header |           
----------------------------          
-| 28 byte arp packet      |          
----------------------------          
-| 18 byte Ethernet padding|          
----------------------------          
-| 4 byte Ethernet CRC     |          
----------------------------          
+A主机发送arp request，关键字段如下填充。
+arp-type      |arp request
+arp-s-ip      |192.168.1.60(主机A的IP)
+arp-s-mac     |aa-bb-cc-dd-ee-ff(主机A的MAC)
+arp-d-ip      |192.168.1.100(主机B的IP)
+arp-d-mac     |00-00-00-00-00-00(目的主机未知，填0)
+
+ethernet-d-mac|ff-ff-ff-ff-ff-ff(广播)
+ethernet-s-mac|aa-bb-cc-dd-ee-ff
+
+B主机接收到广播后，解析ARP包，发现目的IP是自己，会回复arp reply。
+arp-type      |arp reply
+arp-s-ip      |192.168.1.100(主机B的IP)
+arp-s-mac     |gg-bb-cc-dd-ee-ff(主机B的MAC)
+arp-d-ip      |192.168.1.60(主机A的IP)
+arp-d-mac     |aa-bb-cc-dd-ee-ff(主机A的MAC)
+
+ethernet-d-mac|aa-bb-cc-dd-ee-ff(单播)
+ethernet-s-mac|gg-bb-cc-dd-ee-ff
+
+广播请求，单播回应
 </pre>
-主机A需要和主机B通信，已知B的IP地址为192.168.1.100，首先主机A发送ARP Request，        
-ARP报文中源MAC和源IP都填写A的实际地址，目的IP填写目的IP，目的MAC填全0，op code        
-填为ARP Request，然后进行以太网组包，源MAC地址填写A的地址，目的地址填写全1，即        
-发送以太网广播。        
-主机B收到广播后，查看ARP Request包发现对端在请求自己的MAC地址，然后回应一个ARP        
-Reply给A，ARP包中源MAC和源IP填写B的地址，目的MAC和目的IP填写A的地址，op code填写        
-为ARP Reply，二层组包时源MAC填写B的地址，目的MAC填写A的地址，即单播回应。        
-        
+
 ## ARP Table        
-1.ARP表根据收到的ARP Reply产生，原则上只包含两个内容，IP地址和对应的MAC地址。
-2.ARP表实时更新，收到ARP Reply就会刷新。    
+1.ARP表包含2部分，IP地址和对应的MAC地址。
+2.ARP表根据收到的ARP包(request/reply)产生，Request/Reply的源IP和源MAC字段。
+2.ARP表实时更新，收到ARP包就会刷新，后来覆盖先到。
 3.ARP老化时间。  
   
 问：ARP表和MAC地址表的区别？      
-答：ARP表包含的是IP和MAC地址的对应关系，根据收到的ARP Reply产生并刷新。      
+答：ARP表包含的是IP和MAC地址的对应关系，根据收到的ARP包产生并刷新。      
 	MAC表包含MAC地址，接口，类型，VLAN ID，根据收到的以太网帧的源地址产    
 	生并刷新。    
   

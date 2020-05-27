@@ -1,4 +1,10 @@
-#dynamic host control protocol
+# dynamic host control protocol
+
+## what is dhcp
+dynamic host control protocol，动态主机协议，简单理解，主要作用是对接入的设备
+的IP地址进行统一管理，
+
+## how dhcp works
 The DHCP employs a connectionless service model, using the User Datagram Protocol (UDP).   
 It is implemented with two UDP port numbers for its operations which are the same as for the bootstrap   
 protocol (BOOTP). UDP port number 67 is the destination port of a server, and UDP port number 68 is   
