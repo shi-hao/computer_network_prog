@@ -121,7 +121,7 @@ DHCP options
 0x3204c0a80164 50(Requested IP)  
                4(len)  
 			   192.168.1.100(IP)  
-0x370401030f06 55 (Parameter Request List):  
+0x370401030f06 55 (Parameter Request List)  
     		   1 (Request Subnet Mask),  
     		   3 (Router),  
                15 (Domain Name),  
@@ -282,7 +282,7 @@ DHCP options
 0x3604c0a80001         54 (DHCP server identifier)  
 	                   4(len)  
 	                   192.168.1.1(DHCP Server)  
-0x0608ca6a0014ca6a2e97 6 (DNS servers):  
+0x0608ca6a0014ca6a2e97 6 (DNS servers)  
 	                   8(len)  
 	                   202.106.0.20  
 	                   202.106.46.151  
