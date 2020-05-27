@@ -80,7 +80,7 @@ DHCP协议主要分4个步骤，发现，提供，请求，应答。
   
 **DHCP DISCOVER**  
 --------------------------------------------  
-Octet 0 	Octet 1 	Octet 2 	Octet 3  
+Octet 0     Octet 1     Octet 2     Octet 3  
 --------------------------------------------  
 OP 	        HTYPE 	    HLEN 	    HOPS  
 0x01 	    0x01 	    0x06 	    0x00  
@@ -120,10 +120,10 @@ DHCP options
                1(Discover)  
 0x3204c0a80164 50(Requested IP)  
                4(len)  
-			   192.168.1.100(IP)  
+               192.168.1.100(IP)  
 0x370401030f06 55 (Parameter Request List)  
-    		   1 (Request Subnet Mask),  
-    		   3 (Router),  
+               1 (Request Subnet Mask),  
+               3 (Router),  
                15 (Domain Name),  
                6 (Domain Name Server)  
 0xff 255 (Endmark)   
@@ -131,10 +131,10 @@ DHCP options
   
 **DHCP OFFER**   
 --------------------------------------------  
-Octet 0 	Octet 1 	Octet 2 	Octet 3  
+Octet 0   Octet 1   Octet 2    Octet 3  
 --------------------------------------------  
-OP 	    HTYPE 	HLEN 	HOPS  
-0x02 	0x01 	0x06 	0x00  
+OP 	      HTYPE 	HLEN 	   HOPS  
+0x02 	  0x01 	    0x06 	   0x00  
 --------------------------------------------  
 XID  
 0x3903F326  
