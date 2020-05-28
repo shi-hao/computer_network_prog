@@ -2,7 +2,7 @@
   
 ## what is DHCP and used for?  
 名词解释：DHCP，dynamic host control protocol，动态主机协议  
-用    途：主要作用是对接入设备动态分配IP地址，以及网关，掩码，DNS等网络参数。  
+用    途：主要作用是对接入设备动态分配IP地址，网关，掩码，DNS等网络参数。  
   
 <pre>  
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+  
@@ -82,8 +82,8 @@ DHCP协议主要分4个步骤，发现，提供，请求，应答。
 --------------------------------------------  
 Octet 0     Octet 1     Octet 2     Octet 3  
 --------------------------------------------  
-OP 	        HTYPE 	    HLEN 	    HOPS  
-0x01 	    0x01 	    0x06 	    0x00  
+OP          HTYPE 	    HLEN 	    HOPS  
+0x01        0x01 	    0x06 	    0x00  
 --------------------------------------------  
 XID  
 0x3903F326  
@@ -133,7 +133,7 @@ DHCP options
 --------------------------------------------  
 Octet 0   Octet 1   Octet 2    Octet 3  
 --------------------------------------------  
-OP 	      HTYPE 	HLEN 	   HOPS  
+OP        HTYPE 	HLEN 	   HOPS  
 0x02 	  0x01 	    0x06 	   0x00  
 --------------------------------------------  
 XID  
@@ -167,19 +167,19 @@ Magic cookie
 --------------------------------------------  
 DHCP options  
 0x350101               53(DHCP Message Type)  
-		               1(len)  
+                       1(len)  
                        2(DHCP Offer)  
 0x0104ffffff00         1(subnet mask)  
                        4(len)   
                        255.255.255.0(mask)  
 0x0304c0a800013        3(Router)  
                        4(len)  
-				       192.168.1.1(router)  
+                       192.168.1.1(router)  
 0x330400015130         51(IP address lease time)  
                        4(len)   
                        86320s(time)  
 0x3604c0a80001         54(DHCP server)  
-				       4(len)  
+                       4(len)  
                        192.168.1.1(server)  
 0x0608ca6a0014ca6a2e97 6 (DNS servers)  
                        8(len)  
@@ -189,7 +189,7 @@ DHCP options
   
 **DHCP REQUEST**   
 --------------------------------------------  
-Octet 0 	Octet 1 	Octet 2 	Octet 3  
+Octet 0     Octet 1 	Octet 2 	Octet 3  
 --------------------------------------------  
 OP      	HTYPE 	    HLEN 	    HOPS  
 0x01 	    0x01 	    0x06 	    0x00  
@@ -226,7 +226,7 @@ Magic cookie
 DHCP options  
 0x350103       53(DHCP Message Type)  
                1(len)  
-		       3(request)  
+               3(request)  
 0x3204c0a80081 50(requested IP)  
                4(len)  
                192.168.0.129(requested IP)  
@@ -235,7 +235,7 @@ DHCP options
   
 **DHCP ACK**   
 --------------------------------------------  
-Octet 0 	Octet 1 	Octet 2 	Octet 3  
+Octet 0     Octet 1 	Octet 2 	Octet 3  
 --------------------------------------------  
 OP   	    HTYPE 	    HLEN 	    HOPS  
 0x02 	    0x01 	    0x06 	    0x00  
@@ -270,22 +270,22 @@ Magic cookie
 0x63825363  
 --------------------------------------------  
 DHCP options  
-0x350105               53(DHCP Message Type)  
-                       1(len)  
-                       5(DHCP ACK) or 6 (DHCP NAK)  
-0x0104ffffff001        1(subnet mask)  
-	                   4(len)  
-	                   255.255.255.0(mask)  
+0x350105               53 (DHCP Message Type)  
+                       1 (len)  
+                       5 (DHCP ACK) or 6 (DHCP NAK)  
+0x0104ffffff001        1 (subnet mask)  
+                       4 (len)  
+                       255.255.255.0 (mask)  
 0x0304c0a80001         3 (Router)  
-	                   4(len)  
-	                   192.168.1.1(router)  
+                       4 (len)  
+                       192.168.1.1 (router)  
 0x3604c0a80001         54 (DHCP server identifier)  
-	                   4(len)  
-	                   192.168.1.1(DHCP Server)  
+                       4 (len)  
+                       192.168.1.1 (DHCP Server)  
 0x0608ca6a0014ca6a2e97 6 (DNS servers)  
-	                   8(len)  
-	                   202.106.0.20  
-	                   202.106.46.151  
+                       8 (len)  
+                       202.106.0.20  
+                       202.106.46.151  
 --------------------------------------------  
 </pre>  
   
