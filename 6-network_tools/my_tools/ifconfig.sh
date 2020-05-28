@@ -71,7 +71,7 @@ do
 	my_printf "null" "line" $i ${ip_array[i]}  ${mask_array[i]} ${gw_ip[i]} ${msg[i]}
 done 
 
-# Chosing config
+# Choosing config
 in_id=""
 while [[ ! "$in_id" =~ ^[0-9]+$ || $in_id -gt $len || $in_id -lt 0 ]]; do
 	my_echo "red" " please input 0~$len to chose the ip config"
