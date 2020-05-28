@@ -74,11 +74,11 @@ DHCP协议主要分4个步骤，发现，提供，请求，应答。
 客户端已经获取了IP地址，在更新一个IP的租期时，可能直接使用UDP单播。    
 <pre>  
 	client   ---discovery--broadcasting-->      server     
-	client   <--offer---nicast/broadcast--      server    
+	client   <--offer--unicast/broadcast--      server    
 	client   ---request----broadcast----->      server    
 	client   <--acknowledgement-----------      server    
   
-**DHCP DISCOVER**  
+1.**DHCP DISCOVER**  
 --------------------------------------------  
 Octet 0     Octet 1     Octet 2     Octet 3  
 --------------------------------------------  
@@ -129,7 +129,7 @@ DHCP options
 0xff 255 (Endmark)   
 --------------------------------------------  
   
-**DHCP OFFER**   
+2.**DHCP OFFER**   
 --------------------------------------------  
 Octet 0   Octet 1   Octet 2    Octet 3  
 --------------------------------------------  
@@ -187,7 +187,7 @@ DHCP options
                        202.106.46.152  
 --------------------------------------------  
   
-**DHCP REQUEST**   
+3.**DHCP REQUEST**   
 --------------------------------------------  
 Octet 0     Octet 1 	Octet 2 	Octet 3  
 --------------------------------------------  
@@ -233,7 +233,7 @@ DHCP options
 --------------------------------------------  
   
   
-**DHCP ACK**   
+4.**DHCP ACK**   
 --------------------------------------------  
 Octet 0     Octet 1 	Octet 2 	Octet 3  
 --------------------------------------------  
