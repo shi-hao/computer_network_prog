@@ -189,7 +189,7 @@ DHCP options
   
 3.DHCP REQUEST   
 --------------------------------------------  
-Octet 0     Octet 1 	Octet 2 	Octet 3  
+Octet 0     Octet 1     Octet 2     Octet 3  
 --------------------------------------------  
 OP          HTYPE 	    HLEN        HOPS  
 0x01 	    0x01 	    0x06        0x00  
@@ -235,7 +235,7 @@ DHCP options
   
 4.DHCP ACK   
 --------------------------------------------  
-Octet 0     Octet 1 	Octet 2 	Octet 3  
+Octet 0     Octet 1     Octet 2     Octet 3  
 --------------------------------------------  
 OP   	    HTYPE       HLEN 	    HOPS  
 0x02 	    0x01        0x06 	    0x00  
