@@ -1,11 +1,11 @@
 # TCP/UDP
 
-**Packet**
-**TCP/UDP SEQUENCE**
-**TCP/UDP PORT**
-**TCP/UDP MTU**
-
 ## TCP
+
+### What is TCP and used for?
+TCP:Transport Control Protocl传输控制协议
+用途：传输控制
+
 <pre>
 TCP Header
 --------------------------------------------
@@ -105,6 +105,9 @@ number大小不是301，或者直接没有ACK，那么发送方则知道数据�
 ### finish 
 
 ## UDP
+
+### What is UDP and used for?
+UDP:User Datagram Protocl用户数据包协议
 <pre>
 UDP Header
 --------------------------------------------
