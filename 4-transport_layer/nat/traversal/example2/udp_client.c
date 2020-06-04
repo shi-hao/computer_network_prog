@@ -62,8 +62,7 @@ void signal_func(){
 	data_len = 4;
 	for(int cnt=0; cnt<my_group.pos; cnt++){
 		si_other = my_group.member_array[cnt].si;
-		printf("sending member talk to %s:%d\n", inet_ntoa(si_other.sin_addr), 
-				ntohs(si_other.sin_port));
+		printf("sending member talk to %s:%d\n", inet_ntoa(si_other.sin_addr), ntohs(si_other.sin_port));
 		if (sendto(s, buf, data_len, 0, (struct sockaddr*)(&si_other), slen)==-1)
 			diep("sendto()");
 	}
