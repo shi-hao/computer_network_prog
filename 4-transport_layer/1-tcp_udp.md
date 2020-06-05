@@ -58,7 +58,9 @@ FIN: finish, FIN bit is used to terminate the TCP connection.
 ## 3.Sequence  
 通信前要建连接，通信中要应答，丢失要重传，结束要拆连接。    
 
-### 3.1 three-step handshake  
+### 3.1 establish
+server passive open
+client actively connect server, three-step handshake  
 <pre>
 -------------------------------------------
 client |  ---SYN-->   |server
@@ -125,6 +127,7 @@ TCP数据包是可以批量确认的，比如发送方在没有收到ACK之前�
 ### 3.3 reset  
   
 ### 3.4 finish   
+four-step finish  
 <pre>
 -------------------------------------------
 client |  ---FIN------->   |server
