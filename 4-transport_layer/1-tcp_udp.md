@@ -56,8 +56,16 @@ FIN: finish, FIN bit is used to terminate the TCP connection.
 </pre>  
   
 ## 3.Sequence  
-TCP通信时序，通信前要建连接，通信中要应答，丢失要重传，结束要拆连接。    
+通信前要建连接，通信中要应答，丢失要重传，结束要拆连接。    
+
 ### 3.1 three-step handshake  
+<pre>
+-------------------------------------------
+client |  ---SYN-->   |server
+       | <--SYN+ACK-- |
+	   | ---ACK--->   |
+-------------------------------------------
+</pre>
 To establish a connection, TCP uses a three-way handshake. Before a client    
 attempts to connect with a server, the server must first bind to and listen at    
 a port to open it up for connections: this is called a passive open. Once the    
@@ -83,27 +91,49 @@ TCP正式通信之前，需要先建立连接，通过三步建立连接。
    择一个随机数B作为序列号，一般是0，acknowlegement number设置为B+1。  
 (3)client回应一条ACK报文，ACK标志位置1，sequence number置为A+1，acknowlegement  
    number标志位置为B+1  
-  
+
 ### 3.2 communication  
-(1)PUSH+ACK  
+<pre>
+-------------------------------------------
+client |  ---PUSH+ACK-->   |server
+       |  <---ACK---       |
+       |                   |
+	   |  <---PUSH+ACK--   |
+       |   ---ACK--->      |
+-------------------------------------------
+</pre>
+(1)应答 
 正常通信一般使用的是PUSH+ACK报文，即PUSH和ACK标志位置1。  
-(2)sequence number和acknowlegement number  
+
+(2)丢包重传
+丢包检测
+sequence number和acknowlegement number  
 当连接建立，开始传输数据后，server和client双方各自维护自己的序列号，序列号如何  
 选择呢，双方对自己发送的每一个字节数据按照发送顺序进行编号，比如client发送一个  
 长度为20字节的数据包，即payload为20字节，那么字节编号就是1到20，数据包的  
 sequence number是payload的首个字节的编号，即1，当server收到数据包后，ACK应答包  
 的acknowlegement number是收到payload字节总数加上1，即21。  
-(3)批量确认和滑动窗口机制  
+当发送方发送一组长度为300字节的数据到接收方，但是接收方回应的acknowlegement  
+number大小不是301，或者直接没有ACK，那么发送方则知道数据丢包了，启动重发机制。  
+
+(3)流量控制
+批量确认和滑动窗口机制  
 TCP数据包是可以批量确认的，比如发送方在没有收到ACK之前，可以发送多个数据包，然  
 后接收端收到多个数据包后，回复一个ACK数据包来确认所有数据包都收到了。  
 ???????????滑动窗口?????????????????????????  
-(4)丢包检测  
-当发送方发送一组长度为300字节的数据到接收方，但是接收方回应的acknowlegement  
-number大小不是301，或者直接没有ACK，那么发送方则知道数据丢包了，启动重发机制。  
   
 ### 3.3 reset  
   
 ### 3.4 finish   
+<pre>
+-------------------------------------------
+client |  ---FIN------->   |server
+       |  <---ACK---       |
+       |                   |
+	   |  <---FIN-------   |
+       |   ---ACK--->      |
+-------------------------------------------
+</pre>
   
 # UDP  
 ## 1.What is UDP and used for?  
