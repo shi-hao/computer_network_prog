@@ -1,6 +1,6 @@
 # dynamic host control protocol  
   
-## 1.what is DHCP and used for?  
+## 1.What is DHCP and used for?  
 名词解释：DHCP，dynamic host control protocol，动态主机协议  
 用    途：主要作用是对接入设备动态分配IP地址，网关，掩码，DNS等网络参数。  
   
@@ -74,10 +74,12 @@ DHCP协议主要分4个步骤，发现，提供，请求，应答。
 首先客户端发送一个广播请求，如果客户端和服务端在不同的子网，则需要DHCP Helper和DHCP Relay Agent。    
 客户端已经获取了IP地址，在更新一个IP的租期时，可能直接使用UDP单播。    
 <pre>  
-	client   ---discovery--broadcasting-->      server     
-	client   <--offer--unicast/broadcast--      server    
-	client   ---request----broadcast----->      server    
-	client   <--acknowledgement-----------      server    
+------------------------------------------------------
+	client  | ---discovery--broadcast-----> |  server     
+	        | <--offer--unicast------------ |       
+	        | ---request----broadcast-----> |       
+	        | <--acknowledgement--unicast-- |       
+------------------------------------------------------
   
 1.DHCP DISCOVER  
 --------------------------------------------  

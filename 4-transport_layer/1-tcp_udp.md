@@ -101,9 +101,9 @@ TCP数据包是可以批量确认的，比如发送方在没有收到ACK之前�
 当发送方发送一组长度为300字节的数据到接收方，但是接收方回应的acknowlegement  
 number大小不是301，或者直接没有ACK，那么发送方则知道数据丢包了，启动重发机制。  
   
-### reset  
+### 3.3 reset  
   
-### finish   
+### 3.4 finish   
   
 # UDP  
 ## 1.What is UDP and used for?  

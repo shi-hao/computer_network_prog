@@ -63,6 +63,12 @@ op code : operation code,
 ARP协议对下使用以太网协议，广播请求，单播回应。  
 主机A(192.168.1.60)和主机B(192.168.1.100)通信，MAC地址未知。  
 <pre>  
+--------------------------------------
+A |--arp request(broadcast)->|B
+  |                          |
+  |<---arp reply(unicast)----|
+  |                          |
+--------------------------------------
 A主机发送arp request，关键字段如下填充。  
 arp-type      |arp request  
 arp-s-ip      |192.168.1.60(主机A的IP)  
@@ -86,9 +92,9 @@ ethernet-s-mac|gg-bb-cc-dd-ee-ff
 广播请求，单播回应  
 </pre>  
   
-## ARP Table          
-ARP根据收到的ARP包的源IP和MAC地址产生，包含两部部分，IP地址和对应的MAC地址。
-ARP是实时更新的，收到ARP包就会刷新，后来覆盖先到，ARP老化时间一般是20分钟。
+## 4.ARP Table          
+ARP表根据收到的ARP包的源IP和MAC地址生成，包含两部部分，IP地址和对应的MAC地址。
+ARP表是实时更新的，收到ARP包就会刷新，后来覆盖先到，ARP老化时间一般是20分钟。
 <pre>
 ARP Table
 ---------------------------------------------------------
@@ -102,7 +108,7 @@ ARP Table
 答：ARP表包含的是IP和MAC地址的对应关系，根据收到的ARP包的源地址产生并刷新。        
 	MAC表包含MAC地址，接口，类型，VLAN ID，根据收到的以太网帧的源地址产生并刷新。      
     
-## 免费ARP(gratuitous ARP)          
+## 5.Gratuitous ARP(免费ARP)          
 免费ARP简单来说就是自己请求或者回应自己。        
 (1)免费ARP Request        
 将ARP报文中的发送MAC和发送IP设置为本地的相应地址，然后目的IP设置为本地IP地址，          
@@ -117,7 +123,7 @@ ARP Table
 网络内的其他主机占用某个IP，比如网关会不停在网络内广播此免费ARP报文，一定程度        
 上也可以防御低频率的ARP欺骗攻击。        
         
-## ARP欺骗           
+## 6.ARP Spoofing(ARP欺骗)             
 ARP欺骗的核心原理很简单，当网络中有设备发送ARP Request时，按照正常流程，对应的          
 主机回应ARP Reply，但是有些欺骗者会在网络中发送一些假的Reply数据包，将数据包中MAC          
 修改为自己的MAC，其他设备收到该Reply后，会更新自己的ARP表为错误的MAC，          
