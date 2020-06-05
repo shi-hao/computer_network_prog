@@ -67,8 +67,9 @@ ARP协议对下使用以太网协议，广播请求，单播回应。
 A |--arp request(broadcast)->|B
   |                          |
   |<---arp reply(unicast)----|
-  |                          |
 --------------------------------------
+</pre>  
+<pre>  
 A主机发送arp request，关键字段如下填充。  
 arp-type      |arp request  
 arp-s-ip      |192.168.1.60(主机A的IP)  
