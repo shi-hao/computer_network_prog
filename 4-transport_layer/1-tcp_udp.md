@@ -56,6 +56,7 @@ FIN: finish, FIN bit is used to terminate the TCP connection.
 </pre>  
   
 ## 3.Sequence  
+TCP通信时序，通信前要建连接，通信中要应答，丢失要重传，结束要拆连接。    
 ### 3.1 three-step handshake  
 To establish a connection, TCP uses a three-way handshake. Before a client    
 attempts to connect with a server, the server must first bind to and listen at    
@@ -121,3 +122,4 @@ UDP Header
 </pre>  
   
 ## 3.Sequence  
+UDP协议本身没有设计通信时序，直接可以向指定端口收发数据。  
