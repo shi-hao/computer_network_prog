@@ -59,8 +59,8 @@ FIN: finish, FIN bit is used to terminate the TCP connection.
 通信前要建连接，通信中要应答，丢失要重传，结束要拆连接。    
 
 ### 3.1 establish
-server passive open
-client actively connect server, three-step handshake  
+server passive open  
+client actively connect server, three-step handshake    
 <pre>
 -------------------------------------------
 client |  ---SYN-->   |server
