@@ -1,10 +1,10 @@
 # ARP--Address Resolution Protocol              
     
-## ARP是什么？用途是什么？  
+## What is ARP and used for? 
 名词解释：ARP，address resolution protocol，地址解析协议。  
 用    途：已知目的主机的IP地址，请求目的主机的MAC地址。  
   
-## 协议包结构  
+## ARP Packet  
 <pre>  
 ARP对下使用以太网协议，组包如下所示。  
 ---------------------------            
@@ -59,7 +59,7 @@ op code : operation code,
 目标协议地址：m个字节，m由协议地址长度得到，一般为目标IP地址？？？6字节？？？。            
 </pre>            
   
-## ARP工作原理？  
+## Sequence  
 ARP协议对下使用以太网协议，广播请求，单播回应。  
 主机A(192.168.1.60)和主机B(192.168.1.100)通信，MAC地址未知。  
 <pre>  
