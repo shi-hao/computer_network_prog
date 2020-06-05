@@ -1,9 +1,10 @@
 # 以太网协议    
 数据链路层的核心协议是以太网协议。    
 
-## What is Ethernet Protocol and used for?
+## 1.What is Ethernet Protocol and used for?
+Ethernet Protocol:以太网协议  
   
-## Ethernet Protocol Packet        
+## 2.Ethernet Protocol Packet        
 以太网帧主要包含4部分，18字节。          
 <pre>        
 --------------------------------------------------------------        
@@ -43,7 +44,7 @@ MAC地址。网卡的物理地址的第一个字节的最低位必须是0！！
 广播的MAC地址很固定，是全1，即：            
 0xff-0xff-0xff-0xff-0xff-0xff            
 
-## Sequence 
+## 3.Sequence 
   
 ## Q&A  
 MAC地址冲突？MAC地址漂移？如何解决？  
