@@ -1,10 +1,10 @@
 # TCP
 
-## What is TCP and used for?
+## 1.What is TCP and used for?
 TCP:Transport Control Protocl传输控制协议
 用途：传输控制
 
-## TCP Packet
+## 2.TCP Packet
 <pre>
 TCP Header
 --------------------------------------------
@@ -55,8 +55,8 @@ SYN: synchronize, SYN bit is used to synchronize the sequence numbers.
 FIN: finish, FIN bit is used to terminate the TCP connection.
 </pre>
 
-## Sequence
-### 3-step handshake
+## 3.Sequence
+### 3.1 three-step handshake
 To establish a connection, TCP uses a three-way handshake. Before a client  
 attempts to connect with a server, the server must first bind to and listen at  
 a port to open it up for connections: this is called a passive open. Once the  
@@ -83,7 +83,7 @@ TCP正式通信之前，需要先建立连接，通过三步建立连接。
 (3)client回应一条ACK报文，ACK标志位置1，sequence number置为A+1，acknowlegement
    number标志位置为B+1
 
-### communication
+### 3.2 communication
 (1)PUSH+ACK
 正常通信一般使用的是PUSH+ACK报文，即PUSH和ACK标志位置1。
 (2)sequence number和acknowlegement number
@@ -105,10 +105,10 @@ number大小不是301，或者直接没有ACK，那么发送方则知道数据�
 ### finish 
 
 # UDP
-## What is UDP and used for?
+## 1.What is UDP and used for?
 UDP:User Datagram Protocl用户数据包协议
 
-## UDP Packet
+## 2.UDP Packet
 <pre>
 UDP Header
 --------------------------------------------
@@ -120,4 +120,4 @@ UDP Header
 ---------------------------------------------
 </pre>
 
-## Sequence
+## 3.Sequence

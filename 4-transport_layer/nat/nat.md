@@ -1,15 +1,15 @@
 # NAT   
   
-## what is NAT and used for?  
+## 1.What is NAT and used for?  
 名词解释：NAT，network address translation网络地址转换。  
   
 用途：主要作用是实现将IP包中的源/目的IP地址替换为另一个IP地址。  
 通常是将IP包局域网私网地址转换为可路由公网地址。  
   
-## NAT Packet
+## 2.NAT Packet
 **NAT是网络地址转换，不是协议，所以没有包格式。**  
   
-## Sequence 
+## 3.Sequence 
 
 ## How NAT works?    
 NAT技术细节，各个厂家的设备可能都略微有差异，名称上也不太统一。      

@@ -1,10 +1,10 @@
 # 网络协议                    
 网络层的核心协议是网络协议(internet protocol)。  
 
-## What is Internet Protocol and used for?
+## 1.What is Internet Protocol and used for?
 IP:internet protocol, 网络协议
   
-## IP Packet    
+## 2.IP Packet    
 <pre>    
 IPv4 Header    
 ---------------------------------------------    
@@ -162,7 +162,7 @@ n位二进制的表示范围是多少？
 将八位二进制分为两组，一组四位，四位二进制可以转换为一位十六进制。  
 逆向，则一位十六进制转换为四位二进制。  
 
-## Sequence
+## 3.Sequence
       
 ## Linux设置IP地址              
 系统ubuntu18.04下，如何手动设置IP地址？                
