@@ -50,10 +50,10 @@ void usage()
 
 int main(int argc, char* argv[])
 {
-#define arp_request  0
-#define arp_reply    1
-#define brdcast_mac  "ff:ff:ff:ff:ff:ff"
-#define zero_mac     "00:00:00:00:00:00"
+#define  arp_request   0
+#define  arp_reply     1
+#define  brdcast_mac   "ff:ff:ff:ff:ff:ff"
+#define  zero_mac      "00:00:00:00:00:00"
 
 //	if (argc < 7) {
 //		usage();
@@ -82,38 +82,48 @@ int main(int argc, char* argv[])
 //		}
 //	}
 
+	char arp_src_ip[16]; /* e.g. '255.255.255.255'* = 15 chars + \0 = 16 chars */
+	char arp_tar_ip[16];
+	memset(arp_src_ip, 0, sizeof(arp_src_ip));
+	memset(arp_tar_ip, 0, sizeof(arp_tar_ip));
+
+	char arp_src_mac[18]; /* e.g. 'aa:bb:cc:11:22:33' = 17 chars + \0 = 18 chars */
+	char arp_tar_mac[18];
+	memset(arp_src_mac, 0, sizeof(arp_src_mac));
+	memset(arp_tar_mac, 0, sizeof(arp_tar_mac));
+
+	char eth_des_mac[18];
+	char eth_src_mac[18];
+	memset(eth_src_mac, 0, sizeof(eth_src_mac));
+	memset(eth_des_mac, 0, sizeof(eth_des_mac));
+
 	int ifname_idx = -1;
 	int arp_opcode = -1;
-	int src_ip_idx = -1;
-	int src_mac_idx = -1;
-	int tar_ip_idx = -1;
-	int tar_mac_idx = -1;
 	int interval = -1;
 
 	//parse parameters
 	for (int i = 1; i < argc; i++) {
 		if(strncmp(argv[i], "-i", 2) == 0){
 			ifname_idx = ++i;
-			printf("%s\n", argv[ifname_idx]);
+			printf("-i %s\n", argv[ifname_idx]);
 		}else if(strncmp(argv[i], "-q", 2) == 0){
 			arp_opcode = arp_request;
 		}else if(strncmp(argv[i], "-p", 2) == 0){
 			arp_opcode = arp_reply;
 		}else if(strncmp(argv[i], "-Sip", 4) == 0){
-			src_ip_idx = ++i;
-			printf("%s\n", argv[src_ip_idx]);
+			strcpy(arp_src_ip, argv[++i]);
+			printf("-Sip %s\n", arp_src_ip);
 		}else if(strncmp(argv[i], "-Smac", 5) == 0){
-			src_mac_idx = ++i;
-			printf("%s\n", argv[src_mac_idx]);
+			strcpy(arp_src_mac, argv[++i]);
+			printf("-Smac %s\n", arp_src_mac);
 		}else if(strncmp(argv[i], "-Tip", 4) == 0){
-			tar_ip_idx = ++i;
-			printf("%s\n", argv[tar_ip_idx]);
+			strcpy(arp_tar_ip, argv[++i]);
+			printf("-Tip %s\n", arp_tar_ip);
 		}else if(strncmp(argv[i], "-Tmac", 5) == 0){
-			tar_mac_idx = ++i;
-			printf("%s\n", argv[tar_mac_idx]);
+			strcpy(arp_tar_mac, argv[++i]);
+			printf("-Tmac %s\n", arp_tar_mac);
 		}else if(strncmp(argv[i], "-l", 2) == 0){
 			interval = atoi(argv[++i]);
-			printf("interval=%d \n", interval);
 		}
 	}
 
@@ -127,10 +137,6 @@ int main(int argc, char* argv[])
 	}
 
 	struct arp_packet* arp;
-	char arp_src_mac[18]; /* e.g. 'aa:bb:cc:11:22:33' = 17 chars + \0 = 18 chars */
-	char arp_tar_mac[18];
-	char eth_des_mac[18];
-	char eth_src_mac[18];
 	if(arp_opcode == arp_request){ //arp_request
 		strncpy(eth_des_mac, brdcast_mac, sizeof(eth_des_mac));
 		strncpy(eth_src_mac, ether_ntoa(&iface_hwaddr), sizeof(eth_src_mac));
@@ -139,7 +145,7 @@ int main(int argc, char* argv[])
 		strncpy(arp_src_mac, ether_ntoa(&iface_hwaddr), sizeof(arp_src_mac));
 
 		arp = create_arp_packet(eth_des_mac, eth_src_mac,
-				ARPOP_REQUEST, arp_src_mac, argv[src_ip_idx], arp_tar_mac, argv[tar_ip_idx]);
+				ARPOP_REQUEST, arp_src_mac, arp_src_ip, arp_tar_mac, arp_tar_ip);
 	}else if(arp_opcode == arp_reply){ //arp_reply
 
 	}else{
@@ -195,7 +201,7 @@ int main(int argc, char* argv[])
 	while (1) {
 		if (send_arp_to(arp, sock, if_idx) > 0) {
 			printf("\r send NO. %ld ARP: %s is at %s --to-> %s", ++cnt,
-					argv[src_ip_idx], arp_src_mac, argv[tar_ip_idx]);
+					arp_src_ip, arp_src_mac, arp_tar_ip);
 		}
 		usleep(interval);
 	}
