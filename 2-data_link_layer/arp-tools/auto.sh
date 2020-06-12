@@ -1,4 +1,6 @@
-#sudo ./arpspoof.elf -i eno1 -t 192.168.0.1 -s 192.168.0.1
-#sudo ./arpspoof.elf -i eno1 -s 192.168.0.1 -t 192.168.0.1 -g p 
-#sudo ./arptool.elf -q -i eno1 -Sip 192.168.0.1 -Smac ff:ff:ff:ff:ff:ff -Tip 192.168.0.1 -Tmac ff:ff:ff:ff:ff:ff
-sudo ./arptool.elf -q -i eno1 -Sip 192.168.0.1  -Tip 192.168.0.1
+#send arp request to ip 192.168.0.100
+#sudo ./arptool.elf -q -i eno1 -Sip 192.168.0.1  -Tip 192.168.0.100
+
+
+#send arp reply to 
+sudo ./arptool.elf -p -i eno1 -Sip 192.168.0.1
