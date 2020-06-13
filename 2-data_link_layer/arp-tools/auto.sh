@@ -1,6 +1,11 @@
-#send arp request to ip 192.168.0.100
-#sudo ./arptool.elf -q -i eno1 -Sip 192.168.0.1  -Tip 192.168.0.100
+#arp request
+#sudo ./arptool.elf -q -i wlp4s0 -Sip 192.168.0.1  -Tip 192.168.0.120
 
+#arp reply
+#sudo ./arptool.elf -p -i wlp4s0  -Tip 192.168.0.120
 
-#send arp reply to 
-sudo ./arptool.elf -p -i eno1 -Sip 192.168.0.1
+#arp reply
+#sudo ./arptool.elf -p -i wlp4s0  -Tip 192.168.0.120 -Tmac 00:00:00:00:00:00
+
+#arp reply
+sudo ./arptool.elf -p -i wlp4s0  -Tip 192.168.31.1

@@ -14,6 +14,19 @@
 
 #include "arp.h"
 
+/*
+ * ARP REQUEST(广播)
+ * arp -q -i interface [-Sip arp_src_ip] [-Smac arp_src_mac] -Tip arp_tar_ip
+ *    Tip必须设置
+ *    -Sip和-Smac可选设置，如果不设置，会按照interface的IP地址和mac地址进行组包。
+ *
+ * ARP REPLY(广播或者单播)
+ * arp -p -i interface [-Sip arp_src_ip] [-Smac arp_src_mac] -Tip arp_tar_ip [-Tmac arp_tar_mac]
+ *    Tip必须设置
+ *    -Sip和-Smac可选设置，如果不设置，会按照interface的IP地址和mac地址进行组包。
+ *    -Tmac可选设置，如果不设置，会按照Tip实际的mac地址进行组包。
+ */
+
 int mac_from_iface(const char* iface_name, struct ether_addr* ether_out)
 {
 	int sock = socket(AF_INET, SOCK_DGRAM, 0);
@@ -73,10 +86,10 @@ int ip_from_iface(const char* iface_name, char* ip_buff){
 
 void usage()
 {
-	printf("Usage:\n");
-	printf("    arpspoof -q/-p -i interface -Tip target_ip -Sip source_ip -Smac source_mac -Tmac target_mac [-l interval]\n");
-	printf("Example:\n");
-	printf("    arpspoof -q -i wlan0 -Sip 192.168.0.101 -Tip 192.168.0.1\n");
+	printf("\nUsage:\n");
+	printf("arp -q -i interface [-Sip arp_src_ip] [-Smac arp_src_mac] -Tip arp_tar_ip\n");
+	printf("arp -p -i interface [-Sip arp_src_ip] [-Smac arp_src_mac] -Tip arp_tar_ip [-Tmac arp_tar_mac] \n");
+	printf("-Tip must be seted\n");
 }
 
 int main(int argc, char* argv[])
@@ -122,23 +135,22 @@ int main(int argc, char* argv[])
 			printf("arp reply\n");
 		}else if(strncmp(argv[i], "-Sip", 4) == 0){
 			strcpy(arp_src_ip, argv[++i]);
-			printf("-Sip %s\n", arp_src_ip);
 		}else if(strncmp(argv[i], "-Smac", 5) == 0){
 			strcpy(arp_src_mac, argv[++i]);
 			strcpy(eth_src_mac, arp_src_mac);
-			printf("-Smac %s\n", arp_src_mac);
-			printf("Ethernet SRC MAC: %s\n", eth_src_mac);
 		}else if(strncmp(argv[i], "-Tip", 4) == 0){
 			strcpy(arp_tar_ip, argv[++i]);
-			printf("-Tip %s\n", arp_tar_ip);
 		}else if(strncmp(argv[i], "-Tmac", 5) == 0){
 			strcpy(arp_tar_mac, argv[++i]);
-			strcpy(eth_des_mac, arp_tar_mac);
-			printf("-Tmac %s\n", arp_tar_mac);
-			printf("Ethernet DES MAC: %s\n", eth_des_mac);
 		}else if(strncmp(argv[i], "-l", 2) == 0){
 			interval = atoi(argv[++i]);
 		}
+	}
+
+	//Check the target ip
+	if(strlen(arp_tar_ip) == 0){
+		usage();
+		return -1;
 	}
 
 	if (interval < 0)
@@ -156,37 +168,54 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
-	//check parameters
+	//arp source ip
 	if(strlen(arp_src_ip) == 0){
 		strcpy(arp_src_ip, ip_buff);
-		printf("-Sip %s\n", arp_src_ip);
 	}
-	if(strlen(arp_tar_ip) == 0){
-		strcpy(arp_tar_ip, brdcast_ip);
-		printf("-Tip %s\n", arp_tar_ip);
-	}
+
+	//arp source mac
 	if(strlen(arp_src_mac) == 0){
 		strncpy(arp_src_mac, ether_ntoa(&iface_hwaddr), sizeof(arp_src_mac));
 		strcpy(eth_src_mac, arp_src_mac);
-		printf("-Smac %s\n", arp_src_mac);
-		printf("Ethernet SRC MAC: %s\n", eth_src_mac);
-	}
-	if(strlen(arp_tar_mac) == 0){
-		strcpy(arp_tar_mac, zero_mac);
-		strcpy(eth_des_mac, brdcast_mac);
-		printf("-Tmac %s\n", arp_tar_mac);
-		printf("Ethernet DES MAC: %s\n", eth_des_mac);
 	}
 
-	//Create ARP Packet
-	struct arp_packet* arp;
-	if((arp_opcode == ARPOP_REPLY) || (arp_opcode == ARPOP_REQUEST)){ 
-		arp = create_arp_packet(eth_des_mac, eth_src_mac,
-				arp_opcode, arp_src_mac, arp_src_ip, arp_tar_mac, arp_tar_ip);
+	//set the arp target mac 
+	if(arp_opcode == ARPOP_REQUEST){ 
+		strcpy(arp_tar_mac, zero_mac);
+		strcpy(eth_des_mac, brdcast_mac);
+	}else if(arp_opcode == ARPOP_REPLY){
+		if(strlen(arp_tar_mac) == 0){
+			struct ether_addr target_hwaddr;
+			int arp_flags = 0;
+			if(arp_cache_lookup(inet_addr(arp_tar_ip), argv[ifname_idx], &arp_flags, 
+						&target_hwaddr) > 0 && arp_flags == 0x2){
+				strncpy(arp_tar_mac, ether_ntoa(&target_hwaddr), sizeof(arp_tar_mac));
+				strcpy(eth_des_mac, arp_tar_mac);
+			}else{
+				printf("not find the %s's mac address in arp table\n", arp_tar_ip);
+				return -1;
+			}
+		}else if(strcmp(arp_tar_mac, zero_mac) == 0){
+			strcpy(eth_des_mac, brdcast_mac);
+		}else{
+			strcpy(eth_des_mac, arp_tar_mac);
+		}
+
 	}else{
 		usage();
 		return -1;
 	}
+
+	//create_arp_packet
+	printf("-Sip %s\n", arp_src_ip);
+	printf("-Tip %s\n", arp_tar_ip);
+	printf("-Smac %s\n", arp_src_mac);
+	printf("-Tmac %s\n", arp_tar_mac);
+	printf(" Ethernet SRC MAC: %s\n", eth_src_mac);
+	printf(" Ethernet DES MAC: %s\n", eth_des_mac);
+	struct arp_packet* arp;
+	arp = create_arp_packet(eth_des_mac, eth_src_mac,
+			arp_opcode, arp_src_mac, arp_src_ip, arp_tar_mac, arp_tar_ip);
 
 	//Create socket and send ARP packet
 	int sock = socket(AF_PACKET, SOCK_RAW, htons(ETH_P_ARP));
