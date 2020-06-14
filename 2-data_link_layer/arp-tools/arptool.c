@@ -1,3 +1,15 @@
+/*
+ * ARP REQUEST(广播)
+ * arp -q -i interface [-Sip arp_src_ip] [-Smac arp_src_mac] -Tip arp_tar_ip
+ *    Tip必须设置
+ *    -Sip和-Smac可选设置，如果不设置，会按照interface的IP地址和MAC地址进行组包。
+ *
+ * ARP REPLY(广播或者单播)
+ * arp -p -i interface [-Sip arp_src_ip] [-Smac arp_src_mac] -Tip arp_tar_ip [-Tmac arp_tar_mac]
+ *    Tip必须设置
+ *    -Sip和-Smac可选设置，如果不设置，会按照interface的IP地址和MAC地址进行组包。
+ *    -Tmac可选设置，如果不设置，会按照Tip实际的MAC地址进行组包。
+ */
 #include <net/if.h>
 #include <unistd.h>
 #include <sys/socket.h>
@@ -13,19 +25,6 @@
 #include <errno.h>
 
 #include "arp.h"
-
-/*
- * ARP REQUEST(广播)
- * arp -q -i interface [-Sip arp_src_ip] [-Smac arp_src_mac] -Tip arp_tar_ip
- *    Tip必须设置
- *    -Sip和-Smac可选设置，如果不设置，会按照interface的IP地址和mac地址进行组包。
- *
- * ARP REPLY(广播或者单播)
- * arp -p -i interface [-Sip arp_src_ip] [-Smac arp_src_mac] -Tip arp_tar_ip [-Tmac arp_tar_mac]
- *    Tip必须设置
- *    -Sip和-Smac可选设置，如果不设置，会按照interface的IP地址和mac地址进行组包。
- *    -Tmac可选设置，如果不设置，会按照Tip实际的mac地址进行组包。
- */
 
 int mac_from_iface(const char* iface_name, struct ether_addr* ether_out)
 {
