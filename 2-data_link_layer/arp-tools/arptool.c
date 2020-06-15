@@ -48,7 +48,7 @@ int mac_from_iface(const char* iface_name, struct ether_addr* ether_out)
 	return 1;
 }
 
-int ip_from_iface(const char* iface_name, char* ip_buff){
+int ip_from_iface(const char* iface_name, char* iface_ip){
 	//Create an ifreq structure for passing data in and out of ioctl
 	struct ifreq ifr;
 	size_t iface_name_len=strlen(iface_name);
@@ -79,7 +79,7 @@ int ip_from_iface(const char* iface_name, char* ip_buff){
 	//Extract the IP address from the ifreq structure
 	struct sockaddr_in* ipaddr = (struct sockaddr_in*)&ifr.ifr_addr;
 	//printf("IP address: %s\n",inet_ntoa(ipaddr->sin_addr));
-	strcpy(ip_buff, inet_ntoa(ipaddr->sin_addr));
+	strcpy(iface_ip, inet_ntoa(ipaddr->sin_addr));
 	return 0;
 }
 
@@ -162,14 +162,14 @@ int main(int argc, char* argv[])
 	}
 
 	//Get the interface IP address
-	char ip_buff[16]={0};
-	if(ip_from_iface(argv[ifname_idx], ip_buff) < 0){
+	char iface_ip[16]={0};
+	if(ip_from_iface(argv[ifname_idx], iface_ip) < 0){
 		return -1;
 	}
 
 	//arp source ip
 	if(strlen(arp_src_ip) == 0){
-		strcpy(arp_src_ip, ip_buff);
+		strcpy(arp_src_ip, iface_ip);
 	}
 
 	//arp source mac
