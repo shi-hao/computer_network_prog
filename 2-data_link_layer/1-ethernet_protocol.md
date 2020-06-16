@@ -49,7 +49,10 @@ MAC地址。网卡的物理地址的第一个字节的最低位必须是0！！
   
 ## 4.Others  
 ### 修改linux系统主机MAC地址  
+(1)暂时修改MAC地址  
 sudo ifconfig eth0 down  
 sudo ifconfig eth0 hw ether 00:11:22:33:44:55  
 sudo ifconfig eth0 up  
+  
+(2)永久修改MAC地址  
   
