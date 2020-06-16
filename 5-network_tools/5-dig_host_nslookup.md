@@ -1,5 +1,8 @@
 # Get IP
 
+
+how to get the local dns config???   
+
 **get IP from the domain name**
 
 **dig**  
