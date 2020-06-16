@@ -155,25 +155,23 @@ int main(int argc, char* argv[])
 	if (interval < 0)
 		interval = 1000;
 
-	//Get the interface MAC address
-	struct ether_addr iface_hwaddr;
-	if (mac_from_iface(argv[ifname_idx], &iface_hwaddr) < 0) {
-		return -1;
-	}
-
-	//Get the interface IP address
-	char iface_ip[16]={0};
-	if(ip_from_iface(argv[ifname_idx], iface_ip) < 0){
-		return -1;
-	}
-
 	//arp source ip
 	if(strlen(arp_src_ip) == 0){
+		//Get the interface IP address
+		char iface_ip[16]={0};
+		if(ip_from_iface(argv[ifname_idx], iface_ip) < 0){
+			return -1;
+		}
 		strcpy(arp_src_ip, iface_ip);
 	}
 
 	//arp source mac
 	if(strlen(arp_src_mac) == 0){
+		//Get the interface MAC address
+		struct ether_addr iface_hwaddr;
+		if (mac_from_iface(argv[ifname_idx], &iface_hwaddr) < 0) {
+			return -1;
+		}
 		strncpy(arp_src_mac, ether_ntoa(&iface_hwaddr), sizeof(arp_src_mac));
 		strcpy(eth_src_mac, arp_src_mac);
 	}

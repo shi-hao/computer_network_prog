@@ -13,6 +13,7 @@
 ## Normal arp request
 ## sudo ./arptool.elf -q -i iface -Tip tar_ip
 #sudo ./arptool.elf -q -i eno1 -Tip 192.168.0.100
+sudo ./arptool.elf -q -i eno1 -Sip 192.168.0.100 -Tip 255.255.255.255 
 
 ## Gratuitous arp request
 ## sudo ./arptool.elf -q -i iface -Tip iface_ip
@@ -21,7 +22,7 @@
 # ARP Reply
 ## Normal arp reply
 ## sudo ./arptool.elf -p -i iface  -Tip tar_ip
-sudo ./arptool.elf -p -i eno1 -Tip 192.168.0.100
+#sudo ./arptool.elf -p -i eno1 -Tip 192.168.0.100
 
 ## arp reply cheat
 ## sudo ./arptool.elf -p -i iface -Sip gw_ip -Tip tar_ip
