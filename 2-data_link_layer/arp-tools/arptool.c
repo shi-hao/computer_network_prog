@@ -146,7 +146,7 @@ int main(int argc, char* argv[])
 		}
 	}
 
-	//Check the target ip
+	//check arp target ip whether set
 	if(strlen(arp_tar_ip) == 0){
 		usage();
 		return -1;
@@ -155,7 +155,7 @@ int main(int argc, char* argv[])
 	if (interval < 0)
 		interval = 1000;
 
-	//arp source ip
+	//set arp source ip
 	if(strlen(arp_src_ip) == 0){
 		//Get the interface IP address
 		char iface_ip[16]={0};
@@ -165,7 +165,7 @@ int main(int argc, char* argv[])
 		strcpy(arp_src_ip, iface_ip);
 	}
 
-	//arp source mac
+	//set arp source mac
 	if(strlen(arp_src_mac) == 0){
 		//Get the interface MAC address
 		struct ether_addr iface_hwaddr;
