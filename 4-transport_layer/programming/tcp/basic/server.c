@@ -59,7 +59,6 @@ int main(int argc, char *argv[])
 	server_sockaddr.sin_port = htons(atoi(argv[2])); //端口号，需要网络序转换
 
 	//bind成功返回0，出错返回-1
-	//bind server IP address must be the local network card IP address or 0.0.0.0
 	if(bind(server_sockfd,(struct sockaddr *)&server_sockaddr,sizeof(server_sockaddr))==-1)
 	{
 		perror("bind");

@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
 	int sock_cli = socket(AF_INET,SOCK_STREAM, 0);
 
 	//---------------------------------------------------------------
-#if 0
+#if 1
 	/* 
 	 * TCP client bind specific interface using bind()
 	 * this method not works!!
