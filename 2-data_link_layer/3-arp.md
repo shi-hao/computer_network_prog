@@ -111,13 +111,18 @@ ARP Table
       
 ## 5.Gratuitous ARP(免费ARP)            
 免费ARP简单来说就是自己请求或者回应自己。          
-(1)免费ARP Request          
+(1)Gratuitous ARP Request          
 将ARP报文中的发送MAC和发送IP设置为本地的相应地址，然后目的IP设置为本地IP地址，            
 目的MAC设置为全0，以太网层设置为广播，那么这个ARP报文就广播到全网。          
-  
-用来检测网络中是否有设备和自己的IP地址有冲突。          
+<pre>
+典型应用，当手动配置网卡的IP地址时，为了防止配置的IP地址和网域内其他主机的IP
+地址相同而发生冲突，当手动配置完IP地址后，主机会发送一个Gratuitous ARP Request
+广播到全网，如果配置的IP地址有冲突，被冲突的主机就会回复ARP Reply给当前主机，
+当前主机就知道设置的IP地址存在冲突，当前的IP配置可能就不会生效（根据主机操作系
+统不同会有差异）。
+</pre>
           
-(2)免费ARP Reply          
+(2)Gratuitous ARP Reply          
 常规的ARP Reply的源MAC和源IP设置为本机的地址，目的MAC和IP设置为对端的MAC和IP，            
 但是免费ARP Reply将目的IP也设置为本地IP，目的MAC则设置为全0，以太网层设置为广          
 播，ARP报文会广播到全网。          
