@@ -119,7 +119,8 @@ ARP Table
 地址相同而发生冲突，当手动配置完IP地址后，主机会发送一个Gratuitous ARP Request
 广播到全网，如果配置的IP地址有冲突，被冲突的主机就会回复ARP Reply给当前主机，
 当前主机就知道设置的IP地址存在冲突，当前的IP配置可能就不会生效（根据主机操作系
-统不同会有差异）。
+统不同会有差异，通过测试发现，win10会发ARP Request，冲突则配置不生效，ubuntu通
+过命令行配置IP地址，不会发送ARP Request，配置直接生效）。
 </pre>
           
 (2)Gratuitous ARP Reply          

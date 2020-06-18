@@ -42,7 +42,7 @@ int main(int argc, char* argv[])
 	int client_fd;
 	struct sockaddr_in ser_addr;
 
-	printf("\n usage : \n   server ip \n   server port \n   local_IP \n");
+	printf("\n usage : \n   server ip \n   server port \n   device \n");
 
 	if(argc < 4){
 		printf("param is not enough\n");
@@ -56,7 +56,8 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
-#if 1
+	//---------------------------------------------------------------
+#if 0
 	//定义sockaddr_in
 	struct sockaddr_in local_addr;
 	memset(&local_addr, 0, sizeof(local_addr));
@@ -72,6 +73,23 @@ int main(int argc, char* argv[])
 	}
 	printf("bind success.\n");
 #endif
+
+#if 1
+	/* 
+	 * bind the socket to one network device using setsockopt()
+	 */
+	//const char* device = "wlp4s0";
+	const char* device = argv[3];
+	int rc;
+	rc = setsockopt(client_fd, SOL_SOCKET, SO_BINDTODEVICE, device, strlen(device));
+	if (rc != 0)
+	{
+		perror("setsockopt");
+		exit (EXIT_FAILURE);
+	}
+#endif
+	//-------------------------------------------------------------------
+
 
 	memset(&ser_addr, 0, sizeof(ser_addr));
 	ser_addr.sin_family = AF_INET;

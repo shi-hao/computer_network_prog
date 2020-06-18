@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
 {
 	if(argc < 4)
 	{
-		printf("\n usage: server_ip port local_ip \n");
+		printf("\n usage: server_ip server_port iface_name\n");
 		exit(0);
 	}
 
@@ -47,7 +47,8 @@ int main(int argc, char* argv[])
 	 */
 	//const char* device = "wlp4s0";
 	//const char* device = "eno1";
-	const char* device = "wlxec3dfde15940";
+	//const char* device = "wlxec3dfde15940";
+	const char* device = argv[3];
 	int rc;
 	rc = setsockopt(sock_cli, SOL_SOCKET, SO_BINDTODEVICE, device, strlen(device));
 	if (rc != 0)
