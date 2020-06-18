@@ -45,7 +45,9 @@ int main(int argc, char* argv[])
 	/* 
 	 * bind the socket to one network device using setsockopt()
 	 */
-	const char* device = "wlp4s0";
+	//const char* device = "wlp4s0";
+	//const char* device = "eno1";
+	const char* device = "wlxec3dfde15940";
 	int rc;
 	rc = setsockopt(sock_cli, SOL_SOCKET, SO_BINDTODEVICE, device, strlen(device));
 	if (rc != 0)

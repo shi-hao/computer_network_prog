@@ -8,11 +8,10 @@
 
 
 可以使用setsockopt函数来绑定指定的网卡发送数据，但是不能和系统的路由表冲突。        
-      
-在ubuntu系统下测试发现，如果指定的接口和路由表发生冲突，IP包也不能正常发出。        
+在ubuntu系统下测试发现，如果发送IP数据包指定的接口和路由表发生冲突，IP包也不能正常发出。        
       
 举例：      
-example1    
+example1     
   
 route -n       
 Destination     Gateway         Genmask         Flags Metric Ref    Use Iface      
@@ -36,4 +35,3 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 192.168.8.0     0.0.0.0         255.255.255.0   U     600    0        0 wlp4s0  
   
 两个网卡，同时可以上网，指定一个接口发送TCP/UDP数据包。    
-
