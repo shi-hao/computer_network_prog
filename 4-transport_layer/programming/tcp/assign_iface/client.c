@@ -1,29 +1,3 @@
-/*
- * 绑定TCP Socket IP地址和端口号
- *
- * 1.bind函数作用
- *   将socket和指定的IP地址和端口号进行绑定，让socket在绑定的地址上收发数据，即
- * 发送数据时，IP包的源地址TCP的源端口使用指定的地址，接收数据时，只接收目的IP
- * 地址和目的端口号匹配的数据包。
- * bind函数参数中的IP地址必须是主机本地网卡的地址或者设置为全0,表示是本地任意一
- * 个网卡地址。
- *
- * 2.TCP Client绑定IP地址和端口号
- *   一般情况下，在使用TCP通信时，客户端一般不需要指定使用的IP地址和端口号，
- * 而是由系统内核统一分配，主要有以下两点好处。
- * (1)简化使用TCP的流程，编程更简单。
- * (2)IP地址和端口号由系统内核统一分配，可以避免端口冲突，如果所有的TCP连
- * 接都需要用户指定端口号，可能会导致冲突，因为系统内一般有好多进程在使用TCP通
- * 信，不同的进程预先指定了端口号，那么很有可能不同进程预先设定了相同的端口号
- * 而造成冲突。
- *   虽然TCP客户端指定源IP地址和源端口号并不推荐，但是软件接口支持这种操作，使用
- * bind接口即可实现。
- *
- * 3.为什么TCP服务端必须指定IP地址和端口号
- *   CS模式，Server首先要处在被动打开状态，所以server要主动在指定的IP地址
- * 和端口号下监听数据，所以必须要进行绑定操作。
- *
- */
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <stdio.h>
@@ -46,10 +20,11 @@ int main(int argc, char* argv[])
 		exit(0);
 	}
 
-	//定义IPV4的TCP连接的套接字描述符
+	//定义IPv4的TCP连接的套接字描述符
 	int sock_cli = socket(AF_INET,SOCK_STREAM, 0);
 
-#if 1
+	//---------------------------------------------------------------
+#if 0
 	//定义sockaddr_in
 	struct sockaddr_in local_addr;
 	memset(&local_addr, 0, sizeof(local_addr));
@@ -65,6 +40,21 @@ int main(int argc, char* argv[])
 	}
 	printf("bind success.\n");
 #endif
+
+#if 1
+	/* 
+	 * bind the socket to one network device using setsockopt()
+	 */
+	const char* device = "wlp4s0";
+	int rc;
+	rc = setsockopt(sock_cli, SOL_SOCKET, SO_BINDTODEVICE, device, strlen(device));
+	if (rc != 0)
+	{
+		perror("setsockopt");
+		exit (EXIT_FAILURE);
+	}
+#endif
+	//-------------------------------------------------------------------
 
 	//定义sockaddr_in
 	struct sockaddr_in servaddr;
