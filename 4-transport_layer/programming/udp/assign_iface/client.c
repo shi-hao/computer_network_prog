@@ -56,7 +56,6 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
-	//---------------------------------------------------------------
 #if 0
 	//定义sockaddr_in
 	struct sockaddr_in local_addr;
@@ -88,8 +87,6 @@ int main(int argc, char* argv[])
 		exit (EXIT_FAILURE);
 	}
 #endif
-	//-------------------------------------------------------------------
-
 
 	memset(&ser_addr, 0, sizeof(ser_addr));
 	ser_addr.sin_family = AF_INET;
