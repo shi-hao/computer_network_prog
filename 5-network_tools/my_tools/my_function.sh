@@ -54,6 +54,7 @@ function my_pause(){
 	done
 }
 
+# 功能改进，停止当前指令，执行下一条指令
 # break function
 function my_break(){
 	trap "my_echo \"red\" \"\n break and exit \n\"; exit" INT
