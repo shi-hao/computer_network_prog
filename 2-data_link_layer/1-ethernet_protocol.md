@@ -1,5 +1,7 @@
 # 以太网协议      
 数据链路层的核心协议是以太网协议。      
+Ethernet Version 1  
+Ethernet Version 2  
   
 ## 1.What is Ethernet Protocol and used for?  
 Ethernet Protocol:以太网协议    
