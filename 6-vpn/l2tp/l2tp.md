@@ -46,7 +46,4 @@ establishing a tunnel and session in voluntary tunneling method are
 
 
 
-
-
 ## L2TP/IPsec
-
