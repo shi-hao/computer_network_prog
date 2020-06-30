@@ -1,4 +1,6 @@
 # L2TP(Layer 2 Tunneling Protocol)  
+
+## What is L2TP and used for?
 L2TP数据包通过UDP协议传输，因为L2TP不能提供很强的安全性，所以经常使用IPsec来保证L2TP数据的安全。    
 
 The entire L2TP packet, including payload and L2TP header, is sent within a
@@ -11,7 +13,7 @@ uses UDP ports 500 (for IKE – Internet Key Exchange), 4500 (for NAT), and 1701
 The two endpoints of an L2TP tunnel are called the LAC (L2TP Access Concentrator) 
 and the LNS (L2TP Network Server).
 
-## packet structure
+## Packet structure
 An L2TP packet consists of :
 <pre>
 -------------------------------------------------
@@ -29,7 +31,7 @@ An L2TP packet consists of :
 -------------------------------------------------
 </pre>
 
-## L2TP packet exchange
+## Sequence
 At the time of setup of L2TP connection, many control packets are exchanged between 
 server and client to establish tunnel and session for each direction. One peer requests 
 the other peer to assign a specific tunnel and session id through these control packets.
