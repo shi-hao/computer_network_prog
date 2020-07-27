@@ -3,13 +3,21 @@
 ## What is IPSec VPN   
     
 ## IPSec Packet    
+<pre>
+IKE Packet
+</pre>
     
+<pre>
+IPSec AH Packet
+IPSec ESP Packet
+</pre>
+
 ## Sequence    
 (1)Internet Key Exchange(IKE)    
 	IKE Phase1 using UDP destination port 500  
 	IKE Phase2 using UDP destination port 500  
 (2)IPSec ESP Protocol     
-	IKE ESP Protocol using IP type 50  
+	IPSec ESP Protocol using IP type 50  
 	  
     
 ## Compatiblility with NAT  
