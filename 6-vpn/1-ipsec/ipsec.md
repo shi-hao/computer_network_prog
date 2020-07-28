@@ -56,10 +56,26 @@ IPSec IKE阶段使用UDP协议，ESP对下使用IP协议，对NAT兼容性不好
 直接丢弃，可能转发后无法回包。    
 SSL VPN对下使用TCP，完美兼容NAT。    
     
-## Application    
-IPsec site to site, server and client all behind NAT?   
-这种情况应该是不行的，都在NAT网关之后，那么IKE协商阶段根本无法建立连接。    
+## StrongSwan
+(1)安装strongswan及其charon插件
+apt-get install strongswan
+apt-get install libcharon-extra-plugins
+
+(2)重启strongswan服务器
+systemctl restart strongswan
+
+(3)添加ipsec服务到开启启动
+systemctl enable strongswan
+
+(4)启动IPSec连接
+sudo ipsec up <connection>
+
+(5)查看strongswan日志信息
+strongswan日志在/var/log/syslog文件中
+
+## StrongSwan Application    
+### site to site, server and client all behind NAT
   
-IPSec site to site, client behind NAT?    
+### site to site, client behind NAT?    
   
-IPsec site to site, server and client all using public IP address?  
+### site to site, server and client all using public IP address?  
