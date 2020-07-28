@@ -34,13 +34,3 @@ cp ./s_ipsec.conf  /etc/ipsec.conf
 # step 4-Configure Authentication
 ## move the authentication file to /etc directory
 cp ./s_ipsec.secrets  /etc/ipsec.secrets
-
-## restart the strongSwan service and enable it to start at reboot
-systemctl restart strongswan
-#systemctl enable strongswan
-
-## verify the status of the strongSwan service
-systemctl status strongswan
-
-sudo systemctl status strongswan.service
-sudo systemctl is-enabled strongswan.service
