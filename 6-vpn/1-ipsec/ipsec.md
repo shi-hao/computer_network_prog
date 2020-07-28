@@ -21,7 +21,7 @@ IPSec ESP Packet
 	IPSec ESP Protocol using IP type 50(UDP Encapsulation ESP)      
 </pre>  
       
-## Compatiblility with NAT    
+## Compatibility with NAT    
 AH Protocol    
 IPSec AH协议使用IP类型51，将IP头的源/目的地址纳入了校验范围，而NAT会改变IP头源和目的地址，    
 数据到对端后，AH校验会失败，所以AH协议不兼容NAT。      
