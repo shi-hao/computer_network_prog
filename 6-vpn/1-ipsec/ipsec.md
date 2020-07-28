@@ -71,7 +71,10 @@ systemctl enable strongswan
 (4)启动IPSec连接  
 sudo ipsec up <connection>  
   
-(5)查看strongswan日志信息  
+(5)停止ipsec连接  
+sudo ipsec stop
+
+(6)查看strongswan日志信息  
 strongswan日志在/var/log/syslog文件中  
   
 ## StrongSwan Application      
