@@ -57,6 +57,9 @@ IPSec IKE阶段使用UDP协议，ESP对下使用IP协议，对NAT兼容性不好
 直接丢弃，可能转发后无法回包，使用UDP打包ESP协议可以克服这个问题。          
 SSL VPN对下使用TCP，完美兼容NAT。        
 
+## Policy Based Routing
+
+
         
 ## StrongSwan    
 (1)安装strongswan及其charon插件    
