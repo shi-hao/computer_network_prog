@@ -48,6 +48,7 @@ ip route replace dst_ip/mask dev [interface] via [gateway]
 ip route get dst_ip
 
 ## ip rule
+经典的路由
 routing policy database base(RPDB)，是linux的路由策略数据库，可以使用ip rule名
 利查看管理RPDB。
 (1)ip rule show
