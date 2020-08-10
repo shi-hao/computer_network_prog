@@ -81,16 +81,15 @@ rules selected the packet.  This rule may also be deleted.
 (1)查看RPDB路由规则      
 ip rule       
 ip rule show       
-<pre>      
+
 0:	    from all lookup local       
 32766:	from all lookup main       
 32767:	from all lookup default      
-</pre>      
 local, main, default是RPDB的三个默认的规则。      
 最左侧一栏是规则的优先级，0表示最大，32767最小。      
 from all表示IP数据包的源地址为任意地址      
 lookup local表示匹配路由表local      
-      
+
 当主机路由数据包时，会逐个匹配RPDB中所有的规则，匹配成功则进行对应操作。        
       
 (2)ip rule add/del      
