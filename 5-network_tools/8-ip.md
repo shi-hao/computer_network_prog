@@ -1,8 +1,10 @@
 # linux ip command tool        
   
-ip addr/route/rule/xfrm ----IP地址，路由信息，策略路由  
-ip neighbor ----ARP表  
-ip link ----物理接口  
+<pre>
+ip addr/route/rule/xfrm  #IP地址，路由信息，策略路由  
+ip neighbor  #ARP表  
+ip link    #物理接口  
+</pre>
         
 ## ip addr        
 <pre>
