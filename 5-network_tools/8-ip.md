@@ -19,25 +19,6 @@ ip addr del ip_addr/mask dev [interface]
 ip addr add 192.168.10.10/24 dev eth0        
 ip addr del 192.168.10.10/24 dev eth0        
       
-## ip neighbor
-ip neighbor provides a command line interface to display the neighbor table
-(ARP cache)
-
-查看本地ARP表
-ip neighbor
-ip neighbor show
-
-搜索ARP表
-ip neighbor show [host_ip]
-
-## ip link      
-(1)查看所有物理接口信息      
-ip link      
-ip link show dev [device]      
-    
-(2)打开/关闭接口    
-ip link set [interface] up/down    
-      
 ## ip route      
 (1)显示内核路由表      
 ip route       
@@ -60,9 +41,6 @@ ip route replace dst_ip/mask dev [interface] via [gateway]
     
 (5)获取目标IP地址匹配到的路由    
 ip route get dst_ip    
-
-
-
     
 ## ip rule    
 基于策略的路由(policy based routing)：    
@@ -137,3 +115,22 @@ protocol suite (with the state object operating on the Security
 Association Database, and the policy object operating on the Security    
 Policy Database). It is also used for the IP Payload Compression   
 Protocol and features of Mobile IPv6.  
+
+## ip neighbor
+ip neighbor provides a command line interface to display the neighbor table
+(ARP cache)
+
+查看本地ARP表
+ip neighbor
+ip neighbor show
+
+搜索ARP表
+ip neighbor show [host_ip]
+
+## ip link      
+(1)查看所有物理接口信息      
+ip link      
+ip link show dev [device]      
+    
+(2)打开/关闭接口    
+ip link set [interface] up/down    
