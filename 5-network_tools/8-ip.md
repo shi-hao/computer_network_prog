@@ -5,6 +5,7 @@ ip neighbor ----ARP表
 ip link ----物理接口  
         
 ## ip addr        
+<pre>
 (1)查看本地所有网卡IP地址等信息。        
 ip addr        
 ip addr show        
@@ -18,8 +19,10 @@ ip addr del ip_addr/mask dev [interface]
         
 ip addr add 192.168.10.10/24 dev eth0          
 ip addr del 192.168.10.10/24 dev eth0          
+</pre>
         
 ## ip route        
+<pre>
 (1)显示内核路由表        
 ip route         
 ip route show        
@@ -41,8 +44,10 @@ ip route replace dst_ip/mask dev [interface] via [gateway]
       
 (5)获取目标IP地址匹配到的路由      
 ip route get dst_ip      
+</pre>
       
 ## ip rule      
+<pre>
 基于策略的路由(policy based routing)：      
 经典的路由算法是根据IP数据包的目的地址字段进行路由，在一些时候，希望能够根据数      
 据包的其他字段进行路由，比如源地址，IP协议字段，传输协议端口等，这就是基于策略      
@@ -107,16 +112,20 @@ ip rule add from 192.168.99.0/24 table 10
       
 ip route add 192.168.99.0/24 via 192.168.0.1 dev eno1 table 10      
 向路由表10中添加路由规则。      
+</pre>
     
 ## ip xfrm     
+<pre>
 xfrm is an IP framework for transforming packets (such as encrypting    
 their payloads). This framework is used to implement the IPsec    
 protocol suite (with the state object operating on the Security    
 Association Database, and the policy object operating on the Security      
 Policy Database). It is also used for the IP Payload Compression     
 Protocol and features of Mobile IPv6.    
+</pre>
   
 ## ip neighbor  
+<pre>
 ip neighbor provides a command line interface to display the neighbor table  
 (ARP cache)  
   
@@ -126,11 +135,14 @@ ip neighbor show
   
 搜索ARP表  
 ip neighbor show [host_ip]  
+</pre>
   
 ## ip link        
+<pre>
 (1)查看所有物理接口信息        
 ip link        
 ip link show dev [device]        
       
 (2)打开/关闭接口      
 ip link set [interface] up/down      
+</pre>
