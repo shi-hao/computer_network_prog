@@ -2,8 +2,6 @@
 
 ## computer network programming
 
-欢迎交流，互相学习！
-
 ## 联系方式
 
 e-mail  : shi7631470@163.com
