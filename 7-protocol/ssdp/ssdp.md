@@ -54,3 +54,4 @@ of SSDP also used port 5000 for this service.[6]
 <server>  
 --Response  
   SSDP NOTIFY via UDP:Unicast    
+  SSDP 200 OK via UDP:Unicast  
