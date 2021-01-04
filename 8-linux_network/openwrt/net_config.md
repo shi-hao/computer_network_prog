@@ -79,7 +79,7 @@ config dnsmasq
 config dhcp 'lan'  
 	option interface 'lan' #enable dhcp server in 'lan'  
 	option start '1'       #set the dhcp ip poll start to 1  
-	option limit '100'     #set the dhcp ip poll end to 100  
+	option limit '100'     #set the dhcp ip poll limit to 100  
 	option leasetime '12h' #set ip lease time to 12 hours  
 	option dhcpv6 'server' #enable dhcpv6  
 	option ra 'server'  

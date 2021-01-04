@@ -299,3 +299,6 @@ DHCP options
 (2)当网关不开启DHCP时，如何知道网关的IP地址  
 使用wireshark抓包，查看网络内的数据包，通过其他主机发送的数据包信息查看IP信息  
 来猜测网关IP地址，然后手动设置，尝试。  
+
+## 5.多个dhcp server在网络内
+## 6.DHCP Server Option
