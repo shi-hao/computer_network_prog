@@ -102,3 +102,8 @@ config dhcp 'wan'
   
 ## OpenWRT Firewall  
 OpenWRT DHCP Server config file is "/etc/config/firewall"  
+
+enable ip forward
+enbale masquerade on interface
+
+iptables -t nat -A POSTROUTING -o tun0 -j MASQUERADE
