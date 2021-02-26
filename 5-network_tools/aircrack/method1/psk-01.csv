@@ -1,8 +1,0 @@
-
-BSSID, First time seen, Last time seen, channel, Speed, Privacy, Cipher, Authentication, Power, # beacons, # IV, LAN IP, ID-length, ESSID, Key
-E4:F4:C6:0C:F7:5D, 2021-02-26 15:58:14, 2021-02-26 16:03:16,  1,  54, WPA2, CCMP,PSK, -30,     2647,      277,   0.  0.  0.  0,  16, NETGEAR-2.4G-YF2, 
-
-Station MAC, First time seen, Last time seen, Power, # packets, BSSID, Probed ESSIDs
-D4:25:8B:6E:20:08, 2021-02-26 15:58:22, 2021-02-26 16:03:08, -18,       76, E4:F4:C6:0C:F7:5D,
-0C:2C:54:0D:8A:58, 2021-02-26 15:59:05, 2021-02-26 16:03:03, -14,      114, E4:F4:C6:0C:F7:5D,
-

@@ -1,8 +1,13 @@
 #!/bin/bash
 
+airodump-ng : 抓包工具
+
 # Catch handshake packets
 #	airodump-ng -w [文件名] -bssid [AP_MAC] -c [channel_number]  [moniter_nic]
 #		-w       保存抓到的握手数据到文件
 #		-bssid   ap mac
 #		-c       ap channel number
-sudo airodump-ng -w ./files/psk --bssid E4:F4:C6:0C:F7:5D -c 13  mon0 
+#sudo airodump-ng -w ./files/psk --bssid E4:F4:C6:0C:F7:5D -c 13  wlp4s0mon 
+#sudo airodump-ng -w ./files/psk --bssid 40:31:3C:18:6C:EF -c 6  wlp4s0mon 
+#sudo airodump-ng -w ./files/psk --bssid 88:C3:97:BC:7B:56 -c 8  wlp4s0mon 
+sudo airodump-ng -w ./files/psk --bssid B4:0F:3B:95:78:28 -c 1  wlp4s0mon 
