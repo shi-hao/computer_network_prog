@@ -7,30 +7,8 @@ source ./my_function.sh
 # Trap ctrl-c
 my_break
 
-# Get all interfaces
-all_ifs=$(get_if_names)
-ifs_arr=($all_ifs)
-len=$((${#ifs_arr[*]}-1))
-
-# Echo all interfaces
-my_printf "green" "null" "ID" "Interface" "IP" "MAC"
-for((i=0;i<=len;i++));
-do
-	card_ip=$(get_card_ip "${ifs_arr[i]}")
-	card_mac=$(get_card_mac "${ifs_arr[i]}")
-	my_printf "null" "null" "$i" "${ifs_arr[i]}" "$card_ip" "$card_mac"
-done 
-
-# Chosing interface
-in_id=""
-while [[ ! "$in_id" =~ ^[+-]?[0-9]+$ ]] || [ "$in_id" -lt 0 -o "$in_id" -gt "$len" ]; do
-	my_echo "red" " please input 0~$len to chose the interface"
-	read in_id
-done
-
-# Interface
-my_if=${ifs_arr[$in_id]}
-my_echo "red" " chosing interface:$my_if "
+# Chose network interface
+chose_if my_if
 
 # Del the default gateway
 if [ "$1" == "clear" ] ;then
