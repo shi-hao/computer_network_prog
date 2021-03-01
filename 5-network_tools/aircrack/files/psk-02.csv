@@ -1,9 +1,0 @@
-
-BSSID, First time seen, Last time seen, channel, Speed, Privacy, Cipher, Authentication, Power, # beacons, # IV, LAN IP, ID-length, ESSID, Key
-B4:0F:3B:95:78:28, 2021-02-27 00:14:22, 2021-02-27 00:20:56,  1,  54, WPA2, CCMP,PSK, -74,      400,    40657,   0.  0.  0.  0,  12, Tenda_957828, 
-
-Station MAC, First time seen, Last time seen, Power, # packets, BSSID, Probed ESSIDs
-F6:B2:F2:58:95:D7, 2021-02-27 00:17:14, 2021-02-27 00:17:45, -85,       10, B4:0F:3B:95:78:28,
-C2:DD:C3:61:23:F3, 2021-02-27 00:14:28, 2021-02-27 00:20:16, -85,       36, B4:0F:3B:95:78:28,
-AA:F7:F1:B6:72:49, 2021-02-27 00:14:45, 2021-02-27 00:20:56,  -1,    40657, B4:0F:3B:95:78:28,
-
