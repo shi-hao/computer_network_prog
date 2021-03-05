@@ -3,7 +3,7 @@
 # airodump-ng : Capture raw 802.11 frames.
 
 #########################################
-# chose network interfaces
+# choose network interfaces
 source ../my_tools/my_function.sh
 
 my_if=''

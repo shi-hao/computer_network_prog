@@ -6,7 +6,7 @@
 sudo airmon-ng check kill
 
 ################################################
-# chose network interfaces
+# choose network interfaces
 source ../my_tools/my_function.sh
 
 my_if=''
