@@ -12,7 +12,7 @@ telnet是一个应用协议用于提供命令行接口，使用TCP协议。
 telnet [ip or domain]  [port]
 
 ## ssh
-Secure Shell，简单的理解 ssh = telnet + ssl
+Secure Shell
 默认情况下，使用TCP的22端口，也可以指定端口。
 
 ssh [user_name]@[ip]
