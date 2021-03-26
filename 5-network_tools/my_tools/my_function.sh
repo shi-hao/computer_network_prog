@@ -116,8 +116,9 @@ function chose_if(){
 	done
 	
 	# Interface
-	local my_if=${ifs_arr[$in_id]}
-	my_echo "red" " choosing interface:$my_if "
+	net_if=${ifs_arr[$in_id]}
+	my_echo "red" " choosing interface:$net_if "
 	
-	eval "$1=$my_if"
+	eval "$1=$net_if"
+	#return $net_if
 }
