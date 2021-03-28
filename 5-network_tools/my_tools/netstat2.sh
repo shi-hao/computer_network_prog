@@ -40,7 +40,7 @@ my_echo "blue" " choosing file : $target_file"
 
 while read line
 do  
-eval "$line"  
+	eval "$line"  
 done < $path$target_file 
 
 my_echo "blue"   "--------------------------------------------------------------------"
