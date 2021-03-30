@@ -2,14 +2,15 @@
 
 # Adding dns config??
 
-source ./my_function.sh
-source ./file_opr.sh
+source my_cnf.sh
+source my_ifs.sh
+source my_stdio.sh
 
 # Trap ctrl-c
 my_break
 
 # Chose network interface
-chose_if my_if
+pick_if my_if
 
 # Del the default gateway
 if [ "$1" == "clear" ] ;then
@@ -32,8 +33,8 @@ fi
 # Config file
 cnf_file=/home/bleach/myfile/ip_cnf.txt
 
-# chose config items
-chose_cnf $cnf_file my_ip my_mask my_gw
+# choose config items
+pick_cnf $cnf_file my_ip my_mask my_gw
 
 # Config the interface ip using commands
 #sudo ifconfig $my_if down
