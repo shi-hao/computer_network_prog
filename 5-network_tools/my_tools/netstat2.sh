@@ -1,7 +1,8 @@
 #!/bin/bash 
 
 # Import shell script 
-source ./my_function.sh
+source ./my_stdio.sh
+source ./my_ifs.sh
 
 # Trap ctrl-c
 my_break
@@ -59,20 +60,24 @@ my_echo "blue" "----------------------------------------------------------------
 my_echo "blue" " step1：Searching the local route table"
 if [ -n "$gateway" ];
 then
-	ip route list match $gateway
-	if [ $? -ne 0 ]; then
-		my_echo "red" "\nGateway $gateway route table match failed\n"
-		route -n
-	fi
+#	ip route list match $gateway
+#	if [ $? -ne 0 ]; then
+#		my_echo "red" "\nGateway $gateway route table match failed\n"
+#		route -n
+#	fi
+
+	rt_match $gateway
 fi
 
 if [ -n "$host_ip" ];
 then
-	ip route list match $host_ip
-	if [ $? -ne 0 ]; then
-		my_echo "red" "\nHost $host_ip route table match failed\n"
-		route -n
-	fi
+#	ip route list match $host_ip
+#	if [ $? -ne 0 ]; then
+#		my_echo "red" "\nHost $host_ip route table match failed\n"
+#		route -n
+#	fi
+
+	rt_match $host_ip
 fi
 
 my_pause
@@ -81,24 +86,26 @@ my_echo "blue" "----------------------------------------------------------------
 my_echo "blue" " step2：Searching the local ARP table"
 if [ -n "$gateway" ];
 then
-	#out=eval ip neighbor show $host_ip
-	out=$(ip neighbor show $host_ip)
-	echo $out
-	if [ -z "$out" ]; then
-		my_echo "red" "\nGateway $gateway ARP table match failed\n"
-		arp -n
-	fi
+#	#out=eval ip neighbor show $host_ip
+#	out=$(ip neighbor show $host_ip)
+#	echo $out
+#	if [ -z "$out" ]; then
+#		my_echo "red" "\nGateway $gateway ARP table match failed\n"
+#		arp -n
+#	fi
+	arpt_match $gateway
 fi
 
 if [ -n "$host_ip" ];
 then
-	#out=eval ip neighbor show $host_ip
-	out=$(ip neighbor show $host_ip)
-	echo $out
-	if [ -z "$out" ]; then
-		my_echo "red" "\nHost $host_ip ARP table match failed\n"
-		arp -n
-	fi
+#	#out=eval ip neighbor show $host_ip
+#	out=$(ip neighbor show $host_ip)
+#	echo $out
+#	if [ -z "$out" ]; then
+#		my_echo "red" "\nHost $host_ip ARP table match failed\n"
+#		arp -n
+#	fi
+	arpt_match $host_ip
 fi
 
 my_pause

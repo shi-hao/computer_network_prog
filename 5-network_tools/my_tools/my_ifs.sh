@@ -69,17 +69,19 @@ function pick_if(){
 }
 
 
+# match route table
 function rt_match(){
-	local host_ip=$1
-	local out=eval ip route list match $host_ip
+	local host_ip="$1"
+	ip route list match $host_ip
 	if [ $? -ne 0 ]; then
 		my_echo "red" "\nHost $host_ip local route table match failed\n"
 		route -n
 	fi
 }
 
+# match arp table
 function arpt_match(){
-	local host_ip=$1
+	local host_ip="$1"
 	local out=$(ip neighbor show $host_ip)
 	echo $out
 	if [ -z "$out" ]; then
@@ -87,4 +89,3 @@ function arpt_match(){
 		arp -n
 	fi
 }
-

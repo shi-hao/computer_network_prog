@@ -9,7 +9,7 @@ source my_stdio.sh
 # Trap ctrl-c
 my_break
 
-# Chose network interface
+# Choose network interface
 pick_if my_if
 
 # Del the default gateway
