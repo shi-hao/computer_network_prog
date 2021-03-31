@@ -50,7 +50,7 @@ function my_pause(){
 	while true
 	do
 		local isContinue='y'
-		my_echo "red" " 请输入y继续，输入n退出 [y/n] "
+		my_echo "blue" " 请输入y继续，输入n退出 [y/n] "
 		read isContinue
 		if [ "$isContinue" == "y" ]; then
 			break
