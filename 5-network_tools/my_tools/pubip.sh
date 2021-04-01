@@ -26,6 +26,6 @@
 # traceroute是否可以查看公网IP呢？
 # traceroute是不可以查看公网IP的，可以实践下。
 
-source ./my_function.sh
+source ./my_stdio.sh
 
 curl ifconfig.me
