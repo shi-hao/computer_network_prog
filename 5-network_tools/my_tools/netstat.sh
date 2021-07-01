@@ -1,19 +1,20 @@
 #!/bin/bash 
 
 # Import shell script 
-source ./lib/my_stdio.sh
-source ./lib/my_ifs.sh
-
-# Trap ctrl-c
-my_break
+source my_stdio.sh
+source my_ifs.sh
 
 # Get all the config files 
-cnf_file_pattern=.cnf
 path=/home/bleach/myfile/
+cnf_file_pattern=.cnf
 all_cnf_files=$(ls -p  $path |	grep -v / | grep "$cnf_file_pattern$")
 
 files_arr=($all_cnf_files)
 len=$((${#files_arr[*]}-1))
+
+###################################################################
+# Trap ctrl-c
+my_break
 
 if [ $len -ge  0 ]; then
 	my_echo "blue" " find $[len+1] config file"
@@ -125,3 +126,4 @@ then
 	my_echo "blue" " ntp同步时间测试"
 	ntpdate -q $ntp_domain
 fi
+###################################################################

@@ -2,10 +2,14 @@
 
 # Adding dns config??
 
-source ./lib/my_cnf.sh
-source ./lib/my_ifs.sh
-source ./lib/my_stdio.sh
+source my_cnf.sh
+source my_ifs.sh
+source my_stdio.sh
 
+# Config file
+cnf_file=/home/bleach/myfile/ip_cnf.txt
+
+################################################
 # Trap ctrl-c
 my_break
 
@@ -30,9 +34,6 @@ if [ "$1" == "dhcp" ] ;then
 	exit 0
 fi
 
-# Config file
-cnf_file=/home/bleach/myfile/ip_cnf.txt
-
 # choose config items
 pick_int_cnf $cnf_file my_ip my_mask my_gw
 
@@ -46,3 +47,4 @@ sudo route add default gw  $my_gw dev $my_if
 ifconfig $my_if
 route -n
 ping $my_gw
+################################################

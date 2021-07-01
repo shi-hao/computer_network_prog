@@ -1,7 +1,11 @@
 #!/bin/bash 
 
-source ./lib/my_stdio.sh
+source my_stdio.sh
 
+# Config file
+cnf_file=/home/bleach/myfile/ip_host.txt
+
+#######################################################
 # Trap ctrl-c
 my_break
 
@@ -13,9 +17,6 @@ elif [[ ! "$1" =~ ^[+-]?[0-9]+$ ]]; then
 	my_echo "red" " Error: ping [sleep_time:0-N] "
 	exit
 fi
-
-# Config file
-cnf_file=/home/bleach/myfile/ip_host.txt
 
 # Read ip
 while read line
@@ -59,3 +60,4 @@ do
 		fi
 	done 
 done
+#######################################################
