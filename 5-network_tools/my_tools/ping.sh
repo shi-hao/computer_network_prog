@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-source ./my_stdio.sh
+source ./lib/my_stdio.sh
 
 # Trap ctrl-c
 my_break

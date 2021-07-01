@@ -2,9 +2,9 @@
 
 # Adding dns config??
 
-source my_cnf.sh
-source my_ifs.sh
-source my_stdio.sh
+source ./lib/my_cnf.sh
+source ./lib/my_ifs.sh
+source ./lib/my_stdio.sh
 
 # Trap ctrl-c
 my_break
@@ -34,7 +34,7 @@ fi
 cnf_file=/home/bleach/myfile/ip_cnf.txt
 
 # choose config items
-pick_cnf $cnf_file my_ip my_mask my_gw
+pick_int_cnf $cnf_file my_ip my_mask my_gw
 
 # Config the interface ip using commands
 #sudo ifconfig $my_if down

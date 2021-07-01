@@ -7,7 +7,7 @@ __MY_CNF_SH__='my_cnf.sh'
 source ./my_stdio.sh
 
 # Choose config items
-function pick_cnf(){
+function pick_int_cnf(){
 	# Config file
 	cnf_file=$1
 	
