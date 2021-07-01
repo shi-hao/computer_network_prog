@@ -3,7 +3,7 @@ if [ -n "$__MY_IFS_SH__" ]; then
 fi
 __MY_IFS_SH__='my_ifs.sh'
 
-source ./my_stdio.sh
+#source $cur_dir/my_stdio.sh
 
 # get card ip 
 function get_if_ip(){

@@ -1,11 +1,15 @@
 #!/bin/bash 
 
-source my_stdio.sh
-
 # Config file
 cnf_file=/home/bleach/myfile/ip_host.txt
 
+
 #######################################################
+# import shell script
+cur_dir=$(pwd)
+lib_dir=$cur_dir/lib
+source $lib_dir/my_stdio.sh
+
 # Trap ctrl-c
 my_break
 

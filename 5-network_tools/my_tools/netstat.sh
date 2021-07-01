@@ -1,18 +1,19 @@
 #!/bin/bash 
 
-# Import shell script 
-source my_stdio.sh
-source my_ifs.sh
-
 # Get all the config files 
 path=/home/bleach/myfile/
 cnf_file_pattern=.cnf
 all_cnf_files=$(ls -p  $path |	grep -v / | grep "$cnf_file_pattern$")
-
 files_arr=($all_cnf_files)
 len=$((${#files_arr[*]}-1))
 
 ###################################################################
+# Import shell script 
+cur_dir=$(pwd)
+lib_dir=$cur_dir/lib
+source $lib_dir/my_stdio.sh
+source $lib_dir/my_ifs.sh
+
 # Trap ctrl-c
 my_break
 

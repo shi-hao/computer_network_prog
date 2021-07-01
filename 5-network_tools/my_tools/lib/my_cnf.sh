@@ -4,7 +4,7 @@ if [ -n "$__MY_CNF_SH__" ]; then
 fi
 __MY_CNF_SH__='my_cnf.sh'
 
-source ./my_stdio.sh
+#source $cur_dir/my_stdio.sh
 
 # Choose config items
 function pick_int_cnf(){

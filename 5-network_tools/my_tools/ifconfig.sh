@@ -2,14 +2,17 @@
 
 # Adding dns config??
 
-source my_cnf.sh
-source my_ifs.sh
-source my_stdio.sh
-
 # Config file
 cnf_file=/home/bleach/myfile/ip_cnf.txt
 
 ################################################
+# import shell script
+cur_dir=$(pwd)
+lib_dir=$cur_dir/lib
+source $lib_dir/my_stdio.sh
+source $lib_dir/my_cnf.sh
+source $lib_dir/my_ifs.sh
+
 # Trap ctrl-c
 my_break
 
